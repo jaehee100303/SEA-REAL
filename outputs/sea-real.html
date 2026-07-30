@@ -1975,6 +1975,7 @@
 
     function repairOcrLine(line) {
       return line.replace(/[가-힣]{2,}/g, token => {
+        if (["인분", "가격", "시가", "싯가", "포장"].includes(token)) return token;
         if (menuTranslations[token] || Object.keys(menuTranslations).some(key => token.includes(key))) return token;
         let bestKey = token;
         let bestDistance = Infinity;
