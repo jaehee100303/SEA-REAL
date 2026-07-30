@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
   <style>
     :root {
       --ocean: #0ea5e9;
@@ -777,6 +778,171 @@
       font-size: 10px;
       font-weight: 800;
     }
+    .photo-upload {
+      position: relative;
+      min-height: 110px;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      color: #315b75;
+      background: #eef8fc;
+      border: 1.5px dashed #8bd3ef;
+      border-radius: 16px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .photo-upload input {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .photo-upload strong { display: block; margin-top: 7px; font-size: 12px; }
+    .photo-upload small { color: #7890a3; font-size: 9px; }
+    .menu-preview {
+      width: 100%;
+      max-height: 220px;
+      display: none;
+      object-fit: contain;
+      margin-top: 10px;
+      background: #eef4f7;
+      border-radius: 15px;
+    }
+    .ocr-progress {
+      height: 7px;
+      display: none;
+      overflow: hidden;
+      background: #e6eff4;
+      border-radius: 999px;
+    }
+    .ocr-progress i {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, #38bdf8, #0284c7);
+      border-radius: inherit;
+      transition: width .2s ease;
+    }
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: 18px;
+    }
+    .quick-link {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 13px;
+      color: #214b65;
+      background: #f2f8fb;
+      border: 1px solid #e0ecf2;
+      border-radius: 16px;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .quick-link i {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 38px;
+      background: white;
+      border-radius: 13px;
+      box-shadow: 0 5px 15px rgba(8, 47, 73, .07);
+      font-size: 18px;
+      font-style: normal;
+    }
+    .booking-total {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 15px;
+      color: #315b75;
+      background: #edf8fd;
+      border-radius: 15px;
+      font-size: 12px;
+    }
+    .booking-total strong { color: #0369a1; font-size: 18px; }
+    .booking-success {
+      display: none;
+      margin-top: 12px;
+      padding: 13px;
+      color: #166534;
+      background: #dcfce7;
+      border-radius: 13px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+    .course-tabs {
+      display: flex;
+      gap: 7px;
+      margin-top: 18px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .course-tab {
+      min-width: max-content;
+      padding: 9px 12px;
+      color: #678397;
+      background: #edf4f7;
+      border-radius: 11px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .course-tab.active { color: white; background: #0284c7; }
+    .course-summary {
+      display: flex;
+      gap: 8px;
+      margin: 13px 0;
+    }
+    .course-summary span {
+      padding: 7px 9px;
+      color: #0369a1;
+      background: #e9f7fd;
+      border-radius: 9px;
+      font-size: 10px;
+      font-weight: 800;
+    }
+    .course-route { display: grid; gap: 0; }
+    .course-stop {
+      position: relative;
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 10px;
+      padding-bottom: 15px;
+      color: #49697d;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+    .course-stop:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 13px;
+      top: 26px;
+      bottom: 1px;
+      width: 2px;
+      background: #cae9f5;
+    }
+    .course-number {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      z-index: 1;
+      color: white;
+      background: #0ea5e9;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 800;
+    }
+    .course-stop b { display: block; color: #173f58; font-size: 12px; }
 
     @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
     @keyframes rise { from { opacity: 0; transform: translateY(8px) scale(.99); } to { opacity: 1; transform: none; } }
@@ -825,6 +991,7 @@
       .tool-grid { grid-template-columns: 1fr 1fr; }
       .tool-field:first-child { grid-column: 1 / -1; }
       .crowd-board { grid-template-columns: 1fr; }
+      .quick-links { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
@@ -1282,6 +1449,64 @@
       }
     };
 
+    const featureLabels = {
+      ko: {
+        photoSelect: "메뉴판 사진 촬영 또는 선택", photoSub: "사진은 서버에 저장되지 않고 기기에서 처리됩니다.", readPhoto: "사진에서 글자 읽기", reading: "메뉴판을 읽는 중", ocrDone: "사진 속 글자를 읽었습니다. 아래에서 번역 언어를 선택하세요.", ocrError: "글자를 읽지 못했어요. 밝고 정면에서 찍은 사진으로 다시 시도해 주세요.",
+        sosGuide: "필요한 시설을 누르면 현재 위치 주변 검색 결과가 지도에서 열립니다.", touristInfo: "관광안내소", police: "경찰서", hospital: "병원·응급실", consulate: "영사관", openMap: "지도에서 찾기",
+        bookingBeach: "해수욕장", bookingItem: "대여 용품", bookingDate: "이용 날짜", bookingTime: "이용 시간", bookingQty: "수량", estimate: "예상 금액", reserve: "V1 예약 신청", bookingDone: "예약 신청이 접수되었습니다. V1에서는 실제 결제가 진행되지 않습니다.", bookingDemo: "출시 실험용 예약 화면입니다. 제휴 업체 연결 전에는 실제 재고와 결제가 반영되지 않습니다.",
+        jetSki: "제트스키 · 30분", paddleBoard: "패들보드 · 60분", lifeJacket: "구명조끼 · 1일", tube: "튜브 · 1일", surfBoard: "서핑보드 · 2시간",
+        family: "가족", couple: "커플", solo: "혼자", friends: "친구", duration: "소요시간", budget: "예상비용", routeMap: "전체 코스 지도에서 보기"
+      },
+      en: {
+        photoSelect: "Take or choose a menu photo", photoSub: "The photo stays on your device and is not stored on a server.", readPhoto: "Read text from photo", reading: "Reading the menu", ocrDone: "Text detected. Choose a language below to translate it.", ocrError: "Text could not be read. Try a brighter, front-facing photo.",
+        sosGuide: "Tap a facility to open nearby results based on your current location.", touristInfo: "Tourist information", police: "Police station", hospital: "Hospital · ER", consulate: "Consulate", openMap: "Find on map",
+        bookingBeach: "Beach", bookingItem: "Rental item", bookingDate: "Date", bookingTime: "Time", bookingQty: "Quantity", estimate: "Estimated total", reserve: "Request V1 booking", bookingDone: "Your booking request was received. No payment is processed in V1.", bookingDemo: "V1 booking prototype. Live stock and payment require partner integration.",
+        jetSki: "Jet ski · 30 min", paddleBoard: "Paddle board · 60 min", lifeJacket: "Life jacket · 1 day", tube: "Tube · 1 day", surfBoard: "Surfboard · 2 hours",
+        family: "Family", couple: "Couple", solo: "Solo", friends: "Friends", duration: "Duration", budget: "Estimated cost", routeMap: "Open the full route in Maps"
+      },
+      ja: {
+        photoSelect: "メニュー写真を撮影または選択", photoSub: "写真はサーバーに保存されず、端末内で処理されます。", readPhoto: "写真から文字を読み取る", reading: "メニューを読み取り中", ocrDone: "文字を読み取りました。下で翻訳言語を選択してください。", ocrError: "文字を読み取れませんでした。明るく正面から撮影した写真で再度お試しください。",
+        sosGuide: "施設をタップすると、現在地周辺の検索結果が地図で開きます。", touristInfo: "観光案内所", police: "警察署", hospital: "病院・救急", consulate: "領事館", openMap: "地図で探す",
+        bookingBeach: "海水浴場", bookingItem: "レンタル用品", bookingDate: "利用日", bookingTime: "利用時間", bookingQty: "数量", estimate: "予想金額", reserve: "V1予約申請", bookingDone: "予約申請を受け付けました。V1では決済されません。", bookingDemo: "V1予約プロトタイプです。実在庫と決済には提携業者との連携が必要です。",
+        jetSki: "ジェットスキー・30分", paddleBoard: "パドルボード・60分", lifeJacket: "ライフジャケット・1日", tube: "浮き輪・1日", surfBoard: "サーフボード・2時間",
+        family: "家族", couple: "カップル", solo: "一人", friends: "友達", duration: "所要時間", budget: "予想費用", routeMap: "コース全体を地図で見る"
+      },
+      zh: {
+        photoSelect: "拍摄或选择菜单照片", photoSub: "照片不会上传服务器，仅在设备中处理。", readPhoto: "识别照片文字", reading: "正在识别菜单", ocrDone: "已识别照片文字，请在下方选择翻译语言。", ocrError: "无法识别文字，请使用光线明亮、正面拍摄的照片重试。",
+        sosGuide: "点击设施即可在地图中查看当前位置附近的搜索结果。", touristInfo: "旅游咨询处", police: "警察局", hospital: "医院·急诊", consulate: "领事馆", openMap: "在地图中查找",
+        bookingBeach: "海水浴场", bookingItem: "租赁用品", bookingDate: "使用日期", bookingTime: "使用时间", bookingQty: "数量", estimate: "预计金额", reserve: "提交V1预约", bookingDone: "预约申请已提交。V1版本不会进行实际支付。", bookingDemo: "V1预约原型，实际库存和支付需要连接合作商家。",
+        jetSki: "水上摩托·30分钟", paddleBoard: "桨板·60分钟", lifeJacket: "救生衣·1天", tube: "游泳圈·1天", surfBoard: "冲浪板·2小时",
+        family: "家庭", couple: "情侣", solo: "独自", friends: "朋友", duration: "所需时间", budget: "预计费用", routeMap: "在地图中查看完整路线"
+      }
+    };
+
+    const courseData = {
+      ko: {
+        family: { duration: "6시간", budget: "약 95,000원", stops: [["송도해상케이블카", "바다 위에서 부산 풍경 감상"], ["감천문화마을", "아이와 함께 골목 산책과 사진"], ["자갈치시장", "가족이 함께 먹는 제철 해산물"]] },
+        couple: { duration: "7시간", budget: "약 120,000원", stops: [["해운대 블루라인파크", "해변열차로 여유로운 시작"], ["청사포", "바다 전망 카페와 등대 산책"], ["광안리", "저녁 식사 후 광안대교 야경"]] },
+        solo: { duration: "5시간", budget: "약 55,000원", stops: [["흰여울문화마을", "절벽길을 따라 천천히 걷기"], ["부평깡통시장", "혼자 즐기기 좋은 부산 간식"], ["보수동책방골목", "조용한 책방과 골목 탐방"]] },
+        friends: { duration: "8시간", budget: "약 150,000원", stops: [["송정해수욕장", "오전 서핑 또는 패들보드"], ["해동용궁사", "바다 옆 사찰과 기장 산책"], ["민락회센터", "회와 야경으로 하루 마무리"]] }
+      },
+      en: {
+        family: { duration: "6 hours", budget: "About ₩95,000", stops: [["Songdo Marine Cable Car", "Enjoy Busan’s coast from above"], ["Gamcheon Culture Village", "A colourful family walk and photo stop"], ["Jagalchi Market", "Share seasonal seafood together"]] },
+        couple: { duration: "7 hours", budget: "About ₩120,000", stops: [["Haeundae Blue Line Park", "Start slowly on the beach train"], ["Cheongsapo", "Ocean-view cafés and lighthouse walk"], ["Gwangalli", "Dinner followed by bridge night views"]] },
+        solo: { duration: "5 hours", budget: "About ₩55,000", stops: [["Huinnyeoul Culture Village", "A calm cliffside walk"], ["Bupyeong Kkangtong Market", "Easy Busan street food for one"], ["Bosu Book Street", "Quiet bookshops and old lanes"]] },
+        friends: { duration: "8 hours", budget: "About ₩150,000", stops: [["Songjeong Beach", "Morning surfing or paddle boarding"], ["Haedong Yonggungsa", "A seaside temple and Gijang walk"], ["Millak Raw Fish Center", "Finish with sashimi and night views"]] }
+      },
+      ja: {
+        family: { duration: "6時間", budget: "約95,000ウォン", stops: [["松島海上ケーブルカー", "海の上から釜山の景色を楽しむ"], ["甘川文化村", "家族で路地散歩と写真撮影"], ["チャガルチ市場", "家族で旬の海鮮を味わう"]] },
+        couple: { duration: "7時間", budget: "約120,000ウォン", stops: [["海雲台ブルーラインパーク", "海辺列車でゆっくりスタート"], ["青沙浦", "海が見えるカフェと灯台散歩"], ["広安里", "夕食後に広安大橋の夜景"]] },
+        solo: { duration: "5時間", budget: "約55,000ウォン", stops: [["ヒンヨウル文化村", "崖沿いをゆっくり散歩"], ["富平カントン市場", "一人でも楽しめる釜山グルメ"], ["宝水洞本屋通り", "静かな本屋と路地を探索"]] },
+        friends: { duration: "8時間", budget: "約150,000ウォン", stops: [["松亭海水浴場", "午前のサーフィンやパドルボード"], ["海東龍宮寺", "海辺の寺院と機張散歩"], ["民楽刺身センター", "刺身と夜景で一日を締めくくる"]] }
+      },
+      zh: {
+        family: { duration: "6小时", budget: "约95,000韩元", stops: [["松岛海上缆车", "从海上欣赏釜山风景"], ["甘川文化村", "适合亲子的巷弄散步与拍照"], ["札嘎其市场", "全家一起品尝当季海鲜"]] },
+        couple: { duration: "7小时", budget: "约120,000韩元", stops: [["海云台蓝线公园", "乘海边列车悠闲开始"], ["青沙浦", "海景咖啡馆与灯塔散步"], ["广安里", "晚餐后欣赏广安大桥夜景"]] },
+        solo: { duration: "5小时", budget: "约55,000韩元", stops: [["白浅文化村", "沿悬崖小路悠闲漫步"], ["富平罐头市场", "适合独自品尝的釜山小吃"], ["宝水洞书店街", "探索安静书店与老巷"]] },
+        friends: { duration: "8小时", budget: "约150,000韩元", stops: [["松亭海水浴场", "上午冲浪或体验桨板"], ["海东龙宫寺", "海边寺庙与机张散步"], ["民乐生鱼片中心", "以刺身和夜景结束一天"]] }
+      }
+    };
+
     const crowdData = [
       ["haeundae", "busy"],
       ["gwangalli", "normal"],
@@ -1414,8 +1639,16 @@
 
     function renderMenuTranslator(container) {
       const label = toolLabels[currentLanguage];
+      const feature = featureLabels[currentLanguage];
       container.innerHTML = `
         <div class="tool-form">
+          <label class="photo-upload" for="menuPhoto">
+            <span>📷<strong>${feature.photoSelect}</strong><small>${feature.photoSub}</small></span>
+            <input id="menuPhoto" type="file" accept="image/*" capture="environment">
+          </label>
+          <img class="menu-preview" id="menuPreview" alt="Menu photo preview">
+          <button class="tool-button" id="menuOcrButton" type="button" disabled>${feature.readPhoto}</button>
+          <div class="ocr-progress" id="ocrProgress"><i></i></div>
           <div class="tool-field">
             <label for="menuInput">${label.menuInput}</label>
             <textarea class="tool-textarea" id="menuInput" placeholder="${label.menuPlaceholder}"></textarea>
@@ -1433,6 +1666,55 @@
           <p class="tool-note">${label.menuHint}</p>
         </div>`;
       document.getElementById("menuTranslateButton").addEventListener("click", translateMenu);
+      document.getElementById("menuPhoto").addEventListener("change", previewMenuPhoto);
+      document.getElementById("menuOcrButton").addEventListener("click", readMenuPhoto);
+    }
+
+    function previewMenuPhoto(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const preview = document.getElementById("menuPreview");
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = "block";
+      document.getElementById("menuOcrButton").disabled = false;
+    }
+
+    async function readMenuPhoto() {
+      const feature = featureLabels[currentLanguage];
+      const file = document.getElementById("menuPhoto").files[0];
+      const button = document.getElementById("menuOcrButton");
+      const progress = document.getElementById("ocrProgress");
+      const progressBar = progress.querySelector("i");
+      if (!file || !window.Tesseract) {
+        document.getElementById("menuTranslationResult").textContent = feature.ocrError;
+        return;
+      }
+      button.disabled = true;
+      progress.style.display = "block";
+      progressBar.style.width = "3%";
+      button.textContent = `${feature.reading} · 0%`;
+      try {
+        const worker = await Tesseract.createWorker("kor+eng", 1, {
+          logger: message => {
+            if (message.status === "recognizing text") {
+              const percent = Math.round((message.progress || 0) * 100);
+              progressBar.style.width = `${percent}%`;
+              button.textContent = `${feature.reading} · ${percent}%`;
+            }
+          }
+        });
+        const result = await worker.recognize(file);
+        await worker.terminate();
+        document.getElementById("menuInput").value = result.data.text.trim();
+        document.getElementById("menuTranslationResult").textContent = feature.ocrDone;
+        progressBar.style.width = "100%";
+      } catch (error) {
+        document.getElementById("menuTranslationResult").textContent = feature.ocrError;
+      } finally {
+        button.disabled = false;
+        button.textContent = feature.readPhoto;
+        setTimeout(() => { progress.style.display = "none"; progressBar.style.width = "0"; }, 700);
+      }
     }
 
     function translateMenu() {
@@ -1481,6 +1763,116 @@
       const label = toolLabels[currentLanguage];
       const locale = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN" }[currentLanguage];
       document.getElementById("crowdUpdated").textContent = `${label.updated} · ${new Intl.DateTimeFormat(locale, { hour: "2-digit", minute: "2-digit" }).format(new Date())}`;
+    }
+
+    function renderSosTool(container) {
+      const label = featureLabels[currentLanguage];
+      const facilities = [
+        ["🧭", label.touristInfo, "부산 관광안내소"],
+        ["🚓", label.police, "부산 경찰서"],
+        ["🏥", label.hospital, "부산 응급실 병원"],
+        ["🏛", label.consulate, "부산 영사관"]
+      ];
+      const guide = document.createElement("p");
+      guide.className = "tool-note";
+      guide.style.marginTop = "14px";
+      guide.textContent = label.sosGuide;
+      const links = document.createElement("div");
+      links.className = "quick-links";
+      facilities.forEach(([icon, name, query]) => {
+        const link = document.createElement("a");
+        link.className = "quick-link";
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+        link.innerHTML = `<i>${icon}</i><span>${name}<small style="display:block;margin-top:4px;color:#7890a3;font-weight:500">${label.openMap} ↗</small></span>`;
+        links.appendChild(link);
+      });
+      container.append(guide, links);
+    }
+
+    function renderBookingTool(container) {
+      const label = featureLabels[currentLanguage];
+      const today = new Date().toISOString().slice(0, 10);
+      const beachOptions = ["haeundae", "gwangalli", "songjeong", "songdo", "dadaepo", "ilgwang"].map(key => `<option value="${key}">${t(key)}</option>`).join("");
+      container.innerHTML = `
+        <div class="tool-form">
+          <div class="tool-grid">
+            <div class="tool-field">
+              <label for="bookingBeach">${label.bookingBeach}</label>
+              <select class="tool-select" id="bookingBeach">${beachOptions}</select>
+            </div>
+            <div class="tool-field">
+              <label for="bookingItem">${label.bookingItem}</label>
+              <select class="tool-select" id="bookingItem">
+                <option value="55000">${label.jetSki}</option>
+                <option value="20000">${label.paddleBoard}</option>
+                <option value="5000">${label.lifeJacket}</option>
+                <option value="8000">${label.tube}</option>
+                <option value="25000">${label.surfBoard}</option>
+              </select>
+            </div>
+            <div class="tool-field">
+              <label for="bookingDate">${label.bookingDate}</label>
+              <input class="tool-input" id="bookingDate" type="date" min="${today}" value="${today}">
+            </div>
+            <div class="tool-field">
+              <label for="bookingTime">${label.bookingTime}</label>
+              <select class="tool-select" id="bookingTime"><option>09:00</option><option>11:00</option><option>13:00</option><option>15:00</option><option>17:00</option></select>
+            </div>
+            <div class="tool-field">
+              <label for="bookingQty">${label.bookingQty}</label>
+              <input class="tool-input" id="bookingQty" type="number" min="1" max="10" value="1">
+            </div>
+          </div>
+          <div class="booking-total"><span>${label.estimate}</span><strong id="bookingTotal">₩55,000</strong></div>
+          <button class="tool-button" id="bookingSubmit" type="button">${label.reserve}</button>
+          <div class="booking-success" id="bookingSuccess">${label.bookingDone}</div>
+          <p class="tool-note">${label.bookingDemo}</p>
+        </div>`;
+      ["bookingItem", "bookingQty"].forEach(id => document.getElementById(id).addEventListener("input", updateBookingTotal));
+      document.getElementById("bookingSubmit").addEventListener("click", () => {
+        document.getElementById("bookingSuccess").style.display = "block";
+      });
+      updateBookingTotal();
+    }
+
+    function updateBookingTotal() {
+      const price = Number(document.getElementById("bookingItem").value);
+      const quantity = Math.max(1, Number(document.getElementById("bookingQty").value) || 1);
+      document.getElementById("bookingTotal").textContent = `₩${new Intl.NumberFormat("ko-KR").format(price * quantity)}`;
+    }
+
+    function renderCourseTool(container) {
+      const label = featureLabels[currentLanguage];
+      container.innerHTML = `
+        <div class="course-tabs">
+          <button class="course-tab active" type="button" data-course="family">${label.family}</button>
+          <button class="course-tab" type="button" data-course="couple">${label.couple}</button>
+          <button class="course-tab" type="button" data-course="solo">${label.solo}</button>
+          <button class="course-tab" type="button" data-course="friends">${label.friends}</button>
+        </div>
+        <div id="courseContent"></div>`;
+      container.querySelectorAll("[data-course]").forEach(button => button.addEventListener("click", () => {
+        container.querySelectorAll("[data-course]").forEach(item => item.classList.toggle("active", item === button));
+        showCourse(button.dataset.course);
+      }));
+      showCourse("family");
+    }
+
+    function showCourse(type) {
+      const label = featureLabels[currentLanguage];
+      const course = courseData[currentLanguage][type];
+      const route = course.stops.map(([name, description], index) => `
+        <div class="course-stop">
+          <span class="course-number">${index + 1}</span>
+          <div><b>${name}</b>${description}</div>
+        </div>`).join("");
+      const query = encodeURIComponent(course.stops.map(stop => stop[0]).join(" → "));
+      document.getElementById("courseContent").innerHTML = `
+        <div class="course-summary"><span>${label.duration} · ${course.duration}</span><span>${label.budget} · ${course.budget}</span></div>
+        <div class="course-route">${route}</div>
+        <a class="map-link google" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${query}"><span>${label.routeMap}</span><span>↗</span></a>`;
     }
 
     function openFeature(featureId) {
@@ -1533,6 +1925,18 @@
       if (featureId === "crowd") {
         document.getElementById("modalInfo").textContent = toolLabels[currentLanguage].crowdDemo;
         renderCrowdTool(extra);
+      }
+      if (featureId === "sos") {
+        document.getElementById("modalInfo").textContent = featureLabels[currentLanguage].sosGuide;
+        renderSosTool(extra);
+      }
+      if (featureId === "beachBooking") {
+        document.getElementById("modalInfo").textContent = featureLabels[currentLanguage].bookingDemo;
+        renderBookingTool(extra);
+      }
+      if (featureId === "travelCourse") {
+        document.getElementById("modalInfo").textContent = t("travelCourseInfo");
+        renderCourseTool(extra);
       }
       document.getElementById("featureModal").classList.add("open");
     }
