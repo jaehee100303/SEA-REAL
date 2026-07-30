@@ -636,6 +636,147 @@
       font-size: 13px;
     }
     .dictionary-row b:last-child { text-align: right; color: #0369a1; }
+    .crowd-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+      padding-right: 18px;
+    }
+    .crowd-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 8px;
+      color: #4b6578;
+      background: #f1f7fa;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 700;
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      flex: 0 0 7px;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(100, 116, 139, .08);
+    }
+    .status-dot.free { background: #22c55e; }
+    .status-dot.normal { background: #f59e0b; }
+    .status-dot.busy { background: #ef4444; }
+    .tool-form {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .tool-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .9fr .9fr;
+      gap: 9px;
+    }
+    .tool-field {
+      display: grid;
+      gap: 6px;
+    }
+    .tool-field label {
+      color: #607d91;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .3px;
+    }
+    .tool-input, .tool-select, .tool-textarea {
+      width: 100%;
+      color: #183f58;
+      background: #f4f9fb;
+      border: 1px solid #dce9f0;
+      border-radius: 13px;
+      outline: 0;
+    }
+    .tool-input, .tool-select {
+      min-height: 45px;
+      padding: 0 12px;
+    }
+    .tool-textarea {
+      min-height: 110px;
+      padding: 12px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+    .tool-button {
+      min-height: 46px;
+      color: white;
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+      border-radius: 13px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .tool-result {
+      min-height: 64px;
+      display: grid;
+      place-items: center;
+      padding: 14px;
+      color: #075985;
+      background: linear-gradient(145deg, #ebf8fd, #f5fbfe);
+      border: 1px solid #d9eef8;
+      border-radius: 15px;
+      text-align: center;
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.55;
+    }
+    .tool-result.translation {
+      min-height: 90px;
+      place-items: start;
+      text-align: left;
+      white-space: pre-wrap;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .tool-note {
+      margin: 0;
+      color: #8297a7;
+      font-size: 9px;
+      line-height: 1.5;
+    }
+    .crowd-board {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: 18px;
+    }
+    .crowd-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 14px;
+      background: #f3f8fb;
+      border-radius: 14px;
+      font-size: 12px;
+    }
+    .crowd-row span:last-child {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 800;
+    }
+    .crowd-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 12px;
+      color: #7890a3;
+      font-size: 10px;
+    }
+    .crowd-refresh {
+      padding: 8px 10px;
+      color: #0369a1;
+      background: #e5f5fc;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 800;
+    }
 
     @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
     @keyframes rise { from { opacity: 0; transform: translateY(8px) scale(.99); } to { opacity: 1; transform: none; } }
@@ -681,6 +822,9 @@
       .footer { display: block; line-height: 1.8; }
       .modal { padding: 24px 20px; border-radius: 24px; }
       .map-frame { height: 270px; }
+      .tool-grid { grid-template-columns: 1fr 1fr; }
+      .tool-field:first-child { grid-column: 1 / -1; }
+      .crowd-board { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
@@ -786,7 +930,11 @@
             <button class="service-card" type="button" data-feature="crowd">
               <span class="service-icon green">●</span>
               <strong data-i18n="crowd">실시간 혼잡도</strong>
-              <small data-i18n="crowdSub">여유 · 보통 · 혼잡</small>
+              <div class="crowd-preview">
+                <span class="crowd-pill"><i class="status-dot busy"></i><span data-i18n="haeundaeShort">해운대 혼잡</span></span>
+                <span class="crowd-pill"><i class="status-dot normal"></i><span data-i18n="gwangalliShort">광안리 보통</span></span>
+                <span class="crowd-pill"><i class="status-dot free"></i><span data-i18n="songjeongShort">송정 여유</span></span>
+              </div>
             </button>
           </div>
         </div>
@@ -973,7 +1121,7 @@
         trustText: "부산 현지 데이터로 매일 확인하는 정가 신뢰도", serviceTitle: "필요한 순간에, 필요한 서비스", tapHint: "카드를 눌러 자세히 보기",
         foodReviews: "맛집·리뷰", travelBooking: "여행·예약", visitorHelp: "외국인 편의",
         blueRibbon: "블루리본 추천 맛집", blueRibbonSub: "네이버 · 카카오 · Google Maps", fairRestaurant: "정가 인증 맛집", fairRestaurantSub: "투명한 판매가격", report: "바가지 신고", reportSub: "영수증으로 간편하게",
-        travelCourse: "관광 코스", travelCourseSub: "테마별 동선 안내", beachBooking: "해수욕장 예약", beachBookingSub: "QR로 빠른 입장", crowd: "실시간 혼잡도", crowdSub: "여유 · 보통 · 혼잡",
+        travelCourse: "관광 코스", travelCourseSub: "테마별 동선 안내", beachBooking: "해수욕장 예약", beachBookingSub: "QR로 빠른 입장", crowd: "실시간 혼잡도", crowdSub: "여유 · 보통 · 혼잡", haeundaeShort: "해운대 혼잡", gwangalliShort: "광안리 보통", songjeongShort: "송정 여유",
         dictionary: "부산 로컬 사전", dictionarySub: "정구지 · 메구리 · 아나고", tasteSub: "부산 음식, 쉽게 이해하기", currency: "환율 자동 계산",
         marketTitle: "오늘의 바다 시세", marketSub: "매일 오전 10시, 부산 주요 시장의 평균 가격을 업데이트합니다.", liveAverage: "실시간 평균가",
         jagalchi: "자갈치", millak: "민락", gwangalliMarket: "광안리", marketStandard: "{market} 시장 기준",
@@ -1000,7 +1148,7 @@
         trustText: "Fair-price confidence checked daily with local Busan data", serviceTitle: "The right service, right when you need it", tapHint: "Tap a card to learn more",
         foodReviews: "Food & reviews", travelBooking: "Travel & booking", visitorHelp: "Visitor help",
         blueRibbon: "Blue Ribbon restaurants", blueRibbonSub: "Naver · Kakao · Google Maps", fairRestaurant: "Fair-price restaurants", fairRestaurantSub: "Transparent menu prices", report: "Report overcharging", reportSub: "Submit with your receipt",
-        travelCourse: "Travel routes", travelCourseSub: "Routes for every travel style", beachBooking: "Beach booking", beachBookingSub: "Fast entry with QR", crowd: "Live crowd level", crowdSub: "Quiet · normal · busy",
+        travelCourse: "Travel routes", travelCourseSub: "Routes for every travel style", beachBooking: "Beach booking", beachBookingSub: "Fast entry with QR", crowd: "Live crowd level", crowdSub: "Quiet · normal · busy", haeundaeShort: "Haeundae busy", gwangalliShort: "Gwangalli normal", songjeongShort: "Songjeong quiet",
         dictionary: "Busan local dictionary", dictionarySub: "Understand local expressions", tasteSub: "Understand Busan food easily", currency: "Currency converter",
         marketTitle: "Today’s seafood prices", marketSub: "Average prices from Busan’s major markets, updated daily at 10 AM.", liveAverage: "Live average prices",
         jagalchi: "Jagalchi", millak: "Millak", gwangalliMarket: "Gwangalli", marketStandard: "{market} market",
@@ -1027,7 +1175,7 @@
         trustText: "釜山の地域データで毎日確認する適正価格の信頼度", serviceTitle: "必要な瞬間に、必要なサービス", tapHint: "カードをタップして詳細を見る",
         foodReviews: "グルメ・レビュー", travelBooking: "旅行・予約", visitorHelp: "外国人サポート",
         blueRibbon: "ブルーリボン推薦店", blueRibbonSub: "Naver · Kakao · Google Maps", fairRestaurant: "適正価格認証店", fairRestaurantSub: "透明な販売価格", report: "不当請求を通報", reportSub: "レシートで簡単に",
-        travelCourse: "観光コース", travelCourseSub: "テーマ別ルート案内", beachBooking: "海水浴場予約", beachBookingSub: "QRでスムーズに入場", crowd: "リアルタイム混雑度", crowdSub: "空き · 普通 · 混雑",
+        travelCourse: "観光コース", travelCourseSub: "テーマ別ルート案内", beachBooking: "海水浴場予約", beachBookingSub: "QRでスムーズに入場", crowd: "リアルタイム混雑度", crowdSub: "空き · 普通 · 混雑", haeundaeShort: "海雲台 混雑", gwangalliShort: "広安里 普通", songjeongShort: "松亭 空き",
         dictionary: "釜山ローカル辞典", dictionarySub: "釜山の方言を分かりやすく", tasteSub: "釜山料理を分かりやすく", currency: "為替自動換算",
         marketTitle: "今日の海鮮相場", marketSub: "毎日午前10時、釜山主要市場の平均価格を更新します。", liveAverage: "リアルタイム平均価格",
         jagalchi: "チャガルチ", millak: "民楽", gwangalliMarket: "広安里", marketStandard: "{market}市場基準",
@@ -1054,7 +1202,7 @@
         trustText: "根据釜山本地数据每日核验的合理价格可信度", serviceTitle: "在需要的时刻，找到合适的服务", tapHint: "点击卡片查看详情",
         foodReviews: "美食·评价", travelBooking: "旅行·预约", visitorHelp: "外国游客服务",
         blueRibbon: "蓝丝带推荐餐厅", blueRibbonSub: "Naver · Kakao · Google Maps", fairRestaurant: "合理价格认证餐厅", fairRestaurantSub: "透明的菜单价格", report: "举报高价收费", reportSub: "上传收据即可",
-        travelCourse: "旅游路线", travelCourseSub: "按主题规划路线", beachBooking: "海水浴场预约", beachBookingSub: "使用QR快速入场", crowd: "实时拥挤程度", crowdSub: "宽松 · 普通 · 拥挤",
+        travelCourse: "旅游路线", travelCourseSub: "按主题规划路线", beachBooking: "海水浴场预约", beachBookingSub: "使用QR快速入场", crowd: "实时拥挤程度", crowdSub: "宽松 · 普通 · 拥挤", haeundaeShort: "海云台 拥挤", gwangalliShort: "广安里 普通", songjeongShort: "松亭 宽松",
         dictionary: "釜山本地词典", dictionarySub: "轻松理解釜山方言", tasteSub: "轻松了解釜山美食", currency: "自动汇率换算",
         marketTitle: "今日海鲜价格", marketSub: "每天上午10点更新釜山主要市场的平均价格。", liveAverage: "实时平均价格",
         jagalchi: "札嘎其", millak: "民乐", gwangalliMarket: "广安里", marketStandard: "{market}市场标准",
@@ -1099,6 +1247,67 @@
       sos: ["sos", "sosCopy", "featureReady", "!"]
     };
 
+    const toolLabels = {
+      ko: {
+        amount: "금액", from: "기준 통화", to: "변환 통화", convert: "환율 계산하기", loading: "최신 환율을 불러오는 중…",
+        rateError: "환율 정보를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.", rateSource: "Frankfurter 기준환율 · 영업일 기준 업데이트",
+        menuInput: "한국어 메뉴", menuPlaceholder: "예: 광어회 1인분\n매운탕\n소주", target: "번역 언어", translate: "메뉴 번역하기",
+        translationResult: "번역 결과가 여기에 표시됩니다.", emptyMenu: "번역할 메뉴를 입력해 주세요.", menuHint: "V1은 부산 대표 메뉴와 음식 표현을 우선 지원합니다.",
+        crowdDemo: "V1 실험용 혼잡도 데이터입니다. 실제 출시 전 공공데이터 연동이 필요합니다.", updated: "업데이트", refresh: "새로고침",
+        free: "여유", normal: "보통", busy: "혼잡"
+      },
+      en: {
+        amount: "Amount", from: "From", to: "To", convert: "Convert currency", loading: "Loading the latest rate…",
+        rateError: "Rates are unavailable right now. Please try again shortly.", rateSource: "Frankfurter reference rates · updated on working days",
+        menuInput: "Korean menu", menuPlaceholder: "e.g. 광어회 1인분\n매운탕\n소주", target: "Translate to", translate: "Translate menu",
+        translationResult: "Your translation will appear here.", emptyMenu: "Enter a Korean menu to translate.", menuHint: "V1 currently supports common Busan dishes and menu terms.",
+        crowdDemo: "V1 demonstration data. A public data feed is required before the official launch.", updated: "Updated", refresh: "Refresh",
+        free: "Quiet", normal: "Normal", busy: "Busy"
+      },
+      ja: {
+        amount: "金額", from: "変換元", to: "変換先", convert: "為替を計算", loading: "最新レートを取得中…",
+        rateError: "為替情報を取得できません。しばらくしてから再度お試しください。", rateSource: "Frankfurter参考レート・営業日更新",
+        menuInput: "韓国語メニュー", menuPlaceholder: "例：광어회 1인분\n매운탕\n소주", target: "翻訳言語", translate: "メニューを翻訳",
+        translationResult: "翻訳結果がここに表示されます。", emptyMenu: "翻訳するメニューを入力してください。", menuHint: "V1では釜山の代表料理と一般的なメニュー表現に対応します。",
+        crowdDemo: "V1実験用データです。正式リリース前に公共データとの連携が必要です。", updated: "更新", refresh: "更新する",
+        free: "空き", normal: "普通", busy: "混雑"
+      },
+      zh: {
+        amount: "金额", from: "原币种", to: "目标币种", convert: "换算汇率", loading: "正在获取最新汇率…",
+        rateError: "暂时无法获取汇率，请稍后重试。", rateSource: "Frankfurter参考汇率 · 工作日更新",
+        menuInput: "韩文菜单", menuPlaceholder: "例如：광어회 1인분\n매운탕\n소주", target: "翻译语言", translate: "翻译菜单",
+        translationResult: "翻译结果将显示在这里。", emptyMenu: "请输入需要翻译的菜单。", menuHint: "V1优先支持釜山代表美食和常见菜单用语。",
+        crowdDemo: "这是V1实验数据，正式发布前需要连接公共数据。", updated: "更新", refresh: "刷新",
+        free: "宽松", normal: "普通", busy: "拥挤"
+      }
+    };
+
+    const crowdData = [
+      ["haeundae", "busy"],
+      ["gwangalli", "normal"],
+      ["songjeong", "free"],
+      ["songdo", "normal"],
+      ["dadaepo", "free"],
+      ["ilgwang", "normal"]
+    ];
+
+    const menuTranslations = {
+      "광어회": { en: "Olive flounder sashimi", ja: "ヒラメ刺身", zh: "比目鱼刺身" },
+      "우럭회": { en: "Rockfish sashimi", ja: "クロソイ刺身", zh: "石斑鱼刺身" },
+      "대게": { en: "Snow crab", ja: "ズワイガニ", zh: "雪蟹" },
+      "전복": { en: "Abalone", ja: "アワビ", zh: "鲍鱼" },
+      "돼지국밥": { en: "Pork and rice soup", ja: "豚肉クッパ", zh: "猪肉汤饭" },
+      "밀면": { en: "Busan-style wheat noodles", ja: "釜山式小麦冷麺", zh: "釜山小麦冷面" },
+      "씨앗호떡": { en: "Seed-filled sweet pancake", ja: "種入りホットク", zh: "坚果糖饼" },
+      "부산어묵": { en: "Busan fish cake", ja: "釜山かまぼこ", zh: "釜山鱼糕" },
+      "부산 어묵": { en: "Busan fish cake", ja: "釜山かまぼこ", zh: "釜山鱼糕" },
+      "매운탕": { en: "Spicy fish stew", ja: "魚の辛い鍋", zh: "辣鱼汤" },
+      "회": { en: "Sashimi", ja: "刺身", zh: "生鱼片" },
+      "소주": { en: "Soju", ja: "焼酎（ソジュ）", zh: "烧酒" },
+      "맥주": { en: "Beer", ja: "ビール", zh: "啤酒" },
+      "1인분": { en: "1 serving", ja: "1人前", zh: "1人份" }
+    };
+
     let currentLanguage = "ko";
     let currentMarket = "jagalchi";
 
@@ -1140,6 +1349,140 @@
       document.querySelectorAll(".category").forEach(panel => panel.classList.toggle("active", panel.id === `category-${categoryId}`));
     }
 
+    function renderCurrencyTool(container) {
+      const label = toolLabels[currentLanguage];
+      container.innerHTML = `
+        <div class="tool-form">
+          <div class="tool-grid">
+            <div class="tool-field">
+              <label for="currencyAmount">${label.amount}</label>
+              <input class="tool-input" id="currencyAmount" type="number" inputmode="decimal" min="0" step="any" value="10000">
+            </div>
+            <div class="tool-field">
+              <label for="currencyFrom">${label.from}</label>
+              <select class="tool-select" id="currencyFrom"><option>KRW</option><option>USD</option><option>JPY</option><option>CNY</option></select>
+            </div>
+            <div class="tool-field">
+              <label for="currencyTo">${label.to}</label>
+              <select class="tool-select" id="currencyTo"><option>USD</option><option>JPY</option><option>CNY</option><option>KRW</option></select>
+            </div>
+          </div>
+          <button class="tool-button" id="currencyConvert" type="button">${label.convert}</button>
+          <div class="tool-result" id="currencyResult">${label.loading}</div>
+          <p class="tool-note" id="currencyNote">${label.rateSource}</p>
+        </div>`;
+      document.getElementById("currencyConvert").addEventListener("click", convertCurrency);
+      document.getElementById("currencyFrom").addEventListener("change", convertCurrency);
+      document.getElementById("currencyTo").addEventListener("change", convertCurrency);
+      convertCurrency();
+    }
+
+    async function convertCurrency() {
+      const label = toolLabels[currentLanguage];
+      const amount = Number(document.getElementById("currencyAmount").value);
+      const from = document.getElementById("currencyFrom").value;
+      const to = document.getElementById("currencyTo").value;
+      const result = document.getElementById("currencyResult");
+      const note = document.getElementById("currencyNote");
+      if (!Number.isFinite(amount) || amount < 0) {
+        result.textContent = label.emptyMenu;
+        return;
+      }
+      if (from === to) {
+        result.textContent = `${formatCurrencyNumber(amount, to)} ${to}`;
+        return;
+      }
+      result.textContent = label.loading;
+      try {
+        const response = await fetch(`https://api.frankfurter.dev/v1/latest?base=${from}&symbols=${to}`);
+        if (!response.ok) throw new Error("rate");
+        const data = await response.json();
+        const converted = amount * data.rates[to];
+        result.textContent = `${formatCurrencyNumber(amount, from)} ${from} = ${formatCurrencyNumber(converted, to)} ${to}`;
+        note.textContent = `${label.rateSource} · ${data.date}`;
+      } catch (error) {
+        result.textContent = label.rateError;
+      }
+    }
+
+    function formatCurrencyNumber(value, currency) {
+      const locale = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN" }[currentLanguage];
+      return new Intl.NumberFormat(locale, {
+        maximumFractionDigits: currency === "KRW" || currency === "JPY" ? 0 : 2
+      }).format(value);
+    }
+
+    function renderMenuTranslator(container) {
+      const label = toolLabels[currentLanguage];
+      container.innerHTML = `
+        <div class="tool-form">
+          <div class="tool-field">
+            <label for="menuInput">${label.menuInput}</label>
+            <textarea class="tool-textarea" id="menuInput" placeholder="${label.menuPlaceholder}"></textarea>
+          </div>
+          <div class="tool-field">
+            <label for="menuTarget">${label.target}</label>
+            <select class="tool-select" id="menuTarget">
+              <option value="en">English</option>
+              <option value="ja">日本語</option>
+              <option value="zh">中文</option>
+            </select>
+          </div>
+          <button class="tool-button" id="menuTranslateButton" type="button">${label.translate}</button>
+          <div class="tool-result translation" id="menuTranslationResult">${label.translationResult}</div>
+          <p class="tool-note">${label.menuHint}</p>
+        </div>`;
+      document.getElementById("menuTranslateButton").addEventListener("click", translateMenu);
+    }
+
+    function translateMenu() {
+      const label = toolLabels[currentLanguage];
+      const source = document.getElementById("menuInput").value.trim();
+      const target = document.getElementById("menuTarget").value;
+      const result = document.getElementById("menuTranslationResult");
+      if (!source) {
+        result.textContent = label.emptyMenu;
+        return;
+      }
+      const keys = Object.keys(menuTranslations).sort((a, b) => b.length - a.length);
+      const translatedLines = source.split(/\n/).map(line => {
+        let translated = line;
+        keys.forEach(key => {
+          translated = translated.split(key).join(menuTranslations[key][target]);
+        });
+        return translated;
+      });
+      result.textContent = translatedLines.join("\n");
+    }
+
+    function renderCrowdTool(container) {
+      const label = toolLabels[currentLanguage];
+      const board = document.createElement("div");
+      board.className = "crowd-board";
+      crowdData.forEach(([beachKey, status]) => {
+        const row = document.createElement("div");
+        row.className = "crowd-row";
+        row.innerHTML = `<b>${t(beachKey)}</b><span><i class="status-dot ${status}"></i>${label[status]}</span>`;
+        board.appendChild(row);
+      });
+      const meta = document.createElement("div");
+      meta.className = "crowd-meta";
+      meta.innerHTML = `<span id="crowdUpdated"></span><button class="crowd-refresh" id="crowdRefresh" type="button">${label.refresh}</button>`;
+      const note = document.createElement("p");
+      note.className = "tool-note";
+      note.style.marginTop = "12px";
+      note.textContent = label.crowdDemo;
+      container.append(board, meta, note);
+      updateCrowdTime();
+      document.getElementById("crowdRefresh").addEventListener("click", updateCrowdTime);
+    }
+
+    function updateCrowdTime() {
+      const label = toolLabels[currentLanguage];
+      const locale = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN" }[currentLanguage];
+      document.getElementById("crowdUpdated").textContent = `${label.updated} · ${new Intl.DateTimeFormat(locale, { hour: "2-digit", minute: "2-digit" }).format(new Date())}`;
+    }
+
     function openFeature(featureId) {
       if (featureId === "blueRibbon") {
         document.getElementById("ribbonModal").classList.add("open");
@@ -1178,6 +1521,18 @@
           list.appendChild(row);
         });
         extra.appendChild(list);
+      }
+      if (featureId === "currency") {
+        document.getElementById("modalInfo").textContent = toolLabels[currentLanguage].rateSource;
+        renderCurrencyTool(extra);
+      }
+      if (featureId === "menuTranslate") {
+        document.getElementById("modalInfo").textContent = toolLabels[currentLanguage].menuHint;
+        renderMenuTranslator(extra);
+      }
+      if (featureId === "crowd") {
+        document.getElementById("modalInfo").textContent = toolLabels[currentLanguage].crowdDemo;
+        renderCrowdTool(extra);
       }
       document.getElementById("featureModal").classList.add("open");
     }
