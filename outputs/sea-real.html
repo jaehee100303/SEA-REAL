@@ -943,6 +943,83 @@
       font-weight: 800;
     }
     .course-stop b { display: block; color: #173f58; font-size: 12px; }
+    .verified-list {
+      display: grid;
+      gap: 9px;
+      margin-top: 14px;
+    }
+    .verified-shop {
+      padding: 14px;
+      background: #f3f9fb;
+      border: 1px solid #e2edf2;
+      border-radius: 16px;
+    }
+    .verified-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .verified-head b { color: #173f58; font-size: 12px; }
+    .verified-badge {
+      min-width: max-content;
+      padding: 5px 8px;
+      color: #15803d;
+      background: #dcfce7;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 800;
+    }
+    .verified-price {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .verified-price span {
+      padding: 10px;
+      color: #607d91;
+      background: white;
+      border-radius: 11px;
+      font-size: 9px;
+    }
+    .verified-price strong {
+      display: block;
+      margin-top: 3px;
+      color: #075985;
+      font-size: 13px;
+    }
+    .verify-code {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .verify-code .tool-input { flex: 1; }
+    .verify-code .tool-button { min-width: 100px; padding-inline: 12px; }
+    .receipt-preview {
+      width: 100%;
+      max-height: 190px;
+      display: none;
+      object-fit: contain;
+      margin-top: 8px;
+      background: #eef4f7;
+      border-radius: 14px;
+    }
+    .report-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .report-grid .full { grid-column: 1 / -1; }
+    .privacy-check {
+      display: flex;
+      align-items: start;
+      gap: 8px;
+      color: #607d91;
+      font-size: 9px;
+      line-height: 1.5;
+    }
+    .privacy-check input { margin-top: 2px; }
 
     @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
     @keyframes rise { from { opacity: 0; transform: translateY(8px) scale(.99); } to { opacity: 1; transform: none; } }
@@ -992,6 +1069,8 @@
       .tool-field:first-child { grid-column: 1 / -1; }
       .crowd-board { grid-template-columns: 1fr; }
       .quick-links { grid-template-columns: 1fr; }
+      .report-grid { grid-template-columns: 1fr; }
+      .report-grid .full { grid-column: auto; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
@@ -1455,28 +1534,36 @@
         sosGuide: "필요한 시설을 누르면 현재 위치 주변 검색 결과가 지도에서 열립니다.", touristInfo: "관광안내소", police: "경찰서", hospital: "병원·응급실", consulate: "영사관", openMap: "지도에서 찾기",
         bookingBeach: "해수욕장", bookingItem: "대여 용품", bookingDate: "이용 날짜", bookingTime: "이용 시간", bookingQty: "수량", estimate: "예상 금액", reserve: "V1 예약 신청", bookingDone: "예약 신청이 접수되었습니다. V1에서는 실제 결제가 진행되지 않습니다.", bookingDemo: "출시 실험용 예약 화면입니다. 제휴 업체 연결 전에는 실제 재고와 결제가 반영되지 않습니다.",
         jetSki: "제트스키 · 30분", paddleBoard: "패들보드 · 60분", lifeJacket: "구명조끼 · 1일", tube: "튜브 · 1일", surfBoard: "서핑보드 · 2시간",
-        family: "가족", couple: "커플", solo: "혼자", friends: "친구", duration: "소요시간", budget: "예상비용", routeMap: "전체 코스 지도에서 보기"
+        family: "가족", couple: "커플", solo: "혼자", friends: "친구", duration: "소요시간", budget: "예상비용", routeMap: "전체 코스 지도에서 보기",
+        area: "지역", fishType: "대표 어종", todayFair: "오늘 정가", salePrice: "판매가격", matched: "가격 일치", verifyCode: "QR 인증번호 입력", verify: "인증 확인", verified: "인증된 SEA-REAL 파트너입니다.", invalidCode: "인증번호를 다시 확인해 주세요.", certifiedDemo: "V1 시범 인증 데이터입니다. 실제 제휴점 등록 전에는 방문·결제 자료로 사용할 수 없습니다.",
+        receipt: "영수증 사진", chooseReceipt: "영수증 촬영 또는 선택", restaurant: "식당명", location: "위치·주소", menuName: "메뉴명", paidPrice: "결제금액", expectedPrice: "확인한 정가", reportDetail: "신고 내용", privacy: "입력한 내용이 이 기기에 임시 저장되는 것에 동의합니다.", submitReport: "V1 신고 접수", reportDone: "신고가 임시 접수되었습니다.", requiredFields: "필수 항목과 동의 여부를 확인해 주세요.", overchargeResult: "정가보다 {percent}% 높은 결제입니다.", reportDemo: "V1 기기 내 임시 접수입니다. 관리자와 공공기관에는 전송되지 않습니다."
       },
       en: {
         photoSelect: "Take or choose a menu photo", photoSub: "The photo stays on your device and is not stored on a server.", readPhoto: "Read text from photo", reading: "Reading the menu", ocrDone: "Text detected. Choose a language below to translate it.", ocrError: "Text could not be read. Try a brighter, front-facing photo.",
         sosGuide: "Tap a facility to open nearby results based on your current location.", touristInfo: "Tourist information", police: "Police station", hospital: "Hospital · ER", consulate: "Consulate", openMap: "Find on map",
         bookingBeach: "Beach", bookingItem: "Rental item", bookingDate: "Date", bookingTime: "Time", bookingQty: "Quantity", estimate: "Estimated total", reserve: "Request V1 booking", bookingDone: "Your booking request was received. No payment is processed in V1.", bookingDemo: "V1 booking prototype. Live stock and payment require partner integration.",
         jetSki: "Jet ski · 30 min", paddleBoard: "Paddle board · 60 min", lifeJacket: "Life jacket · 1 day", tube: "Tube · 1 day", surfBoard: "Surfboard · 2 hours",
-        family: "Family", couple: "Couple", solo: "Solo", friends: "Friends", duration: "Duration", budget: "Estimated cost", routeMap: "Open the full route in Maps"
+        family: "Family", couple: "Couple", solo: "Solo", friends: "Friends", duration: "Duration", budget: "Estimated cost", routeMap: "Open the full route in Maps",
+        area: "Area", fishType: "Main seafood", todayFair: "Today’s fair price", salePrice: "Menu price", matched: "Price matched", verifyCode: "Enter QR verification code", verify: "Verify", verified: "Verified SEA-REAL partner.", invalidCode: "Check the verification code and try again.", certifiedDemo: "V1 demonstration certification data. Do not use it as proof of a real partner or purchase.",
+        receipt: "Receipt photo", chooseReceipt: "Take or choose a receipt", restaurant: "Restaurant", location: "Location · address", menuName: "Menu item", paidPrice: "Amount paid", expectedPrice: "Fair price checked", reportDetail: "Report details", privacy: "I agree to temporarily save these details on this device.", submitReport: "Submit V1 report", reportDone: "Your report was saved temporarily.", requiredFields: "Check the required fields and consent.", overchargeResult: "The payment is {percent}% above the fair price.", reportDemo: "V1 device-only draft. It is not sent to an administrator or public authority."
       },
       ja: {
         photoSelect: "メニュー写真を撮影または選択", photoSub: "写真はサーバーに保存されず、端末内で処理されます。", readPhoto: "写真から文字を読み取る", reading: "メニューを読み取り中", ocrDone: "文字を読み取りました。下で翻訳言語を選択してください。", ocrError: "文字を読み取れませんでした。明るく正面から撮影した写真で再度お試しください。",
         sosGuide: "施設をタップすると、現在地周辺の検索結果が地図で開きます。", touristInfo: "観光案内所", police: "警察署", hospital: "病院・救急", consulate: "領事館", openMap: "地図で探す",
         bookingBeach: "海水浴場", bookingItem: "レンタル用品", bookingDate: "利用日", bookingTime: "利用時間", bookingQty: "数量", estimate: "予想金額", reserve: "V1予約申請", bookingDone: "予約申請を受け付けました。V1では決済されません。", bookingDemo: "V1予約プロトタイプです。実在庫と決済には提携業者との連携が必要です。",
         jetSki: "ジェットスキー・30分", paddleBoard: "パドルボード・60分", lifeJacket: "ライフジャケット・1日", tube: "浮き輪・1日", surfBoard: "サーフボード・2時間",
-        family: "家族", couple: "カップル", solo: "一人", friends: "友達", duration: "所要時間", budget: "予想費用", routeMap: "コース全体を地図で見る"
+        family: "家族", couple: "カップル", solo: "一人", friends: "友達", duration: "所要時間", budget: "予想費用", routeMap: "コース全体を地図で見る",
+        area: "地域", fishType: "代表魚種", todayFair: "本日の適正価格", salePrice: "販売価格", matched: "価格一致", verifyCode: "QR認証番号を入力", verify: "認証確認", verified: "認証済みSEA-REALパートナーです。", invalidCode: "認証番号を再確認してください。", certifiedDemo: "V1デモ認証データです。実際の提携店や購入証明には使用できません。",
+        receipt: "レシート写真", chooseReceipt: "レシートを撮影または選択", restaurant: "店舗名", location: "場所・住所", menuName: "メニュー名", paidPrice: "支払金額", expectedPrice: "確認した適正価格", reportDetail: "通報内容", privacy: "入力内容をこの端末に一時保存することに同意します。", submitReport: "V1通報受付", reportDone: "通報を一時保存しました。", requiredFields: "必須項目と同意を確認してください。", overchargeResult: "適正価格より{percent}%高い支払いです。", reportDemo: "V1端末内の一時受付です。管理者や公的機関には送信されません。"
       },
       zh: {
         photoSelect: "拍摄或选择菜单照片", photoSub: "照片不会上传服务器，仅在设备中处理。", readPhoto: "识别照片文字", reading: "正在识别菜单", ocrDone: "已识别照片文字，请在下方选择翻译语言。", ocrError: "无法识别文字，请使用光线明亮、正面拍摄的照片重试。",
         sosGuide: "点击设施即可在地图中查看当前位置附近的搜索结果。", touristInfo: "旅游咨询处", police: "警察局", hospital: "医院·急诊", consulate: "领事馆", openMap: "在地图中查找",
         bookingBeach: "海水浴场", bookingItem: "租赁用品", bookingDate: "使用日期", bookingTime: "使用时间", bookingQty: "数量", estimate: "预计金额", reserve: "提交V1预约", bookingDone: "预约申请已提交。V1版本不会进行实际支付。", bookingDemo: "V1预约原型，实际库存和支付需要连接合作商家。",
         jetSki: "水上摩托·30分钟", paddleBoard: "桨板·60分钟", lifeJacket: "救生衣·1天", tube: "游泳圈·1天", surfBoard: "冲浪板·2小时",
-        family: "家庭", couple: "情侣", solo: "独自", friends: "朋友", duration: "所需时间", budget: "预计费用", routeMap: "在地图中查看完整路线"
+        family: "家庭", couple: "情侣", solo: "独自", friends: "朋友", duration: "所需时间", budget: "预计费用", routeMap: "在地图中查看完整路线",
+        area: "地区", fishType: "代表海鲜", todayFair: "今日合理价格", salePrice: "销售价格", matched: "价格一致", verifyCode: "输入QR认证编号", verify: "验证", verified: "已认证的SEA-REAL合作商家。", invalidCode: "请重新确认认证编号。", certifiedDemo: "这是V1演示认证数据，不能作为真实合作商家或消费凭证。",
+        receipt: "收据照片", chooseReceipt: "拍摄或选择收据", restaurant: "餐厅名称", location: "位置·地址", menuName: "菜单名称", paidPrice: "支付金额", expectedPrice: "查询的合理价格", reportDetail: "举报内容", privacy: "同意将输入内容暂时保存在此设备上。", submitReport: "提交V1举报", reportDone: "举报已暂时保存。", requiredFields: "请检查必填项和同意状态。", overchargeResult: "支付金额比合理价格高{percent}%。", reportDemo: "这是V1设备内临时记录，不会发送给管理员或公共机构。"
       }
     };
 
@@ -1505,6 +1592,21 @@
         solo: { duration: "5小时", budget: "约55,000韩元", stops: [["白浅文化村", "沿悬崖小路悠闲漫步"], ["富平罐头市场", "适合独自品尝的釜山小吃"], ["宝水洞书店街", "探索安静书店与老巷"]] },
         friends: { duration: "8小时", budget: "约150,000韩元", stops: [["松亭海水浴场", "上午冲浪或体验桨板"], ["海东龙宫寺", "海边寺庙与机张散步"], ["民乐生鱼片中心", "以刺身和夜景结束一天"]] }
       }
+    };
+
+    const certifiedDemoData = {
+      haeundae: [
+        { name: "SEA-REAL Partner H-01", code: "SR-HAE-001", fair: 42000, sale: 42000 },
+        { name: "SEA-REAL Partner H-02", code: "SR-HAE-002", fair: 42000, sale: 42000 }
+      ],
+      gwangalli: [
+        { name: "SEA-REAL Partner G-01", code: "SR-GWA-001", fair: 44000, sale: 44000 },
+        { name: "SEA-REAL Partner G-02", code: "SR-GWA-002", fair: 44000, sale: 44000 }
+      ],
+      jagalchi: [
+        { name: "SEA-REAL Partner J-01", code: "SR-JAG-001", fair: 41000, sale: 41000 },
+        { name: "SEA-REAL Partner J-02", code: "SR-JAG-002", fair: 41000, sale: 41000 }
+      ]
     };
 
     const crowdData = [
@@ -1875,6 +1977,136 @@
         <a class="map-link google" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${query}"><span>${label.routeMap}</span><span>↗</span></a>`;
     }
 
+    function renderFairRestaurantTool(container) {
+      const label = featureLabels[currentLanguage];
+      container.innerHTML = `
+        <div class="tool-form">
+          <div class="tool-grid">
+            <div class="tool-field">
+              <label for="certifiedArea">${label.area}</label>
+              <select class="tool-select" id="certifiedArea">
+                <option value="haeundae">${t("haeundae")}</option>
+                <option value="gwangalli">${t("gwangalli")}</option>
+                <option value="jagalchi">${t("jagalchi")}</option>
+              </select>
+            </div>
+            <div class="tool-field">
+              <label for="certifiedFish">${label.fishType}</label>
+              <select class="tool-select" id="certifiedFish">
+                <option value="flounder">${t("flounder")}</option>
+                <option value="rockfish">${t("rockfish")}</option>
+                <option value="snowCrab">${t("snowCrab")}</option>
+              </select>
+            </div>
+          </div>
+          <div class="verified-list" id="verifiedList"></div>
+          <div class="verify-code">
+            <input class="tool-input" id="verifyCodeInput" autocomplete="off" placeholder="${label.verifyCode}">
+            <button class="tool-button" id="verifyCodeButton" type="button">${label.verify}</button>
+          </div>
+          <div class="booking-success" id="verifyResult"></div>
+          <p class="tool-note">${label.certifiedDemo}</p>
+        </div>`;
+      document.getElementById("certifiedArea").addEventListener("change", renderVerifiedShops);
+      document.getElementById("certifiedFish").addEventListener("change", renderVerifiedShops);
+      document.getElementById("verifyCodeButton").addEventListener("click", verifyCertifiedCode);
+      renderVerifiedShops();
+    }
+
+    function renderVerifiedShops() {
+      const label = featureLabels[currentLanguage];
+      const area = document.getElementById("certifiedArea").value;
+      const fish = document.getElementById("certifiedFish").value;
+      const multiplier = { flounder: 1, rockfish: 1.12, snowCrab: 1.9 }[fish];
+      const list = document.getElementById("verifiedList");
+      list.innerHTML = certifiedDemoData[area].map(shop => {
+        const fair = Math.round(shop.fair * multiplier / 1000) * 1000;
+        const sale = Math.round(shop.sale * multiplier / 1000) * 1000;
+        return `
+          <div class="verified-shop">
+            <div class="verified-head"><b>${shop.name}</b><span class="verified-badge">✓ ${label.matched}</span></div>
+            <div class="verified-price">
+              <span>${label.todayFair}<strong>₩${new Intl.NumberFormat("ko-KR").format(fair)}</strong></span>
+              <span>${label.salePrice}<strong>₩${new Intl.NumberFormat("ko-KR").format(sale)}</strong></span>
+            </div>
+            <small style="display:block;margin-top:9px;color:#7890a3;font-size:9px">QR · ${shop.code}</small>
+          </div>`;
+      }).join("");
+    }
+
+    function verifyCertifiedCode() {
+      const label = featureLabels[currentLanguage];
+      const code = document.getElementById("verifyCodeInput").value.trim().toUpperCase();
+      const valid = Object.values(certifiedDemoData).flat().some(shop => shop.code === code);
+      const result = document.getElementById("verifyResult");
+      result.style.display = "block";
+      result.style.color = valid ? "#166534" : "#b91c1c";
+      result.style.background = valid ? "#dcfce7" : "#fee2e2";
+      result.textContent = valid ? label.verified : label.invalidCode;
+    }
+
+    function renderReportTool(container) {
+      const label = featureLabels[currentLanguage];
+      container.innerHTML = `
+        <div class="tool-form">
+          <label class="photo-upload" for="receiptPhoto">
+            <span>🧾<strong>${label.chooseReceipt}</strong><small>${label.receipt}</small></span>
+            <input id="receiptPhoto" type="file" accept="image/*" capture="environment">
+          </label>
+          <img class="receipt-preview" id="receiptPreview" alt="Receipt preview">
+          <div class="report-grid">
+            <div class="tool-field"><label for="reportRestaurant">${label.restaurant}</label><input class="tool-input" id="reportRestaurant"></div>
+            <div class="tool-field"><label for="reportLocation">${label.location}</label><input class="tool-input" id="reportLocation"></div>
+            <div class="tool-field"><label for="reportMenu">${label.menuName}</label><input class="tool-input" id="reportMenu"></div>
+            <div class="tool-field"><label for="reportPaid">${label.paidPrice}</label><input class="tool-input" id="reportPaid" type="number" inputmode="numeric" min="0"></div>
+            <div class="tool-field"><label for="reportFair">${label.expectedPrice}</label><input class="tool-input" id="reportFair" type="number" inputmode="numeric" min="0"></div>
+            <div class="tool-field full"><label for="reportDetail">${label.reportDetail}</label><textarea class="tool-textarea" id="reportDetail"></textarea></div>
+          </div>
+          <label class="privacy-check"><input id="reportConsent" type="checkbox"><span>${label.privacy}</span></label>
+          <button class="tool-button" id="reportSubmit" type="button">${label.submitReport}</button>
+          <div class="booking-success" id="reportResult"></div>
+          <p class="tool-note">${label.reportDemo}</p>
+        </div>`;
+      document.getElementById("receiptPhoto").addEventListener("change", event => {
+        const file = event.target.files && event.target.files[0];
+        if (!file) return;
+        const preview = document.getElementById("receiptPreview");
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+      });
+      document.getElementById("reportSubmit").addEventListener("click", submitOverchargeReport);
+    }
+
+    function submitOverchargeReport() {
+      const label = featureLabels[currentLanguage];
+      const restaurant = document.getElementById("reportRestaurant").value.trim();
+      const location = document.getElementById("reportLocation").value.trim();
+      const menu = document.getElementById("reportMenu").value.trim();
+      const paid = Number(document.getElementById("reportPaid").value);
+      const fair = Number(document.getElementById("reportFair").value);
+      const receipt = document.getElementById("receiptPhoto").files[0];
+      const consent = document.getElementById("reportConsent").checked;
+      const result = document.getElementById("reportResult");
+      result.style.display = "block";
+      if (!receipt || !restaurant || !location || !menu || !paid || !fair || !consent) {
+        result.style.color = "#b91c1c";
+        result.style.background = "#fee2e2";
+        result.textContent = label.requiredFields;
+        return;
+      }
+      const percent = Math.max(0, Math.round((paid - fair) / fair * 100));
+      const report = {
+        id: `SR-${Date.now().toString().slice(-8)}`,
+        restaurant, location, menu, paid, fair,
+        detail: document.getElementById("reportDetail").value.trim(),
+        createdAt: new Date().toISOString()
+      };
+      localStorage.setItem("seaRealLastReport", JSON.stringify(report));
+      result.style.color = "#166534";
+      result.style.background = "#dcfce7";
+      result.textContent = `${label.reportDone} · ${fillTemplate(label.overchargeResult, { percent })} · ${report.id}`;
+    }
+
     function openFeature(featureId) {
       if (featureId === "blueRibbon") {
         document.getElementById("ribbonModal").classList.add("open");
@@ -1937,6 +2169,14 @@
       if (featureId === "travelCourse") {
         document.getElementById("modalInfo").textContent = t("travelCourseInfo");
         renderCourseTool(extra);
+      }
+      if (featureId === "fairRestaurant") {
+        document.getElementById("modalInfo").textContent = featureLabels[currentLanguage].certifiedDemo;
+        renderFairRestaurantTool(extra);
+      }
+      if (featureId === "report") {
+        document.getElementById("modalInfo").textContent = featureLabels[currentLanguage].reportDemo;
+        renderReportTool(extra);
       }
       document.getElementById("featureModal").classList.add("open");
     }
