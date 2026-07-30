@@ -1621,6 +1621,10 @@
     const menuTranslations = {
       "광어회": { en: "Olive flounder sashimi", ja: "ヒラメ刺身", zh: "比目鱼刺身" },
       "우럭회": { en: "Rockfish sashimi", ja: "クロソイ刺身", zh: "石斑鱼刺身" },
+      "모둠회": { en: "Assorted sashimi", ja: "刺身盛り合わせ", zh: "什锦生鱼片" },
+      "활어회": { en: "Fresh live-fish sashimi", ja: "活魚刺身", zh: "活鱼刺身" },
+      "광어": { en: "Olive flounder", ja: "ヒラメ", zh: "比目鱼" },
+      "우럭": { en: "Rockfish", ja: "クロソイ", zh: "石斑鱼" },
       "대게": { en: "Snow crab", ja: "ズワイガニ", zh: "雪蟹" },
       "전복": { en: "Abalone", ja: "アワビ", zh: "鲍鱼" },
       "돼지국밥": { en: "Pork and rice soup", ja: "豚肉クッパ", zh: "猪肉汤饭" },
@@ -1645,11 +1649,16 @@
       "낙지": { en: "Small octopus", ja: "テナガダコ", zh: "小章鱼" },
       "오징어": { en: "Squid", ja: "イカ", zh: "鱿鱼" },
       "새우": { en: "Shrimp", ja: "エビ", zh: "虾" },
+      "가리비": { en: "Scallop", ja: "ホタテ", zh: "扇贝" },
+      "홍합": { en: "Mussel", ja: "ムール貝", zh: "贻贝" },
+      "굴": { en: "Oyster", ja: "カキ", zh: "牡蛎" },
+      "랍스터": { en: "Lobster", ja: "ロブスター", zh: "龙虾" },
       "멍게": { en: "Sea squirt", ja: "ホヤ", zh: "海鞘" },
       "해삼": { en: "Sea cucumber", ja: "ナマコ", zh: "海参" },
       "성게": { en: "Sea urchin", ja: "ウニ", zh: "海胆" },
       "간장게장": { en: "Soy-marinated crab", ja: "ワタリガニの醤油漬け", zh: "酱油腌蟹" },
       "공기밥": { en: "Bowl of rice", ja: "ご飯", zh: "米饭" },
+      "전복죽": { en: "Abalone porridge", ja: "アワビ粥", zh: "鲍鱼粥" },
       "라면사리": { en: "Extra ramen noodles", ja: "追加ラーメン", zh: "加方便面" },
       "순한맛": { en: "Mild", ja: "マイルド", zh: "微辣" },
       "보통맛": { en: "Medium spicy", ja: "普通の辛さ", zh: "中辣" },
@@ -1660,6 +1669,13 @@
       "사이다": { en: "Lemon-lime soda", ja: "サイダー", zh: "汽水" },
       "콜라": { en: "Cola", ja: "コーラ", zh: "可乐" },
       "1인분": { en: "1 serving", ja: "1人前", zh: "1人份" }
+    };
+
+    const menuOcrAliases = {
+      "광여회": "광어회", "광어희": "광어회", "우럭희": "우럭회", "물희": "물회",
+      "회덮밤": "회덮밥", "돼지국밤": "돼지국밥", "씨앗호덕": "씨앗호떡",
+      "매운당": "매운탕", "해물당": "해물탕", "아구찜": "아구찜",
+      "부산오묵": "부산어묵", "간장개장": "간장게장"
     };
 
     let currentLanguage = "ko";
@@ -1909,19 +1925,27 @@
     }
 
     function normalizeMenuText(text) {
-      return text
+      let normalized = text
         .replace(/\r/g, "")
-        .replace(/([가-힣])\s+(?=[가-힣])/g, "$1")
-        .replace(/([가-힣])\s+(?=[가-힣])/g, "$1")
         .replace(/[|¦]/g, " ")
         .replace(/[ \t]{2,}/g, " ")
         .replace(/\n{3,}/g, "\n\n")
         .trim();
+      const knownWords = [...Object.keys(menuTranslations), ...Object.keys(menuOcrAliases)].sort((a, b) => b.length - a.length);
+      knownWords.forEach(word => {
+        const spacedPattern = new RegExp(word.split("").join("\\s*"), "g");
+        normalized = normalized.replace(spacedPattern, word);
+      });
+      Object.entries(menuOcrAliases).forEach(([wrong, corrected]) => {
+        normalized = normalized.split(wrong).join(corrected);
+      });
+      return normalized;
     }
 
     function translateMenu() {
       const label = toolLabels[currentLanguage];
       const source = document.getElementById("menuInput").value.trim();
+      const normalizedSource = normalizeMenuText(source);
       const target = document.getElementById("menuTarget").value;
       const result = document.getElementById("menuTranslationResult");
       const googleLink = document.getElementById("googleTranslateLink");
@@ -1931,16 +1955,55 @@
         return;
       }
       const keys = Object.keys(menuTranslations).sort((a, b) => b.length - a.length);
-      const translatedLines = source.split(/\n/).map(line => {
-        let translated = line;
+      const translatedLines = normalizedSource.split(/\n/).map(line => {
+        let translated = repairOcrLine(line);
         keys.forEach(key => {
           translated = translated.split(key).join(menuTranslations[key][target]);
         });
+        translated = translated.replace(/(\d+)\s*인분/g, (_, count) => {
+          if (target === "en") return `${count} ${count === "1" ? "serving" : "servings"}`;
+          if (target === "ja") return `${count}人前`;
+          return `${count}人份`;
+        });
+        translated = translated.replace(/(\d[\d,.]*)\s*원/g, "$1 KRW");
         return translated;
       });
       result.textContent = translatedLines.join("\n");
       googleLink.href = `https://translate.google.com/?sl=ko&tl=${target}&text=${encodeURIComponent(source)}&op=translate`;
       googleLink.style.display = "flex";
+    }
+
+    function repairOcrLine(line) {
+      return line.replace(/[가-힣]{2,}/g, token => {
+        if (menuTranslations[token] || Object.keys(menuTranslations).some(key => token.includes(key))) return token;
+        let bestKey = token;
+        let bestDistance = Infinity;
+        Object.keys(menuTranslations).forEach(key => {
+          if (Math.abs(key.length - token.length) > 1) return;
+          const distance = editDistance(token, key);
+          if (distance < bestDistance) {
+            bestDistance = distance;
+            bestKey = key;
+          }
+        });
+        const allowed = token.length >= 5 ? 2 : 1;
+        return bestDistance <= allowed ? bestKey : token;
+      });
+    }
+
+    function editDistance(left, right) {
+      const rows = Array.from({ length: left.length + 1 }, (_, index) => [index]);
+      for (let column = 0; column <= right.length; column += 1) rows[0][column] = column;
+      for (let row = 1; row <= left.length; row += 1) {
+        for (let column = 1; column <= right.length; column += 1) {
+          rows[row][column] = Math.min(
+            rows[row - 1][column] + 1,
+            rows[row][column - 1] + 1,
+            rows[row - 1][column - 1] + (left[row - 1] === right[column - 1] ? 0 : 1)
+          );
+        }
+      }
+      return rows[left.length][right.length];
     }
 
     function renderCrowdTool(container) {
