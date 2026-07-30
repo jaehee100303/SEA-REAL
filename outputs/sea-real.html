@@ -637,6 +637,15 @@
       font-size: 13px;
     }
     .dictionary-row b:last-child { text-align: right; color: #0369a1; }
+    .dictionary-row .term-label { text-align: left; color: #173f58; }
+    .pronunciation {
+      display: block;
+      margin-top: 3px;
+      color: #7890a3;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .1px;
+    }
     .crowd-preview {
       display: flex;
       flex-wrap: wrap;
@@ -2291,25 +2300,25 @@
       extra.innerHTML = "";
 
       if (featureId === "dictionary") {
-        const rows = [["정구지", "부추"], ["메구리", "가숭어"], ["아나고", "붕장어"], ["데까", "엄청 큰 사이즈"]];
+        const rows = [["정구지", "Jeongguji", "부추"], ["메구리", "Meguri", "가숭어"], ["아나고", "Anago", "붕장어"], ["데까", "De-kka", "엄청 큰 사이즈"]];
         const list = document.createElement("div");
         list.className = "dictionary-list";
-        rows.forEach(([local, standard]) => {
+        rows.forEach(([local, pronunciation, standard]) => {
           const row = document.createElement("div");
           row.className = "dictionary-row";
-          row.innerHTML = `<b>${local}</b><span>→</span><b>${standard}</b>`;
+          row.innerHTML = `<b class="term-label">${local}<small class="pronunciation">${pronunciation}</small></b><span>→</span><b>${standard}</b>`;
           list.appendChild(row);
         });
         extra.appendChild(list);
       }
       if (featureId === "taste") {
-        const rows = [["돼지국밥", "Rice version of Tonkotsu Ramen"], ["밀면", "Similar to Morioka Reimen"], ["씨앗호떡", "Sweet Korean Churros"], ["부산 어묵", "Premium Handmade Fish Cake"]];
+        const rows = [["돼지국밥", "Dwaeji-gukbap", "Rice version of Tonkotsu Ramen"], ["밀면", "Milmyeon", "Similar to Morioka Reimen"], ["씨앗호떡", "Ssiat-hotteok", "Sweet Korean Churros"], ["부산 어묵", "Busan eomuk", "Premium Handmade Fish Cake"]];
         const list = document.createElement("div");
         list.className = "dictionary-list";
-        rows.forEach(([food, comparison]) => {
+        rows.forEach(([food, pronunciation, comparison]) => {
           const row = document.createElement("div");
           row.className = "dictionary-row";
-          row.innerHTML = `<b>${food}</b><span>→</span><b>${comparison}</b>`;
+          row.innerHTML = `<b class="term-label">${food}<small class="pronunciation">${pronunciation}</small></b><span>→</span><b>${comparison}</b>`;
           list.appendChild(row);
         });
         extra.appendChild(list);
