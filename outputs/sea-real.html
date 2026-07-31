@@ -1226,7 +1226,9 @@
       width: 34%;
       display: flex;
       align-items: center;
-      padding: 1px 3px;
+      justify-content: center;
+      padding: 0 1px;
+      box-sizing: border-box;
       color: #111827;
       background: rgba(255, 249, 235, .98);
       border: 0;
@@ -1240,6 +1242,7 @@
       text-shadow: none;
       white-space: nowrap;
       overflow: hidden;
+      letter-spacing: -.02em;
     }
     .menu-translation-status {
       display: none;
@@ -2219,6 +2222,10 @@
       "놀래미": { en: "Greenling", ja: "アイナメ", zh: "六线鱼" },
       "국내": { en: "Domestic", ja: "韓国産", zh: "韩国产" },
       "계절 활어회": { en: "Seasonal sashimi", ja: "季節の刺身", zh: "时令生鱼片" },
+      "계절": { en: "Seasonal", ja: "季節", zh: "时令" },
+      "대": { en: "L", ja: "大", zh: "大" },
+      "중": { en: "M", ja: "中", zh: "中" },
+      "소": { en: "S", ja: "小", zh: "小" },
       "5인스페셜": { en: "Special for 5", ja: "5人スペシャル", zh: "5人特选" },
       "스끼다시": { en: "Side dishes", ja: "付き出し", zh: "配菜" },
       "싯가": { en: "Market price", ja: "時価", zh: "时价" },
@@ -2277,6 +2284,20 @@
       "5인스페슬": "5인스페셜", "5인스폐셜": "5인스페셜",
       "예절 활어회": "계절 활어회", "계철 활어회": "계절 활어회"
     };
+
+    const singleCellMenuKeys = new Set(["대", "중", "소", "회"]);
+
+    function findMenuSemanticKeys(text) {
+      const normalized = normalizeMenuText(text || "").trim();
+      const matched = Object.keys(menuTranslations)
+        .sort((a, b) => b.length - a.length)
+        .filter(key => key.length >= 2
+          ? normalized.includes(key)
+          : singleCellMenuKeys.has(key) && normalized === key);
+      return matched.filter((key, index, list) => {
+        return !list.some((other, otherIndex) => otherIndex !== index && other.includes(key));
+      });
+    }
 
     let currentLanguage = "ko";
     let currentMarket = "jagalchi";
@@ -2554,20 +2575,18 @@
     }
 
     function mergeMenuLayoutLines(candidates) {
-      const knownKeys = Object.keys(menuTranslations).sort((a, b) => b.length - a.length);
       const merged = [];
       candidates.slice(0, 3).forEach(candidate => {
         (candidate.layoutLines || []).forEach(line => {
           const normalized = normalizeMenuText(line.text || "");
-          const semanticKeys = knownKeys.filter(key => key.length >= 2 && normalized.includes(key)).filter((key, index, list) => {
-            return !list.some((other, otherIndex) => otherIndex !== index && other.includes(key));
-          });
+          const semanticKeys = findMenuSemanticKeys(normalized);
           if (!semanticKeys.length) return;
           const signature = semanticKeys.map(key => menuTranslations[key].en).sort().join("|");
           const duplicate = merged.some(existing => {
             const sameMeaning = existing.signature === signature;
             const sameRow = Math.abs(((existing.top + existing.bottom) / 2) - ((line.top + line.bottom) / 2)) < .035;
-            return sameMeaning && sameRow;
+            const sameColumn = Math.abs(((existing.left + existing.right) / 2) - ((line.left + line.right) / 2)) < .06;
+            return sameMeaning && sameRow && sameColumn;
           });
           if (!duplicate) merged.push({ ...line, text: normalized, signature });
         });
@@ -2614,24 +2633,31 @@
 
     function extractMenuLayoutLines(blocks, preparedImage) {
       if (!Array.isArray(blocks) || !preparedImage || !preparedImage.menuTransform) return [];
-      const lines = [];
+      const textCells = [];
       blocks.forEach(block => {
         (block.paragraphs || []).forEach(paragraph => {
           (paragraph.lines || []).forEach(line => {
-            if (line && line.bbox && String(line.text || "").trim()) lines.push(line);
+            const words = Array.isArray(line && line.words)
+              ? line.words.filter(word => word && word.bbox && String(word.text || "").trim())
+              : [];
+            if (words.length) {
+              words.forEach(word => textCells.push(word));
+            } else if (line && line.bbox && String(line.text || "").trim()) {
+              textCells.push(line);
+            }
           });
         });
       });
       const transform = preparedImage.menuTransform;
       if (transform.rotation !== 0) return [];
-      return lines.map(line => {
-        const bbox = line.bbox;
+      return textCells.map(cell => {
+        const bbox = cell.bbox;
         const x0 = transform.sourceX + bbox.x0 / transform.scale;
         const y0 = transform.sourceY + bbox.y0 / transform.scale;
         const x1 = transform.sourceX + bbox.x1 / transform.scale;
         const y1 = transform.sourceY + bbox.y1 / transform.scale;
         return {
-          text: normalizeMenuText(line.text || ""),
+          text: normalizeMenuText(cell.text || ""),
           left: Math.max(0, Math.min(1, x0 / transform.originalWidth)),
           top: Math.max(0, Math.min(1, y0 / transform.originalHeight)),
           right: Math.max(0, Math.min(1, x1 / transform.originalWidth)),
@@ -2787,7 +2813,6 @@
         result.textContent = label.emptyMenu;
         return;
       }
-      const keys = Object.keys(menuTranslations).sort((a, b) => b.length - a.length);
       const translatedItems = [];
       const sourceLines = normalizedSource.split(/\n/);
       const detectedLayout = Array.isArray(window.currentMenuOcrLines) ? window.currentMenuOcrLines : [];
@@ -2796,9 +2821,7 @@
         : sourceLines.map((text, lineIndex) => ({ text, lineIndex, totalLines: sourceLines.length }));
       linesToTranslate.forEach(sourceLine => {
         const line = repairOcrLine(sourceLine.text);
-        const matchedKeys = keys.filter(key => key.length >= 2 && line.includes(key)).filter((key, index, list) => {
-          return !list.some((other, otherIndex) => otherIndex !== index && other.includes(key));
-        });
+        const matchedKeys = findMenuSemanticKeys(line);
         if (matchedKeys.length) {
           const names = matchedKeys.map(key => menuTranslations[key][target]);
           translatedItems.push({
@@ -2847,19 +2870,19 @@
         line.textContent = item.text;
         const hasDetectedBox = [item.left, item.top, item.right, item.bottom].every(Number.isFinite);
         if (hasDetectedBox) {
-          const left = Math.max(0, item.left - .008);
-          const right = Math.min(.59, Math.max(item.right, left + .16));
-          const height = Math.max(.035, item.bottom - item.top);
+          const left = Math.max(0, item.left - .004);
+          const right = Math.min(.995, Math.max(item.right + .006, left + .025));
+          const height = Math.max(.022, item.bottom - item.top + .004);
           line.style.left = `${left * 100}%`;
-          line.style.width = `${Math.max(.16, right - left) * 100}%`;
+          line.style.width = `${(right - left) * 100}%`;
           line.style.top = `${((item.top + item.bottom) / 2) * 100}%`;
           line.style.minHeight = `${height * 100}%`;
           const preview = document.getElementById("menuPreview");
           const previewHeight = preview.clientHeight || 320;
           const previewWidth = preview.clientWidth || 320;
-          const fontByHeight = previewHeight * height * .72;
-          const fontByWidth = (previewWidth * (right - left) - 6) / Math.max(4, item.text.length * .58);
-          line.style.fontSize = `${Math.max(7, Math.min(15, fontByHeight, fontByWidth))}px`;
+          const fontByHeight = previewHeight * height * .76;
+          const fontByWidth = (previewWidth * (right - left) - 2) / Math.max(2, item.text.length * .52);
+          line.style.fontSize = `${Math.max(5, Math.min(15, fontByHeight, fontByWidth))}px`;
         } else {
           line.style.top = `${fallbackPositions[index]}%`;
         }
