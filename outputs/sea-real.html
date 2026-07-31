@@ -421,25 +421,6 @@
       font-size: calc(13px + var(--font-add, 0px));
       font-weight: 700;
     }
-    .trust-card {
-      width: 100%;
-      padding: 17px 18px;
-      background: rgba(255, 255, 255, .11);
-      border: 1px solid rgba(255, 255, 255, .2);
-      border-radius: 19px;
-      backdrop-filter: blur(16px);
-      color: #d8edf7;
-      font-size: calc(11px + var(--font-add, 0px));
-      line-height: 1.55;
-    }
-    .trust-card strong {
-      display: block;
-      margin-bottom: 3px;
-      color: white;
-      font-size: calc(24px + var(--font-add, 0px));
-      letter-spacing: -1px;
-    }
-
     .service-area { padding: 65px 0 10px; }
     .section-head {
       display: flex;
@@ -1942,8 +1923,22 @@
     }
 
     @media (max-width: 860px) {
-      .hero { min-height: 510px; margin: 0; border-radius: 0 0 28px 28px; }
-      .trust-card { display: none; }
+      .hero {
+        min-height: 0;
+        display: block;
+        margin: 0;
+        padding-bottom: 38px;
+        border-radius: 0 0 28px 28px;
+      }
+      .hero-content { width: 100%; }
+      .hero-side-stack {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        width: min(360px, 100%);
+        margin-top: 20px;
+      }
+      .sea-live-status { overflow-wrap: anywhere; }
       .market-layout { grid-template-columns: 1fr; }
       .fish-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
@@ -1956,10 +1951,10 @@
       .lang-button { min-height: 39px; padding: 0 11px; }
       .screen { min-height: calc(100vh - 64px); }
       .container { width: min(100% - 32px, 1160px); }
-      .hero { min-height: 500px; padding: 58px 22px 52px; align-items: flex-start; }
+      .hero { min-height: 0; padding: 58px 22px 30px; }
       .hero-scene { background-position: 58% 54%; }
-      .hero-side-stack { right: 22px; bottom: 18px; width: min(218px, calc(100% - 44px)); }
-      .sea-live-status { padding: 10px 12px; }
+      .hero-side-stack { width: 100%; margin-top: 18px; }
+      .sea-live-status { padding: 11px 12px; }
       .hero h1 { margin-top: 22px; font-size: clamp(calc(42px + var(--font-add)), 13vw, calc(58px + var(--font-add))); letter-spacing: -3px; }
       .hero-copy { font-size: calc(14px + var(--font-add, 0px)); }
       .beach-finder { margin-top: 27px; padding-left: 12px; gap: 5px; }
@@ -2102,10 +2097,6 @@
             <strong id="seaStatusTitle">부산 바다 불러오는 중</strong>
             <span id="seaStatusMetrics">현재 해양 데이터를 확인하고 있어요.</span>
             <small id="seaStatusSource">Open-Meteo marine model</small>
-          </div>
-          <div class="trust-card">
-            <strong>98.6%</strong>
-            <span data-i18n="trustText">부산 현지 데이터로 매일 확인하는 정가 신뢰도</span>
           </div>
         </div>
       </div>
@@ -2400,7 +2391,7 @@
         heroCopy: "바가지 걱정 없는 부산 여행. 믿을 수 있는 가격과 현지의 진짜 경험을 한 곳에서 만나보세요.",
         beachAria: "해수욕장 선택", beachPlaceholder: "바닷가 주변 맛집찾기", viewMap: "지도 보기",
         haeundae: "해운대해수욕장", gwangalli: "광안리해수욕장", dadaepo: "다대포해수욕장", songdo: "송도해수욕장", songjeong: "송정해수욕장", ilgwang: "일광해수욕장", imrang: "임랑해수욕장",
-        trustText: "부산 현지 데이터로 매일 확인하는 정가 신뢰도", serviceTitle: "필요한 순간에, 필요한 서비스", tapHint: "카드를 눌러 자세히 보기",
+        serviceTitle: "필요한 순간에, 필요한 서비스", tapHint: "카드를 눌러 자세히 보기",
         foodReviews: "맛집·리뷰", travelBooking: "여행·예약", visitorHelp: "외국인 편의",
         blueRibbon: "블루리본 추천 맛집", blueRibbonSub: "네이버 · 카카오 · Google Maps", fairRestaurant: "정가 인증 맛집", fairRestaurantSub: "투명한 판매가격", report: "바가지 신고", reportSub: "영수증으로 간편하게",
         travelCourse: "관광 코스", travelCourseSub: "테마별 동선 안내", beachBooking: "해수욕장 예약", beachBookingSub: "QR로 빠른 입장", crowd: "실시간 혼잡도", crowdSub: "여유 · 보통 · 혼잡", haeundaeShort: "해운대 혼잡", gwangalliShort: "광안리 보통", songjeongShort: "송정 여유",
@@ -2432,7 +2423,7 @@
         heroCopy: "Enjoy a fair, local Busan trip with trustworthy prices and authentic experiences in one place.",
         beachAria: "Choose a beach", beachPlaceholder: "Find restaurants near the beach", viewMap: "View map",
         haeundae: "Haeundae Beach", gwangalli: "Gwangalli Beach", dadaepo: "Dadaepo Beach", songdo: "Songdo Beach", songjeong: "Songjeong Beach", ilgwang: "Ilgwang Beach", imrang: "Imrang Beach",
-        trustText: "Fair-price confidence checked daily with local Busan data", serviceTitle: "The right service, right when you need it", tapHint: "Tap a card to learn more",
+        serviceTitle: "The right service, right when you need it", tapHint: "Tap a card to learn more",
         foodReviews: "Food & reviews", travelBooking: "Travel & booking", visitorHelp: "Visitor help",
         blueRibbon: "Blue Ribbon restaurants", blueRibbonSub: "Naver · Kakao · Google Maps", fairRestaurant: "Fair-price restaurants", fairRestaurantSub: "Transparent menu prices", report: "Report overcharging", reportSub: "Submit with your receipt",
         travelCourse: "Travel routes", travelCourseSub: "Routes for every travel style", beachBooking: "Beach booking", beachBookingSub: "Fast entry with QR", crowd: "Live crowd level", crowdSub: "Quiet · normal · busy", haeundaeShort: "Haeundae busy", gwangalliShort: "Gwangalli normal", songjeongShort: "Songjeong quiet",
@@ -2464,7 +2455,7 @@
         heroCopy: "ぼったくりの心配なく、信頼できる価格と釜山の本当の魅力を一か所で楽しめます。",
         beachAria: "海水浴場を選択", beachPlaceholder: "海辺のレストランを探す", viewMap: "地図を見る",
         haeundae: "海雲台海水浴場", gwangalli: "広安里海水浴場", dadaepo: "多大浦海水浴場", songdo: "松島海水浴場", songjeong: "松亭海水浴場", ilgwang: "日光海水浴場", imrang: "林浪海水浴場",
-        trustText: "釜山の地域データで毎日確認する適正価格の信頼度", serviceTitle: "必要な瞬間に、必要なサービス", tapHint: "カードをタップして詳細を見る",
+        serviceTitle: "必要な瞬間に、必要なサービス", tapHint: "カードをタップして詳細を見る",
         foodReviews: "グルメ・レビュー", travelBooking: "旅行・予約", visitorHelp: "外国人サポート",
         blueRibbon: "ブルーリボン推薦店", blueRibbonSub: "Naver · Kakao · Google Maps", fairRestaurant: "適正価格認証店", fairRestaurantSub: "透明な販売価格", report: "不当請求を通報", reportSub: "レシートで簡単に",
         travelCourse: "観光コース", travelCourseSub: "テーマ別ルート案内", beachBooking: "海水浴場予約", beachBookingSub: "QRでスムーズに入場", crowd: "リアルタイム混雑度", crowdSub: "空き · 普通 · 混雑", haeundaeShort: "海雲台 混雑", gwangalliShort: "広安里 普通", songjeongShort: "松亭 空き",
@@ -2496,7 +2487,7 @@
         heroCopy: "安心畅游釜山，在一个平台查看可信价格并体验真正的本地文化。",
         beachAria: "选择海水浴场", beachPlaceholder: "寻找海边餐厅", viewMap: "查看地图",
         haeundae: "海云台海水浴场", gwangalli: "广安里海水浴场", dadaepo: "多大浦海水浴场", songdo: "松岛海水浴场", songjeong: "松亭海水浴场", ilgwang: "日光海水浴场", imrang: "林浪海水浴场",
-        trustText: "根据釜山本地数据每日核验的合理价格可信度", serviceTitle: "在需要的时刻，找到合适的服务", tapHint: "点击卡片查看详情",
+        serviceTitle: "在需要的时刻，找到合适的服务", tapHint: "点击卡片查看详情",
         foodReviews: "美食·评价", travelBooking: "旅行·预约", visitorHelp: "外国游客服务",
         blueRibbon: "蓝丝带推荐餐厅", blueRibbonSub: "Naver · Kakao · Google Maps", fairRestaurant: "合理价格认证餐厅", fairRestaurantSub: "透明的菜单价格", report: "举报高价收费", reportSub: "上传收据即可",
         travelCourse: "旅游路线", travelCourseSub: "按主题规划路线", beachBooking: "海水浴场预约", beachBookingSub: "使用QR快速入场", crowd: "实时拥挤程度", crowdSub: "宽松 · 普通 · 拥挤", haeundaeShort: "海云台 拥挤", gwangalliShort: "广安里 普通", songjeongShort: "松亭 宽松",
