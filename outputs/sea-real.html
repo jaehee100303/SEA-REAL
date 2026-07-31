@@ -2283,17 +2283,20 @@
       "부산오묵": "부산어묵", "간장개장": "간장게장",
       "5인스페슬": "5인스페셜", "5인스폐셜": "5인스페셜",
       "예절 활어회": "계절 활어회", "계철 활어회": "계절 활어회",
-      "활이회류": "활어회류", "활어희류": "활어회류"
+      "활이회류": "활어회류", "활어희류": "활어회류",
+      "활이 회류": "활어회류", "활어 희류": "활어회류",
+      "5UAmA": "5인스페셜"
     };
 
     const singleCellMenuKeys = new Set(["대", "중", "소", "회"]);
 
     function findMenuSemanticKeys(text) {
       const normalized = normalizeMenuText(text || "").trim();
+      const compact = normalized.replace(/\s+/g, "");
       const matched = Object.keys(menuTranslations)
         .sort((a, b) => b.length - a.length)
         .filter(key => key.length >= 2
-          ? normalized.includes(key)
+          ? normalized.includes(key) || compact.includes(key.replace(/\s+/g, ""))
           : singleCellMenuKeys.has(key) && normalized === key);
       return matched.filter((key, index, list) => {
         return !list.some((other, otherIndex) => otherIndex !== index && other.includes(key));
@@ -2592,7 +2595,16 @@
           if (!duplicate) merged.push({ ...line, text: normalized, signature });
         });
       });
-      return merged.sort((a, b) => a.top - b.top || a.left - b.left);
+      const withoutGenericDuplicates = merged.filter((line, index, all) => {
+        if (line.signature !== menuTranslations["회"].en) return true;
+        return !all.some((other, otherIndex) => {
+          if (otherIndex === index || other.signature === line.signature || !/sashimi/i.test(other.signature)) return false;
+          const sameRow = Math.abs(((other.top + other.bottom) / 2) - ((line.top + line.bottom) / 2)) < .035;
+          const horizontallyRelated = other.left < line.right + .03 && other.right > line.left - .03;
+          return sameRow && horizontallyRelated;
+        });
+      });
+      return withoutGenericDuplicates.sort((a, b) => a.top - b.top || a.left - b.left);
     }
 
     async function ensureTesseractLoaded() {
@@ -2668,7 +2680,7 @@
             const runs = [];
             for (let start = 0; start < words.length; start += 1) {
               for (let end = start; end < Math.min(words.length, start + 4); end += 1) {
-                const runText = words.slice(start, end + 1).map(word => word.text || "").join("");
+                const runText = words.slice(start, end + 1).map(word => word.text || "").join(" ");
                 const semanticKeys = findMenuSemanticKeys(runText);
                 if (semanticKeys.length) {
                   runs.push({
@@ -2704,7 +2716,8 @@
               mappedCells.push({ text: [...new Set(cell.keys)].join(" "), ...mapBox(cell.bbox) });
             });
 
-            const lineHasPrice = /\d/.test(String(line.text || ""));
+            const pricePattern = /(?:\d{1,3}(?:[,.]\d{3})+|\d{4,})/;
+            const lineHasPrice = pricePattern.test(String(line.text || ""));
             const hasFishItem = keysToPlace.some(key => marketRowKeys.has(key));
             if (!lineHasPrice && hasFishItem) {
               const selectedBoxes = [...chosenCells.values()].map(cell => mapBox(cell.bbox));
@@ -2718,7 +2731,7 @@
                 return candidate.box.left > .5
                   && candidate.box.right < .88
                   && !overlapsSelected
-                  && !/\d/.test(candidate.normalized)
+                  && !pricePattern.test(candidate.normalized)
                   && /[가-힣A-Za-z]/.test(candidate.normalized);
               }).sort((a, b) => b.box.left - a.box.left);
               if (unknownRightCells[0]) {
@@ -2937,7 +2950,7 @@
         if (hasDetectedBox) {
           const left = Math.max(0, item.left - .004);
           const right = Math.min(.995, Math.max(item.right + .006, left + .025));
-          const height = Math.max(.022, item.bottom - item.top + .004);
+          const height = Math.min(.055, Math.max(.022, item.bottom - item.top + .004));
           line.style.left = `${left * 100}%`;
           line.style.width = `${(right - left) * 100}%`;
           line.style.top = `${((item.top + item.bottom) / 2) * 100}%`;
