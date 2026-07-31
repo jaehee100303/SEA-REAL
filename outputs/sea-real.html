@@ -2430,16 +2430,17 @@
           }
         });
         await worker.setParameters({
-          tessedit_pageseg_mode: String((Tesseract.PSM && Tesseract.PSM.SPARSE_TEXT) || 11),
+          tessedit_pageseg_mode: String((Tesseract.PSM && Tesseract.PSM.SINGLE_BLOCK) || 6),
           preserve_interword_spaces: "1",
           user_defined_dpi: "300"
         });
 
         const attempts = [
-          { rotation: 0, enhance: true },
-          { rotation: 0, enhance: false },
-          { rotation: 90, enhance: true },
-          { rotation: 270, enhance: true }
+          { rotation: 0, enhance: true, psm: 6 },
+          { rotation: 0, enhance: false, psm: 3 },
+          { rotation: 0, enhance: true, psm: 11 },
+          { rotation: 90, enhance: true, psm: 6 },
+          { rotation: 270, enhance: true, psm: 6 }
         ];
         let bestRecognition = null;
         for (let attemptIndex = 0; attemptIndex < attempts.length; attemptIndex += 1) {
@@ -2447,6 +2448,11 @@
             button.textContent = feature.ocrRetrying;
             progressBar.style.width = "12%";
           }
+          await worker.setParameters({
+            tessedit_pageseg_mode: String(attempts[attemptIndex].psm),
+            preserve_interword_spaces: "1",
+            user_defined_dpi: "300"
+          });
           const preparedImage = await prepareMenuImage(file, attempts[attemptIndex]);
           const result = await worker.recognize(preparedImage);
           const candidate = scoreMenuRecognition(result);
@@ -2454,7 +2460,7 @@
           if (isUsableMenuRecognition(candidate)) break;
         }
 
-        if (!bestRecognition || bestRecognition.meaningfulCharacters < 4) {
+        if (!bestRecognition || !isUsableMenuRecognition(bestRecognition)) {
           throw new Error("No menu text recognized");
         }
         document.getElementById("menuInput").value = bestRecognition.text;
@@ -2487,21 +2493,34 @@
       const confidence = Number(result && result.data ? result.data.confidence : 0) || 0;
       const meaningfulCharacters = (text.match(/[가-힣A-Za-z0-9]/g) || []).length;
       const hangulCharacters = (text.match(/[가-힣]/g) || []).length;
-      const pricePatterns = (text.match(/(?:\d{1,3}(?:,\d{3})+|\d{4,})\s*(?:원|₩|KRW)?/gi) || []).length;
+      const pricePatterns = (text.match(/(?:\d{1,3}(?:,\d{3})+|\d{4,}|\d{1,3}\.\d{1,3})\s*(?:원|₩|KRW)?/gi) || []).length;
       const latinWords = (text.match(/[A-Za-z]{3,}/g) || []).length;
+      const lines = text.split("\n").map(line => line.trim()).filter(Boolean);
+      const fragmentLines = lines.filter(line => {
+        const meaningful = (line.match(/[가-힣A-Za-z0-9]/g) || []).length;
+        return meaningful > 0 && meaningful <= 2;
+      }).length;
+      const knownMenuHits = Object.keys(menuTranslations).filter(word => text.includes(word)).length;
+      const fragmentRatio = lines.length ? fragmentLines / lines.length : 1;
       const score = confidence
         + Math.min(40, meaningfulCharacters * .55)
         + Math.min(30, hangulCharacters * 1.2)
         + Math.min(20, pricePatterns * 5)
-        + Math.min(12, latinWords * 2);
-      return { text, confidence, meaningfulCharacters, hangulCharacters, pricePatterns, latinWords, score };
+        + Math.min(12, latinWords * 2)
+        + Math.min(45, knownMenuHits * 15)
+        - Math.min(55, fragmentLines * 4);
+      return {
+        text, confidence, meaningfulCharacters, hangulCharacters, pricePatterns,
+        latinWords, knownMenuHits, fragmentRatio, score
+      };
     }
 
     function isUsableMenuRecognition(candidate) {
       if (!candidate || candidate.meaningfulCharacters < 8) return false;
-      return candidate.hangulCharacters >= 6
-        || (candidate.pricePatterns >= 2 && candidate.meaningfulCharacters >= 14)
-        || (candidate.confidence >= 65 && candidate.meaningfulCharacters >= 24 && candidate.latinWords >= 3);
+      return (candidate.knownMenuHits >= 1 && candidate.pricePatterns >= 1 && candidate.fragmentRatio < .45)
+        || (candidate.hangulCharacters >= 8 && candidate.pricePatterns >= 1 && candidate.fragmentRatio < .35)
+        || (candidate.confidence >= 68 && candidate.meaningfulCharacters >= 24
+          && candidate.latinWords >= 3 && candidate.fragmentRatio < .3);
     }
 
     async function prepareMenuImage(file, options = {}) {
@@ -2546,9 +2565,10 @@
         cleanup();
         throw new Error("Invalid image dimensions");
       }
-      const maxEdgeScale = 1800 / Math.max(imageWidth, imageHeight);
-      const memorySafeScale = Math.sqrt(2800000 / (imageWidth * imageHeight));
-      const scale = Math.min(1, maxEdgeScale, memorySafeScale);
+      const readabilityScale = Math.max(1, Math.min(2.5, 1300 / Math.min(imageWidth, imageHeight)));
+      const maxEdgeScale = 2200 / Math.max(imageWidth, imageHeight);
+      const memorySafeScale = Math.sqrt(3600000 / (imageWidth * imageHeight));
+      const scale = Math.min(readabilityScale, maxEdgeScale, memorySafeScale);
       const scaledWidth = Math.max(1, Math.round(imageWidth * scale));
       const scaledHeight = Math.max(1, Math.round(imageHeight * scale));
       const swapsDimensions = rotation === 90 || rotation === 270;
