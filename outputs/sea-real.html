@@ -1847,8 +1847,42 @@
       font-weight: 800;
     }
     .course-tab.active { color: white; background: #0284c7; }
+    .course-headline {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 14px;
+      padding: 15px;
+      background: linear-gradient(135deg, #eff9fd, #f8fcfe);
+      border: 1px solid #dceef5;
+      border-radius: 16px;
+    }
+    .course-update-badge {
+      display: inline-flex;
+      margin-bottom: 6px;
+      padding: 4px 7px;
+      color: #0369a1;
+      background: #dff3fc;
+      border-radius: 999px;
+      font-size: calc(8px + var(--font-add, 0px));
+      font-weight: 900;
+    }
+    .course-headline h3 {
+      margin: 0;
+      color: #173f58;
+      font-size: calc(17px + var(--font-add, 0px));
+      letter-spacing: -.4px;
+    }
+    .course-theme {
+      flex: 0 0 auto;
+      color: #58778b;
+      font-size: calc(9px + var(--font-add, 0px));
+      font-weight: 800;
+    }
     .course-summary {
       display: flex;
+      flex-wrap: wrap;
       gap: 8px;
       margin: 13px 0;
     }
@@ -1859,6 +1893,30 @@
       border-radius: 9px;
       font-size: calc(10px + var(--font-add, 0px));
       font-weight: 800;
+    }
+    .course-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+    .course-meta-item {
+      display: grid;
+      gap: 3px;
+      padding: 10px 11px;
+      background: #f7fafc;
+      border: 1px solid #e8f0f4;
+      border-radius: 11px;
+    }
+    .course-meta-item span {
+      color: #8195a4;
+      font-size: calc(8px + var(--font-add, 0px));
+      font-weight: 700;
+    }
+    .course-meta-item b {
+      color: #31566d;
+      font-size: calc(10px + var(--font-add, 0px));
+      line-height: 1.4;
     }
     .course-route { display: grid; gap: 0; }
     .course-stop {
@@ -1893,6 +1951,34 @@
       font-weight: 800;
     }
     .course-stop b { display: block; color: #173f58; font-size: calc(12px + var(--font-add, 0px)); }
+    .course-stop-time {
+      display: inline-block;
+      margin-right: 5px;
+      color: #0284c7;
+      font-size: calc(9px + var(--font-add, 0px));
+      font-weight: 900;
+    }
+    .course-cost-note {
+      margin: 2px 0 13px;
+      color: #8195a4;
+      font-size: calc(9px + var(--font-add, 0px));
+      line-height: 1.5;
+    }
+    .course-source-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 44px;
+      margin-top: 9px;
+      padding: 0 13px;
+      color: #31566d;
+      background: #edf5f8;
+      border: 1px solid #ddebf0;
+      border-radius: 13px;
+      text-decoration: none;
+      font-size: calc(10px + var(--font-add, 0px));
+      font-weight: 800;
+    }
     .verified-list {
       display: grid;
       gap: 9px;
@@ -2044,6 +2130,9 @@
       .market-refresh-card { align-items: flex-start; flex-direction: column; gap: 8px; }
       .market-refresh-detail { text-align: left; }
       .market-source-grid { grid-template-columns: 1fr; }
+      .course-headline { display: block; }
+      .course-theme { display: block; margin-top: 7px; }
+      .course-meta-grid { grid-template-columns: 1fr; }
       .panel { padding: 19px; border-radius: 22px; }
       .panel-head { display: block; }
       .market-tabs { margin-top: 16px; }
@@ -2482,7 +2571,7 @@
         serviceTitle: "필요한 순간에, 필요한 서비스", tapHint: "카드를 눌러 자세히 보기",
         foodReviews: "맛집·리뷰", travelBooking: "여행·예약", visitorHelp: "외국인 편의",
         blueRibbon: "블루리본 추천 맛집", blueRibbonSub: "네이버 · 카카오 · Google Maps", fairRestaurant: "정가 인증 맛집", fairRestaurantSub: "투명한 판매가격", report: "바가지 신고", reportSub: "영수증으로 간편하게",
-        travelCourse: "관광 코스", travelCourseSub: "테마별 동선 안내", beachBooking: "해수욕장 예약", beachBookingSub: "QR로 빠른 입장", crowd: "실시간 혼잡도", crowdSub: "여유 · 보통 · 혼잡", haeundaeShort: "해운대 혼잡", gwangalliShort: "광안리 보통", songjeongShort: "송정 여유",
+        travelCourse: "관광 코스", travelCourseSub: "2026 테마별 추천 동선", beachBooking: "해수욕장 예약", beachBookingSub: "QR로 빠른 입장", crowd: "실시간 혼잡도", crowdSub: "여유 · 보통 · 혼잡", haeundaeShort: "해운대 혼잡", gwangalliShort: "광안리 보통", songjeongShort: "송정 여유",
         dictionary: "부산 로컬 사전", dictionarySub: "정구지 · 메구리 · 아나고", tasteSub: "부산 음식, 쉽게 이해하기", currency: "환율 자동 계산",
         marketTitle: "오늘의 바다 시세", marketSub: "시장별 참고가격과 데이터 출처를 함께 확인하세요.", liveAverage: "시장별 참고 평균가",
         marketCountdownPrefix: "다음 시세 기준 시각까지", marketCountdownSuffix: "남았습니다", hourlyMarketInfo: "표시 기준 시각 · 매 정시(00분, KST)", marketLastUpdated: "현재 기준 구간 · {time}",
@@ -2502,7 +2591,7 @@
         featureReady: "출시 실험 모델 V1에서 제공되는 기능입니다.",
         fairRestaurantCopy: "QR 인증으로 오늘의 정가와 실제 판매가격을 비교합니다.", fairRestaurantInfo: "협력 음식점의 인증 상태와 가격 일치 여부를 한눈에 확인할 수 있어요.",
         reportCopy: "사진, 영수증, 위치와 결제가격을 첨부해 신고할 수 있습니다.", reportInfo: "신고 기능은 개인정보 보호를 위해 정식 접수 단계에서만 본인 확인을 요청합니다.",
-        travelCourseCopy: "가족, 커플, 혼자, 친구 여행에 맞는 부산 동선을 살펴보세요.", travelCourseInfo: "예상 비용, 소요시간, 맛집과 카페를 함께 안내합니다.",
+        travelCourseCopy: "2026 부산 공식 추천 동선을 가족, 커플, 혼자, 친구 테마로 만나보세요.", travelCourseInfo: "추천 출발시간, 이동수단, 1인 예상비용과 Google Maps 전체 경로를 안내합니다.",
         beachBookingCopy: "파라솔, 평상과 튜브를 미리 확인하고 예약할 수 있습니다.", beachBookingInfo: "실제 예약·결제 기능은 제휴 해수욕장 연동 후 제공됩니다.",
         crowdCopy: "주요 해수욕장의 현재 혼잡도를 색상으로 확인합니다.", crowdInfo: "초록은 여유, 노랑은 보통, 빨강은 매우 혼잡을 의미합니다.",
         dictionaryCopy: "부산에서 자주 쓰는 낯선 표현을 쉬운 말로 확인하세요.", tasteCopy: "부산 음식을 익숙한 해외 음식과 비교해 설명합니다.", currencyCopy: "KRW, USD, JPY, CNY 금액을 간편하게 비교합니다.",
@@ -2518,7 +2607,7 @@
         serviceTitle: "The right service, right when you need it", tapHint: "Tap a card to learn more",
         foodReviews: "Food & reviews", travelBooking: "Travel & booking", visitorHelp: "Visitor help",
         blueRibbon: "Blue Ribbon restaurants", blueRibbonSub: "Naver · Kakao · Google Maps", fairRestaurant: "Fair-price restaurants", fairRestaurantSub: "Transparent menu prices", report: "Report overcharging", reportSub: "Submit with your receipt",
-        travelCourse: "Travel routes", travelCourseSub: "Routes for every travel style", beachBooking: "Beach booking", beachBookingSub: "Fast entry with QR", crowd: "Live crowd level", crowdSub: "Quiet · normal · busy", haeundaeShort: "Haeundae busy", gwangalliShort: "Gwangalli normal", songjeongShort: "Songjeong quiet",
+        travelCourse: "Travel routes", travelCourseSub: "2026 themed routes", beachBooking: "Beach booking", beachBookingSub: "Fast entry with QR", crowd: "Live crowd level", crowdSub: "Quiet · normal · busy", haeundaeShort: "Haeundae busy", gwangalliShort: "Gwangalli normal", songjeongShort: "Songjeong quiet",
         dictionary: "Busan local dictionary", dictionarySub: "Understand local expressions", tasteSub: "Understand Busan food easily", currency: "Currency converter",
         marketTitle: "Today’s seafood prices", marketSub: "View reference prices together with each market’s data source.", liveAverage: "Market reference averages",
         marketCountdownPrefix: "Next reference time in", marketCountdownSuffix: "remaining", hourlyMarketInfo: "Display reference · every hour at :00 KST", marketLastUpdated: "Current reference period · {time}",
@@ -2538,7 +2627,7 @@
         featureReady: "Available in the V1 launch experiment.",
         fairRestaurantCopy: "Compare today’s fair price with the actual menu price through QR verification.", fairRestaurantInfo: "See partner verification and price matching at a glance.",
         reportCopy: "Attach a photo, receipt, location and charged price to make a report.", reportInfo: "Identity verification is requested only during the official submission stage.",
-        travelCourseCopy: "Explore Busan routes for families, couples, solo travellers and friends.", travelCourseInfo: "Includes estimated cost, duration, restaurants and cafés.",
+        travelCourseCopy: "Explore 2026 official Busan recommendations for families, couples, solo travellers and friends.", travelCourseInfo: "Includes a suggested start time, transport, estimated per-person cost and a full Google Maps route.",
         beachBookingCopy: "Check and reserve parasols, beach tables and tubes in advance.", beachBookingInfo: "Booking and payment will be available after partner beach integration.",
         crowdCopy: "Check current crowd levels at major beaches by colour.", crowdInfo: "Green means quiet, yellow normal and red very busy.",
         dictionaryCopy: "Understand unfamiliar words commonly used by Busan locals.", tasteCopy: "Busan food explained through familiar dishes from abroad.", currencyCopy: "Quickly compare KRW, USD, JPY and CNY.",
@@ -2554,7 +2643,7 @@
         serviceTitle: "必要な瞬間に、必要なサービス", tapHint: "カードをタップして詳細を見る",
         foodReviews: "グルメ・レビュー", travelBooking: "旅行・予約", visitorHelp: "外国人サポート",
         blueRibbon: "ブルーリボン推薦店", blueRibbonSub: "Naver · Kakao · Google Maps", fairRestaurant: "適正価格認証店", fairRestaurantSub: "透明な販売価格", report: "不当請求を通報", reportSub: "レシートで簡単に",
-        travelCourse: "観光コース", travelCourseSub: "テーマ別ルート案内", beachBooking: "海水浴場予約", beachBookingSub: "QRでスムーズに入場", crowd: "リアルタイム混雑度", crowdSub: "空き · 普通 · 混雑", haeundaeShort: "海雲台 混雑", gwangalliShort: "広安里 普通", songjeongShort: "松亭 空き",
+        travelCourse: "観光コース", travelCourseSub: "2026テーマ別おすすめルート", beachBooking: "海水浴場予約", beachBookingSub: "QRでスムーズに入場", crowd: "リアルタイム混雑度", crowdSub: "空き · 普通 · 混雑", haeundaeShort: "海雲台 混雑", gwangalliShort: "広安里 普通", songjeongShort: "松亭 空き",
         dictionary: "釜山ローカル辞典", dictionarySub: "釜山の方言を分かりやすく", tasteSub: "釜山料理を分かりやすく", currency: "為替自動換算",
         marketTitle: "今日の海鮮相場", marketSub: "市場別の参考価格とデータ出典を一緒に確認できます。", liveAverage: "市場別参考平均価格",
         marketCountdownPrefix: "次の基準時刻まで", marketCountdownSuffix: "です", hourlyMarketInfo: "表示基準時刻・毎時00分（KST）", marketLastUpdated: "現在の基準区間 · {time}",
@@ -2574,7 +2663,7 @@
         featureReady: "リリース実験モデルV1で提供される機能です。",
         fairRestaurantCopy: "QR認証で本日の適正価格と実際の販売価格を比較します。", fairRestaurantInfo: "提携店の認証状態と価格一致を一目で確認できます。",
         reportCopy: "写真、レシート、場所、決済価格を添付して通報できます。", reportInfo: "本人確認は正式な受付段階でのみ行います。",
-        travelCourseCopy: "家族、カップル、一人旅、友人向けの釜山ルートを確認できます。", travelCourseInfo: "予想費用、所要時間、レストラン、カフェを含みます。",
+        travelCourseCopy: "2026年釜山公式おすすめルートを家族、カップル、一人旅、友人向けに紹介します。", travelCourseInfo: "おすすめ出発時刻、移動手段、1人当たりの予想費用、Google Mapsの全ルートを案内します。",
         beachBookingCopy: "パラソル、ビーチテーブル、浮き輪を事前に確認して予約できます。", beachBookingInfo: "予約と決済は提携海水浴場との連携後に提供されます。",
         crowdCopy: "主要海水浴場の現在の混雑度を色で確認します。", crowdInfo: "緑は空き、黄は普通、赤は非常に混雑を表します。",
         dictionaryCopy: "釜山でよく使われる言葉を分かりやすく確認します。", tasteCopy: "釜山料理を身近な海外料理と比較して説明します。", currencyCopy: "KRW、USD、JPY、CNYを簡単に比較します。",
@@ -2590,7 +2679,7 @@
         serviceTitle: "在需要的时刻，找到合适的服务", tapHint: "点击卡片查看详情",
         foodReviews: "美食·评价", travelBooking: "旅行·预约", visitorHelp: "外国游客服务",
         blueRibbon: "蓝丝带推荐餐厅", blueRibbonSub: "Naver · Kakao · Google Maps", fairRestaurant: "合理价格认证餐厅", fairRestaurantSub: "透明的菜单价格", report: "举报高价收费", reportSub: "上传收据即可",
-        travelCourse: "旅游路线", travelCourseSub: "按主题规划路线", beachBooking: "海水浴场预约", beachBookingSub: "使用QR快速入场", crowd: "实时拥挤程度", crowdSub: "宽松 · 普通 · 拥挤", haeundaeShort: "海云台 拥挤", gwangalliShort: "广安里 普通", songjeongShort: "松亭 宽松",
+        travelCourse: "旅游路线", travelCourseSub: "2026主题推荐路线", beachBooking: "海水浴场预约", beachBookingSub: "使用QR快速入场", crowd: "实时拥挤程度", crowdSub: "宽松 · 普通 · 拥挤", haeundaeShort: "海云台 拥挤", gwangalliShort: "广安里 普通", songjeongShort: "松亭 宽松",
         dictionary: "釜山本地词典", dictionarySub: "轻松理解釜山方言", tasteSub: "轻松了解釜山美食", currency: "自动汇率换算",
         marketTitle: "今日海鲜价格", marketSub: "同时查看各市场的参考价格和数据来源。", liveAverage: "各市场参考均价",
         marketCountdownPrefix: "距离下一基准时间还有", marketCountdownSuffix: "后更新", hourlyMarketInfo: "显示基准时间·韩国时间每小时00分", marketLastUpdated: "当前基准时段 · {time}",
@@ -2610,7 +2699,7 @@
         featureReady: "此功能将在V1发布实验版本中提供。",
         fairRestaurantCopy: "通过QR认证比较今日合理价格与实际售价。", fairRestaurantInfo: "一目了然地查看合作餐厅认证状态与价格是否一致。",
         reportCopy: "可上传照片、收据、位置和付款价格进行举报。", reportInfo: "仅在正式提交阶段要求身份验证。",
-        travelCourseCopy: "查看适合家庭、情侣、独自旅行和朋友的釜山路线。", travelCourseInfo: "包括预计费用、所需时间、餐厅与咖啡馆。",
+        travelCourseCopy: "查看适合家庭、情侣、独自旅行和朋友的2026釜山官方推荐路线。", travelCourseInfo: "包括建议出发时间、交通方式、人均预计费用以及Google Maps完整路线。",
         beachBookingCopy: "提前查看并预约遮阳伞、休息台和游泳圈。", beachBookingInfo: "预约与支付将在合作海水浴场接入后提供。",
         crowdCopy: "通过颜色查看主要海水浴场的实时拥挤程度。", crowdInfo: "绿色表示宽松，黄色表示普通，红色表示非常拥挤。",
         dictionaryCopy: "轻松了解釜山当地常用的陌生表达。", tasteCopy: "通过熟悉的海外料理来说明釜山美食。", currencyCopy: "快速比较KRW、USD、JPY和CNY。",
@@ -2683,7 +2772,7 @@
         sosGuide: "필요한 시설을 누르면 현재 위치 주변 검색 결과가 지도에서 열립니다.", touristInfo: "관광안내소", police: "경찰서", hospital: "병원·응급실", consulate: "영사관", openMap: "지도에서 찾기",
         bookingBeach: "해수욕장", bookingItem: "대여 용품", bookingDate: "이용 날짜", bookingTime: "이용 시간", bookingQty: "수량", estimate: "예상 금액", reserve: "V1 예약 신청", bookingDone: "예약 신청이 접수되었습니다. V1에서는 실제 결제가 진행되지 않습니다.", bookingDemo: "출시 실험용 예약 화면입니다. 제휴 업체 연결 전에는 실제 재고와 결제가 반영되지 않습니다.",
         jetSki: "제트스키 · 30분", paddleBoard: "패들보드 · 60분", lifeJacket: "구명조끼 · 1일", tube: "튜브 · 1일", surfBoard: "서핑보드 · 2시간",
-        family: "가족", couple: "커플", solo: "혼자", friends: "친구", duration: "소요시간", budget: "예상비용", routeMap: "전체 코스 지도에서 보기",
+        family: "가족", couple: "커플", solo: "혼자", friends: "친구", duration: "소요시간", budget: "예상비용", bestStart: "추천 출발", transport: "추천 이동", routeMap: "Google Maps 전체 경로 보기", courseUpdated: "2026 여름 업데이트", courseCostNote: "예상비용은 1인 기준이며 식사, 체험, 유료시설 선택에 따라 달라질 수 있습니다.", officialCourseSource: "Visit Busan 공식 추천 동선 확인",
         area: "지역", fishType: "대표 어종", todayFair: "오늘 정가", salePrice: "판매가격", matched: "가격 일치", verifyCode: "QR 인증번호 입력", verify: "인증 확인", verified: "인증된 SEA-REAL 파트너입니다.", invalidCode: "인증번호를 다시 확인해 주세요.", certifiedDemo: "V1 시범 인증 데이터입니다. 실제 제휴점 등록 전에는 방문·결제 자료로 사용할 수 없습니다.",
         receipt: "영수증 사진", chooseReceipt: "영수증 촬영 또는 선택", restaurant: "식당명", location: "위치·주소", menuName: "메뉴명", paidPrice: "결제금액", expectedPrice: "확인한 정가", reportDetail: "신고 내용", privacy: "입력한 내용이 이 기기에 임시 저장되는 것에 동의합니다.", submitReport: "V1 신고 접수", reportDone: "신고가 임시 접수되었습니다.", requiredFields: "필수 항목과 동의 여부를 확인해 주세요.", overchargeResult: "정가보다 {percent}% 높은 결제입니다.", reportDemo: "V1 기기 내 임시 접수입니다. 관리자와 공공기관에는 전송되지 않습니다."
       },
@@ -2692,7 +2781,7 @@
         sosGuide: "Tap a facility to open nearby results based on your current location.", touristInfo: "Tourist information", police: "Police station", hospital: "Hospital · ER", consulate: "Consulate", openMap: "Find on map",
         bookingBeach: "Beach", bookingItem: "Rental item", bookingDate: "Date", bookingTime: "Time", bookingQty: "Quantity", estimate: "Estimated total", reserve: "Request V1 booking", bookingDone: "Your booking request was received. No payment is processed in V1.", bookingDemo: "V1 booking prototype. Live stock and payment require partner integration.",
         jetSki: "Jet ski · 30 min", paddleBoard: "Paddle board · 60 min", lifeJacket: "Life jacket · 1 day", tube: "Tube · 1 day", surfBoard: "Surfboard · 2 hours",
-        family: "Family", couple: "Couple", solo: "Solo", friends: "Friends", duration: "Duration", budget: "Estimated cost", routeMap: "Open the full route in Maps",
+        family: "Family", couple: "Couple", solo: "Solo", friends: "Friends", duration: "Duration", budget: "Estimated cost", bestStart: "Suggested start", transport: "Recommended transport", routeMap: "Open full route in Google Maps", courseUpdated: "Summer 2026 update", courseCostNote: "Costs are per person and may vary with meals, activities and paid attractions.", officialCourseSource: "View the official Visit Busan route",
         area: "Area", fishType: "Main seafood", todayFair: "Today’s fair price", salePrice: "Menu price", matched: "Price matched", verifyCode: "Enter QR verification code", verify: "Verify", verified: "Verified SEA-REAL partner.", invalidCode: "Check the verification code and try again.", certifiedDemo: "V1 demonstration certification data. Do not use it as proof of a real partner or purchase.",
         receipt: "Receipt photo", chooseReceipt: "Take or choose a receipt", restaurant: "Restaurant", location: "Location · address", menuName: "Menu item", paidPrice: "Amount paid", expectedPrice: "Fair price checked", reportDetail: "Report details", privacy: "I agree to temporarily save these details on this device.", submitReport: "Submit V1 report", reportDone: "Your report was saved temporarily.", requiredFields: "Check the required fields and consent.", overchargeResult: "The payment is {percent}% above the fair price.", reportDemo: "V1 device-only draft. It is not sent to an administrator or public authority."
       },
@@ -2701,7 +2790,7 @@
         sosGuide: "施設をタップすると、現在地周辺の検索結果が地図で開きます。", touristInfo: "観光案内所", police: "警察署", hospital: "病院・救急", consulate: "領事館", openMap: "地図で探す",
         bookingBeach: "海水浴場", bookingItem: "レンタル用品", bookingDate: "利用日", bookingTime: "利用時間", bookingQty: "数量", estimate: "予想金額", reserve: "V1予約申請", bookingDone: "予約申請を受け付けました。V1では決済されません。", bookingDemo: "V1予約プロトタイプです。実在庫と決済には提携業者との連携が必要です。",
         jetSki: "ジェットスキー・30分", paddleBoard: "パドルボード・60分", lifeJacket: "ライフジャケット・1日", tube: "浮き輪・1日", surfBoard: "サーフボード・2時間",
-        family: "家族", couple: "カップル", solo: "一人", friends: "友達", duration: "所要時間", budget: "予想費用", routeMap: "コース全体を地図で見る",
+        family: "家族", couple: "カップル", solo: "一人", friends: "友達", duration: "所要時間", budget: "予想費用", bestStart: "おすすめ出発", transport: "おすすめ移動", routeMap: "Google Mapsで全ルートを見る", courseUpdated: "2026年夏アップデート", courseCostNote: "費用は1人基準で、食事、体験、有料施設の選択により変わる場合があります。", officialCourseSource: "Visit Busan公式おすすめルートを見る",
         area: "地域", fishType: "代表魚種", todayFair: "本日の適正価格", salePrice: "販売価格", matched: "価格一致", verifyCode: "QR認証番号を入力", verify: "認証確認", verified: "認証済みSEA-REALパートナーです。", invalidCode: "認証番号を再確認してください。", certifiedDemo: "V1デモ認証データです。実際の提携店や購入証明には使用できません。",
         receipt: "レシート写真", chooseReceipt: "レシートを撮影または選択", restaurant: "店舗名", location: "場所・住所", menuName: "メニュー名", paidPrice: "支払金額", expectedPrice: "確認した適正価格", reportDetail: "通報内容", privacy: "入力内容をこの端末に一時保存することに同意します。", submitReport: "V1通報受付", reportDone: "通報を一時保存しました。", requiredFields: "必須項目と同意を確認してください。", overchargeResult: "適正価格より{percent}%高い支払いです。", reportDemo: "V1端末内の一時受付です。管理者や公的機関には送信されません。"
       },
@@ -2710,7 +2799,7 @@
         sosGuide: "点击设施即可在地图中查看当前位置附近的搜索结果。", touristInfo: "旅游咨询处", police: "警察局", hospital: "医院·急诊", consulate: "领事馆", openMap: "在地图中查找",
         bookingBeach: "海水浴场", bookingItem: "租赁用品", bookingDate: "使用日期", bookingTime: "使用时间", bookingQty: "数量", estimate: "预计金额", reserve: "提交V1预约", bookingDone: "预约申请已提交。V1版本不会进行实际支付。", bookingDemo: "V1预约原型，实际库存和支付需要连接合作商家。",
         jetSki: "水上摩托·30分钟", paddleBoard: "桨板·60分钟", lifeJacket: "救生衣·1天", tube: "游泳圈·1天", surfBoard: "冲浪板·2小时",
-        family: "家庭", couple: "情侣", solo: "独自", friends: "朋友", duration: "所需时间", budget: "预计费用", routeMap: "在地图中查看完整路线",
+        family: "家庭", couple: "情侣", solo: "独自", friends: "朋友", duration: "所需时间", budget: "预计费用", bestStart: "建议出发", transport: "建议交通", routeMap: "在Google Maps查看完整路线", courseUpdated: "2026夏季更新", courseCostNote: "费用按每人估算，可能因餐饮、体验和收费景点选择而变化。", officialCourseSource: "查看Visit Busan官方推荐路线",
         area: "地区", fishType: "代表海鲜", todayFair: "今日合理价格", salePrice: "销售价格", matched: "价格一致", verifyCode: "输入QR认证编号", verify: "验证", verified: "已认证的SEA-REAL合作商家。", invalidCode: "请重新确认认证编号。", certifiedDemo: "这是V1演示认证数据，不能作为真实合作商家或消费凭证。",
         receipt: "收据照片", chooseReceipt: "拍摄或选择收据", restaurant: "餐厅名称", location: "位置·地址", menuName: "菜单名称", paidPrice: "支付金额", expectedPrice: "查询的合理价格", reportDetail: "举报内容", privacy: "同意将输入内容暂时保存在此设备上。", submitReport: "提交V1举报", reportDone: "举报已暂时保存。", requiredFields: "请检查必填项和同意状态。", overchargeResult: "支付金额比合理价格高{percent}%。", reportDemo: "这是V1设备内临时记录，不会发送给管理员或公共机构。"
       }
@@ -2718,28 +2807,76 @@
 
     const courseData = {
       ko: {
-        family: { duration: "6시간", budget: "약 95,000원", stops: [["송도해상케이블카", "바다 위에서 부산 풍경 감상"], ["감천문화마을", "아이와 함께 골목 산책과 사진"], ["자갈치시장", "가족이 함께 먹는 제철 해산물"]] },
-        couple: { duration: "7시간", budget: "약 120,000원", stops: [["해운대 블루라인파크", "해변열차로 여유로운 시작"], ["청사포", "바다 전망 카페와 등대 산책"], ["광안리", "저녁 식사 후 광안대교 야경"]] },
-        solo: { duration: "5시간", budget: "약 55,000원", stops: [["흰여울문화마을", "절벽길을 따라 천천히 걷기"], ["부평깡통시장", "혼자 즐기기 좋은 부산 간식"], ["보수동책방골목", "조용한 책방과 골목 탐방"]] },
-        friends: { duration: "8시간", budget: "약 150,000원", stops: [["송정해수욕장", "오전 서핑 또는 패들보드"], ["해동용궁사", "바다 옆 사찰과 기장 산책"], ["민락회센터", "회와 야경으로 하루 마무리"]] }
+        family: {
+          title: "해운대 오션 패밀리", theme: "가족 · 실내외 균형", duration: "약 7시간", budget: "1인 약 70,000원", start: "10:00", transport: "도보 · 도시철도",
+          stops: [["10:00", "해운대해수욕장", "붐비기 전 바다 산책과 가족사진", "해운대해수욕장"], ["11:00", "SEA LIFE 부산아쿠아리움", "날씨와 관계없이 즐기는 해양생물 체험", "SEA LIFE 부산아쿠아리움"], ["13:30", "동백섬·누리마루", "해안 산책로와 APEC 전망 포인트", "동백섬"], ["16:00", "해운대시장·구남로", "부산 간식과 이른 저녁으로 마무리", "해운대시장"]]
+        },
+        couple: {
+          title: "광안리 선셋 데이트", theme: "커플 · 문화와 야경", duration: "약 7시간 30분", budget: "1인 약 55,000원", start: "14:00", transport: "도시철도 · 도보",
+          stops: [["14:00", "F1963", "전시와 서점, 정원을 함께 둘러보기", "F1963"], ["16:00", "광안리해수욕장", "해변 산책과 광안대교 포토타임", "광안리해수욕장"], ["17:30", "밀락더마켓", "오션뷰 카페와 가벼운 저녁", "밀락더마켓"], ["19:30", "광안대교 야경", "해변에서 야경을 감상하며 데이트 마무리", "광안리해수욕장 만남의광장"]]
+        },
+        solo: {
+          title: "다대포 노을 힐링", theme: "혼자 · 전시와 산책", duration: "약 7시간", budget: "1인 약 30,000원", start: "12:00", transport: "도시철도 · 버스 · 도보",
+          stops: [["12:00", "부산현대미술관", "차분하게 현대미술 전시 관람", "부산현대미술관"], ["14:30", "장림포구", "알록달록한 포구와 카페 산책", "장림포구"], ["16:30", "다대포 고우니생태길", "갈대와 갯벌을 따라 천천히 걷기", "다대포 고우니생태길"], ["18:30", "다대포해수욕장", "일몰 시간에 맞춰 노을 감상", "다대포해수욕장"]]
+        },
+        friends: {
+          title: "송정 바다열차 데이", theme: "친구 · 바다와 체험", duration: "약 8시간", budget: "1인 약 60,000원", start: "10:00", transport: "해변열차 · 도보",
+          stops: [["10:00", "송정해수욕장", "바다 산책 또는 선택형 서핑 체험", "송정해수욕장"], ["12:00", "구 송정역", "레트로 역사에서 단체사진", "송정역 옛역사"], ["13:00", "블루라인파크 송정정거장", "해변열차로 청사포까지 이동", "해운대블루라인파크 송정정거장"], ["14:00", "청사포 다릿돌전망대", "푸른 바다 위 전망대 산책", "청사포 다릿돌전망대"], ["16:00", "청사포 카페거리", "오션뷰 카페와 조개구이로 마무리", "청사포 카페거리"]]
+        }
       },
       en: {
-        family: { duration: "6 hours", budget: "About ₩95,000", stops: [["Songdo Marine Cable Car", "Enjoy Busan’s coast from above"], ["Gamcheon Culture Village", "A colourful family walk and photo stop"], ["Jagalchi Market", "Share seasonal seafood together"]] },
-        couple: { duration: "7 hours", budget: "About ₩120,000", stops: [["Haeundae Blue Line Park", "Start slowly on the beach train"], ["Cheongsapo", "Ocean-view cafés and lighthouse walk"], ["Gwangalli", "Dinner followed by bridge night views"]] },
-        solo: { duration: "5 hours", budget: "About ₩55,000", stops: [["Huinnyeoul Culture Village", "A calm cliffside walk"], ["Bupyeong Kkangtong Market", "Easy Busan street food for one"], ["Bosu Book Street", "Quiet bookshops and old lanes"]] },
-        friends: { duration: "8 hours", budget: "About ₩150,000", stops: [["Songjeong Beach", "Morning surfing or paddle boarding"], ["Haedong Yonggungsa", "A seaside temple and Gijang walk"], ["Millak Raw Fish Center", "Finish with sashimi and night views"]] }
+        family: {
+          title: "Haeundae Ocean Family", theme: "Family · indoor and outdoor", duration: "About 7 hours", budget: "About ₩70,000 per person", start: "10:00", transport: "Walk · subway",
+          stops: [["10:00", "Haeundae Beach", "Take a quiet morning walk and family photos", "해운대해수욕장"], ["11:00", "SEA LIFE Busan Aquarium", "Explore marine life regardless of the weather", "SEA LIFE 부산아쿠아리움"], ["13:30", "Dongbaekseom · Nurimaru", "Follow the coast to an APEC viewpoint", "동백섬"], ["16:00", "Haeundae Market · Gunam-ro", "Finish with Busan snacks and an early dinner", "해운대시장"]]
+        },
+        couple: {
+          title: "Gwangalli Sunset Date", theme: "Couple · culture and night views", duration: "About 7.5 hours", budget: "About ₩55,000 per person", start: "14:00", transport: "Subway · walk",
+          stops: [["14:00", "F1963", "Browse exhibitions, the bookstore and garden", "F1963"], ["16:00", "Gwangalli Beach", "Walk the beach and photograph Gwangan Bridge", "광안리해수욕장"], ["17:30", "Millac the Market", "Enjoy an ocean-view café and light dinner", "밀락더마켓"], ["19:30", "Gwangan Bridge night view", "End the date with the illuminated bridge", "광안리해수욕장 만남의광장"]]
+        },
+        solo: {
+          title: "Dadaepo Sunset Retreat", theme: "Solo · art and walking", duration: "About 7 hours", budget: "About ₩30,000 per person", start: "12:00", transport: "Subway · bus · walk",
+          stops: [["12:00", "Museum of Contemporary Art Busan", "Take your time with contemporary art", "부산현대미술관"], ["14:30", "Jangnim Port", "Walk the colourful harbour and cafés", "장림포구"], ["16:30", "Dadaepo Gouni Eco Trail", "Stroll between reeds and tidal flats", "다대포 고우니생태길"], ["18:30", "Dadaepo Beach", "Arrive in time for the sunset", "다대포해수욕장"]]
+        },
+        friends: {
+          title: "Songjeong Beach Train Day", theme: "Friends · sea and activities", duration: "About 8 hours", budget: "About ₩60,000 per person", start: "10:00", transport: "Beach train · walk",
+          stops: [["10:00", "Songjeong Beach", "Walk the shore or add an optional surf session", "송정해수욕장"], ["12:00", "Old Songjeong Station", "Take group photos at the retro station", "송정역 옛역사"], ["13:00", "Blue Line Park Songjeong Station", "Ride the beach train to Cheongsapo", "해운대블루라인파크 송정정거장"], ["14:00", "Cheongsapo Daritdol Observatory", "Walk above the bright blue sea", "청사포 다릿돌전망대"], ["16:00", "Cheongsapo Café Street", "Finish with an ocean-view café and seafood", "청사포 카페거리"]]
+        }
       },
       ja: {
-        family: { duration: "6時間", budget: "約95,000ウォン", stops: [["松島海上ケーブルカー", "海の上から釜山の景色を楽しむ"], ["甘川文化村", "家族で路地散歩と写真撮影"], ["チャガルチ市場", "家族で旬の海鮮を味わう"]] },
-        couple: { duration: "7時間", budget: "約120,000ウォン", stops: [["海雲台ブルーラインパーク", "海辺列車でゆっくりスタート"], ["青沙浦", "海が見えるカフェと灯台散歩"], ["広安里", "夕食後に広安大橋の夜景"]] },
-        solo: { duration: "5時間", budget: "約55,000ウォン", stops: [["ヒンヨウル文化村", "崖沿いをゆっくり散歩"], ["富平カントン市場", "一人でも楽しめる釜山グルメ"], ["宝水洞本屋通り", "静かな本屋と路地を探索"]] },
-        friends: { duration: "8時間", budget: "約150,000ウォン", stops: [["松亭海水浴場", "午前のサーフィンやパドルボード"], ["海東龍宮寺", "海辺の寺院と機張散歩"], ["民楽刺身センター", "刺身と夜景で一日を締めくくる"]] }
+        family: {
+          title: "海雲台オーシャンファミリー", theme: "家族・屋内外バランス", duration: "約7時間", budget: "1人約70,000ウォン", start: "10:00", transport: "徒歩・地下鉄",
+          stops: [["10:00", "海雲台海水浴場", "混雑前の海辺散歩と家族写真", "해운대해수욕장"], ["11:00", "SEA LIFE釜山アクアリウム", "天候に左右されない海洋生物体験", "SEA LIFE 부산아쿠아리움"], ["13:30", "冬柏島・ヌリマル", "海岸散歩道とAPEC展望ポイント", "동백섬"], ["16:00", "海雲台市場・亀南路", "釜山のおやつと早めの夕食", "해운대시장"]]
+        },
+        couple: {
+          title: "広安里サンセットデート", theme: "カップル・文化と夜景", duration: "約7時間30分", budget: "1人約55,000ウォン", start: "14:00", transport: "地下鉄・徒歩",
+          stops: [["14:00", "F1963", "展示、書店、庭園を一緒に巡る", "F1963"], ["16:00", "広安里海水浴場", "海辺散歩と広安大橋の写真", "광안리해수욕장"], ["17:30", "ミラック・ザ・マーケット", "オーシャンビューカフェと軽い夕食", "밀락더마켓"], ["19:30", "広安大橋の夜景", "ライトアップされた橋でデートを締めくくる", "광안리해수욕장 만남의광장"]]
+        },
+        solo: {
+          title: "多大浦サンセットヒーリング", theme: "一人・展示と散歩", duration: "約7時間", budget: "1人約30,000ウォン", start: "12:00", transport: "地下鉄・バス・徒歩",
+          stops: [["12:00", "釜山現代美術館", "ゆっくり現代美術を鑑賞", "부산현대미술관"], ["14:30", "長林浦口", "カラフルな港とカフェを散策", "장림포구"], ["16:30", "多大浦コウニ生態道", "葦と干潟に沿って歩く", "다대포 고우니생태길"], ["18:30", "多大浦海水浴場", "日没時刻に合わせて夕景を鑑賞", "다대포해수욕장"]]
+        },
+        friends: {
+          title: "松亭ビーチトレインデー", theme: "友達・海と体験", duration: "約8時間", budget: "1人約60,000ウォン", start: "10:00", transport: "海辺列車・徒歩",
+          stops: [["10:00", "松亭海水浴場", "海辺散歩またはサーフィンを追加", "송정해수욕장"], ["12:00", "旧松亭駅", "レトロな駅舎でグループ写真", "송정역 옛역사"], ["13:00", "ブルーラインパーク松亭停車場", "海辺列車で青沙浦へ移動", "해운대블루라인파크 송정정거장"], ["14:00", "青沙浦タリットル展望台", "青い海の上を歩く", "청사포 다릿돌전망대"], ["16:00", "青沙浦カフェ通り", "オーシャンビューカフェと海鮮で締めくくる", "청사포 카페거리"]]
+        }
       },
       zh: {
-        family: { duration: "6小时", budget: "约95,000韩元", stops: [["松岛海上缆车", "从海上欣赏釜山风景"], ["甘川文化村", "适合亲子的巷弄散步与拍照"], ["札嘎其市场", "全家一起品尝当季海鲜"]] },
-        couple: { duration: "7小时", budget: "约120,000韩元", stops: [["海云台蓝线公园", "乘海边列车悠闲开始"], ["青沙浦", "海景咖啡馆与灯塔散步"], ["广安里", "晚餐后欣赏广安大桥夜景"]] },
-        solo: { duration: "5小时", budget: "约55,000韩元", stops: [["白浅文化村", "沿悬崖小路悠闲漫步"], ["富平罐头市场", "适合独自品尝的釜山小吃"], ["宝水洞书店街", "探索安静书店与老巷"]] },
-        friends: { duration: "8小时", budget: "约150,000韩元", stops: [["松亭海水浴场", "上午冲浪或体验桨板"], ["海东龙宫寺", "海边寺庙与机张散步"], ["民乐生鱼片中心", "以刺身和夜景结束一天"]] }
+        family: {
+          title: "海云台海洋亲子路线", theme: "家庭·室内外兼顾", duration: "约7小时", budget: "每人约70,000韩元", start: "10:00", transport: "步行·地铁",
+          stops: [["10:00", "海云台海水浴场", "避开拥挤，海边散步并拍摄家庭照", "해운대해수욕장"], ["11:00", "SEA LIFE釜山水族馆", "不受天气影响的海洋生物体验", "SEA LIFE 부산아쿠아리움"], ["13:30", "冬柏岛·世峰楼", "漫步海岸并眺望APEC景观", "동백섬"], ["16:00", "海云台市场·龟南路", "品尝釜山小吃并享用早晚餐", "해운대시장"]]
+        },
+        couple: {
+          title: "广安里日落约会", theme: "情侣·文化与夜景", duration: "约7.5小时", budget: "每人约55,000韩元", start: "14:00", transport: "地铁·步行",
+          stops: [["14:00", "F1963", "一起参观展览、书店和庭院", "F1963"], ["16:00", "广安里海水浴场", "海边漫步并拍摄广安大桥", "광안리해수욕장"], ["17:30", "Millac the Market", "在海景咖啡馆享用简餐", "밀락더마켓"], ["19:30", "广安大桥夜景", "以灯光桥景结束约会", "광안리해수욕장 만남의광장"]]
+        },
+        solo: {
+          title: "多大浦日落疗愈", theme: "独自·展览与散步", duration: "约7小时", budget: "每人约30,000韩元", start: "12:00", transport: "地铁·公交·步行",
+          stops: [["12:00", "釜山现代美术馆", "从容欣赏现代艺术展览", "부산현대미술관"], ["14:30", "长林浦口", "漫步彩色港口和咖啡馆", "장림포구"], ["16:30", "多大浦高云生态路", "沿芦苇与滩涂慢慢散步", "다대포 고우니생태길"], ["18:30", "多大浦海水浴场", "在日落时分欣赏晚霞", "다대포해수욕장"]]
+        },
+        friends: {
+          title: "松亭海边列车一日游", theme: "朋友·大海与体验", duration: "约8小时", budget: "每人约60,000韩元", start: "10:00", transport: "海边列车·步行",
+          stops: [["10:00", "松亭海水浴场", "海边散步或自选冲浪体验", "송정해수욕장"], ["12:00", "旧松亭站", "在复古车站拍摄合照", "송정역 옛역사"], ["13:00", "蓝线公园松亭站", "乘海边列车前往青沙浦", "해운대블루라인파크 송정정거장"], ["14:00", "青沙浦踏石观景台", "漫步于蔚蓝大海之上", "청사포 다릿돌전망대"], ["16:00", "青沙浦咖啡街", "以海景咖啡和海鲜结束行程", "청사포 카페거리"]]
+        }
       }
     };
 
@@ -4455,16 +4592,30 @@
     function showCourse(type) {
       const label = featureLabels[currentLanguage];
       const course = courseData[currentLanguage][type];
-      const route = course.stops.map(([name, description], index) => `
+      const route = course.stops.map(([time, name, description], index) => `
         <div class="course-stop">
           <span class="course-number">${index + 1}</span>
-          <div><b>${name}</b>${description}</div>
+          <div><b><span class="course-stop-time">${time}</span>${name}</b><span>${description}</span></div>
         </div>`).join("");
-      const query = encodeURIComponent(course.stops.map(stop => stop[0]).join(" → "));
+      const mapStops = course.stops.map(stop => stop[3] || stop[1]);
+      const origin = encodeURIComponent(mapStops[0]);
+      const destination = encodeURIComponent(mapStops[mapStops.length - 1]);
+      const waypoints = mapStops.slice(1, -1).map(encodeURIComponent).join("%7C");
+      const routeUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}${waypoints ? `&waypoints=${waypoints}` : ""}`;
       document.getElementById("courseContent").innerHTML = `
+        <div class="course-headline">
+          <div><span class="course-update-badge">${label.courseUpdated}</span><h3>${course.title}</h3></div>
+          <span class="course-theme">${course.theme}</span>
+        </div>
         <div class="course-summary"><span>${label.duration} · ${course.duration}</span><span>${label.budget} · ${course.budget}</span></div>
+        <div class="course-meta-grid">
+          <div class="course-meta-item"><span>${label.bestStart}</span><b>${course.start}</b></div>
+          <div class="course-meta-item"><span>${label.transport}</span><b>${course.transport}</b></div>
+        </div>
         <div class="course-route">${route}</div>
-        <a class="map-link google" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${query}"><span>${label.routeMap}</span><span>↗</span></a>`;
+        <p class="course-cost-note">${label.courseCostNote}</p>
+        <a class="map-link google" target="_blank" rel="noopener noreferrer" href="${routeUrl}"><span>${label.routeMap}</span><span>↗</span></a>
+        <a class="course-source-link" target="_blank" rel="noopener noreferrer" href="https://www.visitbusan.net/index.do?menuCd=DOM_000000204002001000&ueb_seq=682"><span>${label.officialCourseSource}</span><span>↗</span></a>`;
     }
 
     function renderFairRestaurantTool(container) {
