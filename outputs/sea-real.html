@@ -1209,7 +1209,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 1px;
+      padding: 1px 3px;
       box-sizing: border-box;
       color: #111827;
       background: rgba(255, 249, 235, .98);
@@ -1218,11 +1218,11 @@
       box-shadow: none;
       font-size: clamp(7px, calc(2vw + var(--font-add, 0px)), 11px);
       font-weight: 900;
-      line-height: 1.15;
+      line-height: 1.08;
       transform: translateY(-50%);
       text-align: left;
       text-shadow: none;
-      white-space: nowrap;
+      white-space: normal;
       overflow: hidden;
       letter-spacing: -.02em;
     }
@@ -2543,7 +2543,7 @@
         amount: "금액", from: "기준 통화", to: "변환 통화", convert: "환율 계산하기", loading: "최신 환율을 불러오는 중…",
         rateError: "환율 정보를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.", rateSource: "Frankfurter 기준환율 · 영업일 기준 업데이트",
         menuInput: "한국어 메뉴", menuPlaceholder: "예: 광어회 1인분\n매운탕\n소주", target: "번역 언어", translate: "메뉴 번역하기",
-        translationResult: "번역 결과가 여기에 표시됩니다.", emptyMenu: "번역할 메뉴를 입력해 주세요.", menuHint: "V1은 부산 대표 메뉴와 음식 표현을 우선 지원합니다.",
+        translationResult: "번역 결과가 여기에 표시됩니다.", emptyMenu: "번역할 메뉴를 입력해 주세요.", menuHint: "사진은 기기에서 인식하고, 인식된 메뉴 글자만 Google 무료 번역 서비스로 전송합니다.",
         crowdDemo: "V1 실험용 혼잡도 데이터입니다. 실제 출시 전 공공데이터 연동이 필요합니다.", updated: "업데이트", refresh: "새로고침",
         free: "여유", normal: "보통", busy: "혼잡", crowdCriteria: "혼잡도 판단 기준", crowdBasis: "해수욕장 수용 가능 인원 대비 현재 추정 방문객 비율", freeRange: "0~39%", normalRange: "40~69%", busyRange: "70% 이상"
       },
@@ -2551,7 +2551,7 @@
         amount: "Amount", from: "From", to: "To", convert: "Convert currency", loading: "Loading the latest rate…",
         rateError: "Rates are unavailable right now. Please try again shortly.", rateSource: "Frankfurter reference rates · updated on working days",
         menuInput: "Korean menu", menuPlaceholder: "e.g. 광어회 1인분\n매운탕\n소주", target: "Translate to", translate: "Translate menu",
-        translationResult: "Your translation will appear here.", emptyMenu: "Enter a Korean menu to translate.", menuHint: "V1 currently supports common Busan dishes and menu terms.",
+        translationResult: "Your translation will appear here.", emptyMenu: "Enter a Korean menu to translate.", menuHint: "The photo is read on your device. Only recognized menu text is sent to Google’s free translation service.",
         crowdDemo: "V1 demonstration data. A public data feed is required before the official launch.", updated: "Updated", refresh: "Refresh",
         free: "Quiet", normal: "Normal", busy: "Busy", crowdCriteria: "Crowd level criteria", crowdBasis: "Estimated visitors as a percentage of beach capacity", freeRange: "0–39%", normalRange: "40–69%", busyRange: "70% or more"
       },
@@ -2559,7 +2559,7 @@
         amount: "金額", from: "変換元", to: "変換先", convert: "為替を計算", loading: "最新レートを取得中…",
         rateError: "為替情報を取得できません。しばらくしてから再度お試しください。", rateSource: "Frankfurter参考レート・営業日更新",
         menuInput: "韓国語メニュー", menuPlaceholder: "例：광어회 1인분\n매운탕\n소주", target: "翻訳言語", translate: "メニューを翻訳",
-        translationResult: "翻訳結果がここに表示されます。", emptyMenu: "翻訳するメニューを入力してください。", menuHint: "V1では釜山の代表料理と一般的なメニュー表現に対応します。",
+        translationResult: "翻訳結果がここに表示されます。", emptyMenu: "翻訳するメニューを入力してください。", menuHint: "写真は端末内で読み取り、認識したメニュー文字だけをGoogle無料翻訳サービスへ送信します。",
         crowdDemo: "V1実験用データです。正式リリース前に公共データとの連携が必要です。", updated: "更新", refresh: "更新する",
         free: "空き", normal: "普通", busy: "混雑", crowdCriteria: "混雑度の判定基準", crowdBasis: "海水浴場の収容可能人数に対する推定来場者の割合", freeRange: "0～39%", normalRange: "40～69%", busyRange: "70%以上"
       },
@@ -2567,7 +2567,7 @@
         amount: "金额", from: "原币种", to: "目标币种", convert: "换算汇率", loading: "正在获取最新汇率…",
         rateError: "暂时无法获取汇率，请稍后重试。", rateSource: "Frankfurter参考汇率 · 工作日更新",
         menuInput: "韩文菜单", menuPlaceholder: "例如：광어회 1인분\n매운탕\n소주", target: "翻译语言", translate: "翻译菜单",
-        translationResult: "翻译结果将显示在这里。", emptyMenu: "请输入需要翻译的菜单。", menuHint: "V1优先支持釜山代表美食和常见菜单用语。",
+        translationResult: "翻译结果将显示在这里。", emptyMenu: "请输入需要翻译的菜单。", menuHint: "照片在设备上识别，仅将识别出的菜单文字发送至Google免费翻译服务。",
         crowdDemo: "这是V1实验数据，正式发布前需要连接公共数据。", updated: "更新", refresh: "刷新",
         free: "宽松", normal: "普通", busy: "拥挤", crowdCriteria: "拥挤程度判断标准", crowdBasis: "当前预计游客占海水浴场可容纳人数的比例", freeRange: "0～39%", normalRange: "40～69%", busyRange: "70%以上"
       }
@@ -2575,7 +2575,7 @@
 
     const featureLabels = {
       ko: {
-        photoSelect: "메뉴판 사진 촬영 또는 선택", photoSub: "선택하면 메뉴 영역을 보정하고 사진 위에 바로 번역합니다. 사진은 서버에 저장되지 않습니다.", readPhoto: "사진 다시 읽기", reading: "메뉴판을 읽는 중", ocrRetrying: "메뉴 영역과 명암을 보정해 다시 읽는 중", ocrDone: "사진 속 글자를 읽고 이미지 위에 번역했습니다.", ocrError: "정확히 읽을 수 있는 메뉴가 부족합니다. 메뉴판을 화면 가득 정면으로 다시 촬영해 주세요.", ocrFormatError: "사진을 열 수 없습니다. 카메라를 다시 열어 JPG 또는 PNG 사진으로 촬영해 주세요.", openFullTranslation: "전체 메뉴를 Google 번역에서 보기", imageTranslation: "이미지 바로 번역",
+        photoSelect: "메뉴판 사진 촬영 또는 선택", photoSub: "선택하면 메뉴 영역을 보정하고 사진 위에 바로 번역합니다. 사진은 서버에 저장되지 않습니다.", readPhoto: "사진 다시 읽기", reading: "메뉴판을 읽는 중", ocrRetrying: "메뉴 영역과 명암을 보정해 다시 읽는 중", ocrDone: "사진 속 글자를 읽었습니다. Google 번역을 적용하는 중…", translating: "인식한 메뉴 전체를 Google 번역으로 변환하는 중…", translationDone: "번역 완료! 메뉴 글자는 번역문으로 덮고 가격 숫자는 원본 그대로 유지했습니다.", translationFallback: "Google 번역 연결이 지연되어 대표 메뉴 사전으로 표시했습니다. 잠시 후 다시 시도해 주세요.", translationError: "번역 서비스에 연결하지 못했습니다. 인터넷 연결을 확인하고 다시 시도해 주세요.", ocrError: "정확히 읽을 수 있는 메뉴가 부족합니다. 메뉴판을 화면 가득 정면으로 다시 촬영해 주세요.", ocrFormatError: "사진을 열 수 없습니다. 카메라를 다시 열어 JPG 또는 PNG 사진으로 촬영해 주세요.", openFullTranslation: "전체 메뉴를 Google 번역에서 보기", imageTranslation: "이미지 바로 번역",
         sosGuide: "필요한 시설을 누르면 현재 위치 주변 검색 결과가 지도에서 열립니다.", touristInfo: "관광안내소", police: "경찰서", hospital: "병원·응급실", consulate: "영사관", openMap: "지도에서 찾기",
         bookingBeach: "해수욕장", bookingItem: "대여 용품", bookingDate: "이용 날짜", bookingTime: "이용 시간", bookingQty: "수량", estimate: "예상 금액", reserve: "V1 예약 신청", bookingDone: "예약 신청이 접수되었습니다. V1에서는 실제 결제가 진행되지 않습니다.", bookingDemo: "출시 실험용 예약 화면입니다. 제휴 업체 연결 전에는 실제 재고와 결제가 반영되지 않습니다.",
         jetSki: "제트스키 · 30분", paddleBoard: "패들보드 · 60분", lifeJacket: "구명조끼 · 1일", tube: "튜브 · 1일", surfBoard: "서핑보드 · 2시간",
@@ -2584,7 +2584,7 @@
         receipt: "영수증 사진", chooseReceipt: "영수증 촬영 또는 선택", restaurant: "식당명", location: "위치·주소", menuName: "메뉴명", paidPrice: "결제금액", expectedPrice: "확인한 정가", reportDetail: "신고 내용", privacy: "입력한 내용이 이 기기에 임시 저장되는 것에 동의합니다.", submitReport: "V1 신고 접수", reportDone: "신고가 임시 접수되었습니다.", requiredFields: "필수 항목과 동의 여부를 확인해 주세요.", overchargeResult: "정가보다 {percent}% 높은 결제입니다.", reportDemo: "V1 기기 내 임시 접수입니다. 관리자와 공공기관에는 전송되지 않습니다."
       },
       en: {
-        photoSelect: "Take or choose a menu photo", photoSub: "The menu area is enhanced and translated directly on the photo. It is not stored.", readPhoto: "Read photo again", reading: "Reading the menu", ocrRetrying: "Enhancing the menu area and trying again", ocrDone: "Text detected and translated on the image.", ocrError: "Not enough menu text could be read. Retake the menu straight on so it fills the frame.", ocrFormatError: "The photo could not be opened. Retake it as a JPG or PNG image.", openFullTranslation: "Open the full menu in Google Translate", imageTranslation: "Translation on image",
+        photoSelect: "Take or choose a menu photo", photoSub: "The menu area is enhanced and translated directly on the photo. It is not stored.", readPhoto: "Read photo again", reading: "Reading the menu", ocrRetrying: "Enhancing the menu area and trying again", ocrDone: "Menu text detected. Applying Google translation…", translating: "Translating every recognized menu line with Google…", translationDone: "Translation complete. Menu words are covered by translations while the original prices stay unchanged.", translationFallback: "Google translation is delayed, so common menu terms are shown from the offline dictionary. Try again shortly.", translationError: "The translation service could not be reached. Check your internet connection and try again.", ocrError: "Not enough menu text could be read. Retake the menu straight on so it fills the frame.", ocrFormatError: "The photo could not be opened. Retake it as a JPG or PNG image.", openFullTranslation: "Open the full menu in Google Translate", imageTranslation: "Translation on image",
         sosGuide: "Tap a facility to open nearby results based on your current location.", touristInfo: "Tourist information", police: "Police station", hospital: "Hospital · ER", consulate: "Consulate", openMap: "Find on map",
         bookingBeach: "Beach", bookingItem: "Rental item", bookingDate: "Date", bookingTime: "Time", bookingQty: "Quantity", estimate: "Estimated total", reserve: "Request V1 booking", bookingDone: "Your booking request was received. No payment is processed in V1.", bookingDemo: "V1 booking prototype. Live stock and payment require partner integration.",
         jetSki: "Jet ski · 30 min", paddleBoard: "Paddle board · 60 min", lifeJacket: "Life jacket · 1 day", tube: "Tube · 1 day", surfBoard: "Surfboard · 2 hours",
@@ -2593,7 +2593,7 @@
         receipt: "Receipt photo", chooseReceipt: "Take or choose a receipt", restaurant: "Restaurant", location: "Location · address", menuName: "Menu item", paidPrice: "Amount paid", expectedPrice: "Fair price checked", reportDetail: "Report details", privacy: "I agree to temporarily save these details on this device.", submitReport: "Submit V1 report", reportDone: "Your report was saved temporarily.", requiredFields: "Check the required fields and consent.", overchargeResult: "The payment is {percent}% above the fair price.", reportDemo: "V1 device-only draft. It is not sent to an administrator or public authority."
       },
       ja: {
-        photoSelect: "メニュー写真を撮影または選択", photoSub: "メニュー部分を補正し、写真上に直接翻訳します。写真は保存されません。", readPhoto: "写真をもう一度読む", reading: "メニューを読み取り中", ocrRetrying: "メニュー部分と明暗を補正して再読込中", ocrDone: "文字を読み取り、画像上に翻訳しました。", ocrError: "十分なメニュー文字を読み取れませんでした。メニューを画面いっぱいに正面から撮影してください。", ocrFormatError: "写真を開けません。JPGまたはPNG形式でもう一度撮影してください。", openFullTranslation: "メニュー全体をGoogle翻訳で見る", imageTranslation: "画像上の翻訳",
+        photoSelect: "メニュー写真を撮影または選択", photoSub: "メニュー部分を補正し、写真上に直接翻訳します。写真は保存されません。", readPhoto: "写真をもう一度読む", reading: "メニューを読み取り中", ocrRetrying: "メニュー部分と明暗を補正して再読込中", ocrDone: "メニュー文字を読み取りました。Google翻訳を適用中…", translating: "認識したメニュー全体をGoogle翻訳で変換中…", translationDone: "翻訳完了。メニュー文字は翻訳で覆い、価格の数字は原文のまま残しました。", translationFallback: "Google翻訳への接続が遅いため、代表メニュー辞書で表示しました。しばらくして再度お試しください。", translationError: "翻訳サービスに接続できません。インターネット接続を確認して再度お試しください。", ocrError: "十分なメニュー文字を読み取れませんでした。メニューを画面いっぱいに正面から撮影してください。", ocrFormatError: "写真を開けません。JPGまたはPNG形式でもう一度撮影してください。", openFullTranslation: "メニュー全体をGoogle翻訳で見る", imageTranslation: "画像上の翻訳",
         sosGuide: "施設をタップすると、現在地周辺の検索結果が地図で開きます。", touristInfo: "観光案内所", police: "警察署", hospital: "病院・救急", consulate: "領事館", openMap: "地図で探す",
         bookingBeach: "海水浴場", bookingItem: "レンタル用品", bookingDate: "利用日", bookingTime: "利用時間", bookingQty: "数量", estimate: "予想金額", reserve: "V1予約申請", bookingDone: "予約申請を受け付けました。V1では決済されません。", bookingDemo: "V1予約プロトタイプです。実在庫と決済には提携業者との連携が必要です。",
         jetSki: "ジェットスキー・30分", paddleBoard: "パドルボード・60分", lifeJacket: "ライフジャケット・1日", tube: "浮き輪・1日", surfBoard: "サーフボード・2時間",
@@ -2602,7 +2602,7 @@
         receipt: "レシート写真", chooseReceipt: "レシートを撮影または選択", restaurant: "店舗名", location: "場所・住所", menuName: "メニュー名", paidPrice: "支払金額", expectedPrice: "確認した適正価格", reportDetail: "通報内容", privacy: "入力内容をこの端末に一時保存することに同意します。", submitReport: "V1通報受付", reportDone: "通報を一時保存しました。", requiredFields: "必須項目と同意を確認してください。", overchargeResult: "適正価格より{percent}%高い支払いです。", reportDemo: "V1端末内の一時受付です。管理者や公的機関には送信されません。"
       },
       zh: {
-        photoSelect: "拍摄或选择菜单照片", photoSub: "系统会增强菜单区域并直接在照片上翻译，照片不会被保存。", readPhoto: "重新识别照片", reading: "正在识别菜单", ocrRetrying: "正在增强菜单区域和明暗并重新识别", ocrDone: "已识别文字并在图片上显示翻译。", ocrError: "无法读取足够的菜单文字，请正面拍摄并让菜单填满画面。", ocrFormatError: "无法打开照片，请重新拍摄JPG或PNG格式的照片。", openFullTranslation: "在Google翻译中查看完整菜单", imageTranslation: "图片直接翻译",
+        photoSelect: "拍摄或选择菜单照片", photoSub: "系统会增强菜单区域并直接在照片上翻译，照片不会被保存。", readPhoto: "重新识别照片", reading: "正在识别菜单", ocrRetrying: "正在增强菜单区域和明暗并重新识别", ocrDone: "已识别菜单文字，正在应用Google翻译…", translating: "正在使用Google翻译转换识别出的全部菜单…", translationDone: "翻译完成，菜单文字已由译文覆盖，原有价格数字保持不变。", translationFallback: "Google翻译连接延迟，现使用常见菜单离线词典显示，请稍后重试。", translationError: "无法连接翻译服务，请检查网络后重试。", ocrError: "无法读取足够的菜单文字，请正面拍摄并让菜单填满画面。", ocrFormatError: "无法打开照片，请重新拍摄JPG或PNG格式的照片。", openFullTranslation: "在Google翻译中查看完整菜单", imageTranslation: "图片直接翻译",
         sosGuide: "点击设施即可在地图中查看当前位置附近的搜索结果。", touristInfo: "旅游咨询处", police: "警察局", hospital: "医院·急诊", consulate: "领事馆", openMap: "在地图中查找",
         bookingBeach: "海水浴场", bookingItem: "租赁用品", bookingDate: "使用日期", bookingTime: "使用时间", bookingQty: "数量", estimate: "预计金额", reserve: "提交V1预约", bookingDone: "预约申请已提交。V1版本不会进行实际支付。", bookingDemo: "V1预约原型，实际库存和支付需要连接合作商家。",
         jetSki: "水上摩托·30分钟", paddleBoard: "桨板·60分钟", lifeJacket: "救生衣·1天", tube: "游泳圈·1天", surfBoard: "冲浪板·2小时",
@@ -2837,6 +2837,8 @@
       "예절 활어회": "계절 활어회", "계철 활어회": "계절 활어회",
       "활이회류": "활어회류", "활어희류": "활어회류",
       "활이 회류": "활어회류", "활어 희류": "활어회류",
+      "활어외": "활어회", "알어회": "활어회", "예절": "계절",
+      "싱가": "시가", "싯가": "시가", "5인 스페셜": "5인스페셜",
       "5UAmA": "5인스페셜"
     };
 
@@ -2861,6 +2863,7 @@
     const marketHourMs = 60 * 60 * 1000;
     let lastMarketUpdate = Math.floor(Date.now() / marketHourMs) * marketHourMs;
     let nextMarketUpdate = lastMarketUpdate + marketHourMs;
+    const menuTranslationServiceUrl = "https://script.google.com/macros/s/AKfycby294lkj3phfO03ZbAAA9rHknO9hSgeimeQYY1oNavgYsczpM6B8va9KGxSjW4gT7-d9w/exec";
 
     const t = key => translations[currentLanguage][key] || translations.ko[key] || key;
     const fillTemplate = (template, values) => Object.keys(values).reduce((text, key) => text.replace(`{${key}}`, values[key]), template);
@@ -3015,6 +3018,7 @@
         </div>`;
       document.getElementById("menuPhoto").addEventListener("change", previewMenuPhoto);
       document.getElementById("menuOcrButton").addEventListener("click", readMenuPhoto);
+      document.getElementById("menuTarget").value = currentLanguage === "ko" ? "en" : currentLanguage;
       document.getElementById("menuTarget").addEventListener("change", () => {
         if (document.getElementById("menuInput").value.trim()) translateMenu();
       });
@@ -3065,7 +3069,8 @@
       button.textContent = `${feature.reading} · 0%`;
       let worker;
       try {
-        worker = await Tesseract.createWorker("kor+eng", 1, {
+        worker = await Tesseract.createWorker("kor", 1, {
+          langPath: "https://tessdata.projectnaptha.com/4.0.0_best",
           logger: message => {
             if (message.status === "recognizing text") {
               const percent = Math.round((message.progress || 0) * 100);
@@ -3106,7 +3111,10 @@
           const candidate = scoreMenuRecognition(result, preparedImage);
           recognitionCandidates.push(candidate);
           if (!bestRecognition || candidate.score > bestRecognition.score) bestRecognition = candidate;
-          if (attemptIndex >= 2 && isUsableMenuRecognition(bestRecognition)) break;
+          if (attemptIndex >= 2
+            && bestRecognition.knownMenuHits >= 3
+            && bestRecognition.hangulCharacters >= 15
+            && bestRecognition.pricePatterns >= 2) break;
         }
 
         if (!bestRecognition || !isUsableMenuRecognition(bestRecognition)) {
@@ -3116,7 +3124,7 @@
         document.getElementById("menuInput").value = bestRecognition.text;
         window.currentMenuOcrLines = bestRecognition.layoutLines;
         document.getElementById("menuTranslationResult").textContent = feature.ocrDone;
-        translateMenu();
+        await translateMenu();
         progressBar.style.width = "100%";
       } catch (error) {
         const message = String(error && error.message || error);
@@ -3132,31 +3140,29 @@
 
     function mergeMenuLayoutLines(candidates) {
       const merged = [];
-      candidates.slice(0, 3).forEach(candidate => {
-        (candidate.layoutLines || []).forEach(line => {
-          const normalized = normalizeMenuText(line.text || "");
-          const semanticKeys = findMenuSemanticKeys(normalized);
-          if (!semanticKeys.length) return;
-          const signature = semanticKeys.map(key => menuTranslations[key].en).sort().join("|");
-          const duplicate = merged.some(existing => {
-            const sameMeaning = existing.signature === signature;
-            const sameRow = Math.abs(((existing.top + existing.bottom) / 2) - ((line.top + line.bottom) / 2)) < .035;
-            const sameColumn = Math.abs(((existing.left + existing.right) / 2) - ((line.left + line.right) / 2)) < .06;
-            return sameMeaning && sameRow && sameColumn;
-          });
-          if (!duplicate) merged.push({ ...line, text: normalized, signature });
+      const bestCandidate = [...candidates].sort((a, b) => b.score - a.score)[0];
+      (bestCandidate && bestCandidate.layoutLines || []).forEach(line => {
+        const normalized = repairOcrLine(normalizeMenuText(line.text || ""))
+          .replace(/\s+/g, " ")
+          .trim();
+        const meaningful = (normalized.match(/[가-힣A-Za-z0-9]/g) || []).length;
+        const hangul = (normalized.match(/[가-힣]/g) || []).length;
+        const latin = (normalized.match(/[A-Za-z]/g) || []).length;
+        const digits = (normalized.match(/\d/g) || []).length;
+        if (meaningful < 2 || (hangul < 1 && !(digits >= 4 && latin === 0))) return;
+        if (![line.left, line.top, line.right, line.bottom].every(Number.isFinite)) return;
+        const centerY = (line.top + line.bottom) / 2;
+        const duplicate = merged.some(existing => {
+          const existingCenterY = (existing.top + existing.bottom) / 2;
+          const horizontalOverlap = Math.max(0, Math.min(existing.right, line.right) - Math.max(existing.left, line.left));
+          const smallerWidth = Math.max(.001, Math.min(existing.right - existing.left, line.right - line.left));
+          return Math.abs(existingCenterY - centerY) < .018 && horizontalOverlap / smallerWidth > .55;
         });
+        if (!duplicate) merged.push({ ...line, text: normalized });
       });
-      const withoutGenericDuplicates = merged.filter((line, index, all) => {
-        if (line.signature !== menuTranslations["회"].en) return true;
-        return !all.some((other, otherIndex) => {
-          if (otherIndex === index || other.signature === line.signature || !/sashimi/i.test(other.signature)) return false;
-          const sameRow = Math.abs(((other.top + other.bottom) / 2) - ((line.top + line.bottom) / 2)) < .035;
-          const horizontallyRelated = other.left < line.right + .03 && other.right > line.left - .03;
-          return sameRow && horizontallyRelated;
-        });
-      });
-      return withoutGenericDuplicates.sort((a, b) => a.top - b.top || a.left - b.left);
+      return merged
+        .sort((a, b) => a.top - b.top || a.left - b.left)
+        .slice(0, 60);
     }
 
     async function ensureTesseractLoaded() {
@@ -3184,10 +3190,10 @@
       const fragmentRatio = lines.length ? fragmentLines / lines.length : 1;
       const score = confidence
         + Math.min(40, meaningfulCharacters * .55)
-        + Math.min(30, hangulCharacters * 1.2)
-        + Math.min(20, pricePatterns * 5)
-        + Math.min(12, latinWords * 2)
-        + Math.min(45, knownMenuHits * 15)
+        + Math.min(55, hangulCharacters * 1.8)
+        + Math.min(25, pricePatterns * 6)
+        + Math.min(60, knownMenuHits * 20)
+        - Math.min(36, latinWords * 4)
         - Math.min(55, fragmentLines * 4);
       const layoutLines = extractMenuLayoutLines(result && result.data ? result.data.blocks : null, preparedImage);
       return {
@@ -3199,13 +3205,32 @@
     function extractMenuLayoutLines(blocks, preparedImage) {
       if (!Array.isArray(blocks) || !preparedImage || !preparedImage.menuTransform) return [];
       const transform = preparedImage.menuTransform;
-      if (transform.rotation !== 0) return [];
-      const mappedCells = [];
+      const mappedLines = [];
       const mapBox = bbox => {
-        const x0 = transform.sourceX + bbox.x0 / transform.scale;
-        const y0 = transform.sourceY + bbox.y0 / transform.scale;
-        const x1 = transform.sourceX + bbox.x1 / transform.scale;
-        const y1 = transform.sourceY + bbox.y1 / transform.scale;
+        let sourceLeft = bbox.x0;
+        let sourceTop = bbox.y0;
+        let sourceRight = bbox.x1;
+        let sourceBottom = bbox.y1;
+        if (transform.rotation === 90) {
+          sourceLeft = bbox.y0;
+          sourceTop = transform.scaledHeight - bbox.x1;
+          sourceRight = bbox.y1;
+          sourceBottom = transform.scaledHeight - bbox.x0;
+        } else if (transform.rotation === 180) {
+          sourceLeft = transform.scaledWidth - bbox.x1;
+          sourceTop = transform.scaledHeight - bbox.y1;
+          sourceRight = transform.scaledWidth - bbox.x0;
+          sourceBottom = transform.scaledHeight - bbox.y0;
+        } else if (transform.rotation === 270) {
+          sourceLeft = transform.scaledWidth - bbox.y1;
+          sourceTop = bbox.x0;
+          sourceRight = transform.scaledWidth - bbox.y0;
+          sourceBottom = bbox.x1;
+        }
+        const x0 = transform.sourceX + sourceLeft / transform.scale;
+        const y0 = transform.sourceY + sourceTop / transform.scale;
+        const x1 = transform.sourceX + sourceRight / transform.scale;
+        const y1 = transform.sourceY + sourceBottom / transform.scale;
         return {
           left: Math.max(0, Math.min(1, x0 / transform.originalWidth)),
           top: Math.max(0, Math.min(1, y0 / transform.originalHeight)),
@@ -3213,7 +3238,6 @@
           bottom: Math.max(0, Math.min(1, y1 / transform.originalHeight))
         };
       };
-      const marketRowKeys = new Set(["도미", "도다리", "방어", "놀래미"]);
 
       blocks.forEach(block => {
         (block.paragraphs || []).forEach(paragraph => {
@@ -3221,87 +3245,60 @@
             const words = Array.isArray(line && line.words)
               ? line.words.filter(word => word && word.bbox && String(word.text || "").trim())
               : [];
-            if (!words.length) {
-              if (line && line.bbox && findMenuSemanticKeys(line.text || "").length) {
-                mappedCells.push({ text: normalizeMenuText(line.text || ""), ...mapBox(line.bbox) });
+            if (!words.length) return;
+            let group = [];
+            const pushGroup = () => {
+              if (!group.length) return;
+              const text = repairOcrLine(normalizeMenuText(group.map(word => word.text || "").join(" ")))
+                .replace(/\s+/g, " ")
+                .trim();
+              const hangul = (text.match(/[가-힣]/g) || []).length;
+              if (hangul < 1) {
+                group = [];
+                return;
               }
-              return;
-            }
-
-            const lineKeys = findMenuSemanticKeys(line.text || "");
-            const runs = [];
-            for (let start = 0; start < words.length; start += 1) {
-              for (let end = start; end < Math.min(words.length, start + 4); end += 1) {
-                const runText = words.slice(start, end + 1).map(word => word.text || "").join(" ");
-                const semanticKeys = findMenuSemanticKeys(runText);
-                if (semanticKeys.length) {
-                  runs.push({
-                    start, end, semanticKeys,
-                    bbox: {
-                      x0: Math.min(...words.slice(start, end + 1).map(word => word.bbox.x0)),
-                      y0: Math.min(...words.slice(start, end + 1).map(word => word.bbox.y0)),
-                      x1: Math.max(...words.slice(start, end + 1).map(word => word.bbox.x1)),
-                      y1: Math.max(...words.slice(start, end + 1).map(word => word.bbox.y1))
-                    }
-                  });
-                }
+              const confidence = group.reduce((sum, word) => sum + (Number(word.confidence) || 0), 0) / group.length;
+              const bbox = {
+                x0: Math.min(...group.map(word => word.bbox.x0)),
+                y0: Math.min(...group.map(word => word.bbox.y0)),
+                x1: Math.max(...group.map(word => word.bbox.x1)),
+                y1: Math.max(...group.map(word => word.bbox.y1))
+              };
+              const mapped = mapBox(bbox);
+              const hasKnownMenuTerm = findMenuSemanticKeys(text).length > 0 || /인\s*스페/.test(text);
+              if ((hasKnownMenuTerm || confidence >= 25) && mapped.right - mapped.left >= .015 && mapped.bottom - mapped.top >= .006) {
+                mappedLines.push({ text, confidence, ...mapped });
               }
-            }
-
-            const keysToPlace = lineKeys.length
-              ? lineKeys
-              : [...new Set(runs.flatMap(run => run.semanticKeys))];
-            const chosenCells = new Map();
-            keysToPlace.forEach(key => {
-              const candidates = runs.filter(run => run.semanticKeys.includes(key)).sort((a, b) => {
-                const wordSpan = (a.end - a.start) - (b.end - b.start);
-                if (wordSpan) return wordSpan;
-                return (a.bbox.x1 - a.bbox.x0) - (b.bbox.x1 - b.bbox.x0);
-              });
-              const chosen = candidates[0];
-              if (!chosen) return;
-              const cellId = `${chosen.start}:${chosen.end}`;
-              if (!chosenCells.has(cellId)) chosenCells.set(cellId, { ...chosen, keys: [] });
-              chosenCells.get(cellId).keys.push(key);
+              group = [];
+            };
+            words.forEach(word => {
+              const normalizedWord = normalizeMenuText(String(word.text || ""));
+              const isKoreanWord = /[가-힣]/.test(normalizedWord);
+              if (!isKoreanWord) {
+                pushGroup();
+                return;
+              }
+              if (group.length) {
+                const previous = group[group.length - 1];
+                const lineHeight = Math.max(1, previous.bbox.y1 - previous.bbox.y0, word.bbox.y1 - word.bbox.y0);
+                const gap = word.bbox.x0 - previous.bbox.x1;
+                if (gap > lineHeight * 1.7) pushGroup();
+              }
+              group.push(word);
             });
-            chosenCells.forEach(cell => {
-              mappedCells.push({ text: [...new Set(cell.keys)].join(" "), ...mapBox(cell.bbox) });
-            });
-
-            const pricePattern = /(?:\d{1,3}(?:[,.]\d{3})+|\d{4,})/;
-            const lineHasPrice = pricePattern.test(String(line.text || ""));
-            const hasFishItem = keysToPlace.some(key => marketRowKeys.has(key));
-            if (!lineHasPrice && hasFishItem) {
-              const selectedBoxes = [...chosenCells.values()].map(cell => mapBox(cell.bbox));
-              const unknownRightCells = words.map(word => ({
-                word,
-                box: mapBox(word.bbox),
-                normalized: normalizeMenuText(word.text || "")
-              })).filter(candidate => {
-                const overlapsSelected = selectedBoxes.some(box =>
-                  candidate.box.left < box.right && candidate.box.right > box.left);
-                return candidate.box.left > .5
-                  && candidate.box.right < .88
-                  && !overlapsSelected
-                  && !pricePattern.test(candidate.normalized)
-                  && /[가-힣A-Za-z]/.test(candidate.normalized);
-              }).sort((a, b) => b.box.left - a.box.left);
-              if (unknownRightCells[0]) {
-                mappedCells.push({ text: "시가", ...unknownRightCells[0].box });
-              }
-            }
+            pushGroup();
           });
         });
       });
-      return mappedCells;
+      return mappedLines;
     }
 
     function isUsableMenuRecognition(candidate) {
       if (!candidate || candidate.meaningfulCharacters < 8) return false;
       return (candidate.knownMenuHits >= 1 && candidate.pricePatterns >= 1 && candidate.fragmentRatio < .45)
         || (candidate.hangulCharacters >= 8 && candidate.pricePatterns >= 1 && candidate.fragmentRatio < .35)
-        || (candidate.confidence >= 68 && candidate.meaningfulCharacters >= 24
-          && candidate.latinWords >= 3 && candidate.fragmentRatio < .3);
+        || (candidate.confidence >= 68 && candidate.hangulCharacters >= 12
+          && candidate.meaningfulCharacters >= 24 && candidate.fragmentRatio < .3);
     }
 
     async function prepareMenuImage(file, options = {}) {
@@ -3393,6 +3390,8 @@
         sourceY,
         sourceWidth,
         sourceHeight,
+        scaledWidth,
+        scaledHeight,
         scale,
         originalWidth: imageWidth,
         originalHeight: imageHeight
@@ -3432,9 +3431,71 @@
       return normalized;
     }
 
-    function translateMenu() {
+    function encodeMenuTranslationPayload(lines) {
+      const bytes = new TextEncoder().encode(JSON.stringify({ lines }));
+      let binary = "";
+      bytes.forEach(byte => { binary += String.fromCharCode(byte); });
+      return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+    }
+
+    function requestGoogleMenuTranslation(lines, target) {
+      return new Promise((resolve, reject) => {
+        const callbackName = `seaRealTranslate${Date.now()}${Math.random().toString(36).slice(2, 8)}`;
+        const script = document.createElement("script");
+        const cleanup = () => {
+          clearTimeout(timeoutId);
+          script.remove();
+          try { delete window[callbackName]; } catch (_) { window[callbackName] = undefined; }
+        };
+        const timeoutId = setTimeout(() => {
+          cleanup();
+          reject(new Error("Translation request timed out"));
+        }, 20000);
+        window[callbackName] = payload => {
+          cleanup();
+          if (!payload || !payload.ok || !Array.isArray(payload.translations)) {
+            reject(new Error(payload && payload.error || "Invalid translation response"));
+            return;
+          }
+          resolve(payload.translations);
+        };
+        script.onerror = () => {
+          cleanup();
+          reject(new Error("Translation service unavailable"));
+        };
+        const data = encodeMenuTranslationPayload(lines);
+        script.src = `${menuTranslationServiceUrl}?callback=${callbackName}&target=${encodeURIComponent(target)}&data=${encodeURIComponent(data)}`;
+        document.head.appendChild(script);
+      });
+    }
+
+    function localMenuTranslation(line, target) {
+      let translated = repairOcrLine(line);
+      const matchedKeys = findMenuSemanticKeys(translated).sort((a, b) => b.length - a.length);
+      matchedKeys.forEach(key => {
+        translated = translated.split(key).join(menuTranslations[key][target]);
+      });
+      return matchedKeys.length ? translated : "";
+    }
+
+    function polishedKnownMenuTranslation(line, translated, target) {
+      if (line.replace(/\s+/g, "").includes("인스페")) return menuTranslations["5인스페셜"][target];
+      const genericKeys = new Set(["회", "활어회", "계절", "계절 활어회"]);
+      const matchedKeys = findMenuSemanticKeys(line);
+      const specificKeys = matchedKeys.filter(key => !genericKeys.has(key) || matchedKeys.length === 1);
+      if (!specificKeys.length) return translated;
+      const labels = [...new Set(specificKeys.map(key => menuTranslations[key][target]))];
+      const prices = [...new Set((line.match(/\d{1,3}(?:[,.]\d{3})+|\d{4,6}/g) || [])
+        .map(price => price.replace(/\./g, ","))
+        .filter(price => Number(price.replace(/,/g, "")) >= 5000))];
+      return [...labels, ...prices].join(" · ") || translated;
+    }
+
+    async function translateMenu() {
       const label = toolLabels[currentLanguage];
       const feature = featureLabels[currentLanguage];
+      const requestId = (window.currentMenuTranslationRequestId || 0) + 1;
+      window.currentMenuTranslationRequestId = requestId;
       const source = document.getElementById("menuInput").value.trim();
       const normalizedSource = normalizeMenuText(source);
       const target = document.getElementById("menuTarget").value;
@@ -3449,13 +3510,25 @@
       const linesToTranslate = detectedLayout.length
         ? detectedLayout.map((line, lineIndex) => ({ ...line, lineIndex, totalLines: detectedLayout.length }))
         : sourceLines.map((text, lineIndex) => ({ text, lineIndex, totalLines: sourceLines.length }));
-      linesToTranslate.forEach(sourceLine => {
-        const line = repairOcrLine(sourceLine.text);
-        const matchedKeys = findMenuSemanticKeys(line);
-        if (matchedKeys.length) {
-          const names = matchedKeys.map(key => menuTranslations[key][target]);
+      const usableLines = linesToTranslate
+        .map(sourceLine => ({ ...sourceLine, text: repairOcrLine(sourceLine.text).replace(/\s+/g, " ").trim() }))
+        .filter(sourceLine => (sourceLine.text.match(/[가-힣A-Za-z0-9]/g) || []).length >= 2)
+        .slice(0, 60);
+      if (!usableLines.length) {
+        result.textContent = feature.ocrError;
+        renderImageTranslationOverlay([], feature);
+        return;
+      }
+      result.textContent = feature.translating;
+      try {
+        const translations = await requestGoogleMenuTranslation(usableLines.map(line => line.text), target);
+        if (requestId !== window.currentMenuTranslationRequestId) return;
+        const translatedByIndex = new Map(translations.map(item => [Number(item.index), String(item.text || "").trim()]));
+        usableLines.forEach((sourceLine, index) => {
+          const translatedText = translatedByIndex.get(index);
+          if (!translatedText) return;
           translatedItems.push({
-            text: [...new Set(names)].join(" · "),
+            text: polishedKnownMenuTranslation(sourceLine.text, translatedText, target),
             lineIndex: sourceLine.lineIndex,
             totalLines: sourceLine.totalLines,
             left: sourceLine.left,
@@ -3463,15 +3536,28 @@
             right: sourceLine.right,
             bottom: sourceLine.bottom
           });
-        }
-      });
-      if (!translatedItems.length) {
-        result.textContent = feature.ocrError;
-        renderImageTranslationOverlay([], feature);
-        return;
+        });
+        if (!translatedItems.length) throw new Error("No translated menu lines");
+        renderImageTranslationOverlay(translatedItems, feature);
+        result.textContent = feature.translationDone;
+      } catch (error) {
+        if (requestId !== window.currentMenuTranslationRequestId) return;
+        usableLines.forEach(sourceLine => {
+          const translatedText = localMenuTranslation(sourceLine.text, target);
+          if (!translatedText) return;
+          translatedItems.push({
+            text: translatedText,
+            lineIndex: sourceLine.lineIndex,
+            totalLines: sourceLine.totalLines,
+            left: sourceLine.left,
+            top: sourceLine.top,
+            right: sourceLine.right,
+            bottom: sourceLine.bottom
+          });
+        });
+        renderImageTranslationOverlay(translatedItems, feature);
+        result.textContent = translatedItems.length ? feature.translationFallback : feature.translationError;
       }
-      result.textContent = "";
-      renderImageTranslationOverlay(translatedItems, feature);
     }
 
     function renderImageTranslationOverlay(items, feature) {
@@ -3502,7 +3588,7 @@
         if (hasDetectedBox) {
           const left = Math.max(0, item.left - .004);
           const right = Math.min(.995, Math.max(item.right + .006, left + .025));
-          const height = Math.min(.055, Math.max(.022, item.bottom - item.top + .004));
+          const height = Math.min(.085, Math.max(.024, item.bottom - item.top + .008));
           line.style.left = `${left * 100}%`;
           line.style.width = `${(right - left) * 100}%`;
           line.style.top = `${((item.top + item.bottom) / 2) * 100}%`;
@@ -3510,9 +3596,9 @@
           const preview = document.getElementById("menuPreview");
           const previewHeight = preview.clientHeight || 320;
           const previewWidth = preview.clientWidth || 320;
-          const fontByHeight = previewHeight * height * .76;
-          const fontByWidth = (previewWidth * (right - left) - 2) / Math.max(2, item.text.length * .52);
-          line.style.fontSize = `${Math.max(5, Math.min(15, fontByHeight, fontByWidth))}px`;
+          const fontByHeight = previewHeight * height * .58;
+          const fontByWidth = (previewWidth * (right - left) - 6) / Math.max(2, item.text.length * .48);
+          line.style.fontSize = `${Math.max(5, Math.min(14, fontByHeight, fontByWidth))}px`;
         } else {
           line.style.top = `${fallbackPositions[index]}%`;
         }
