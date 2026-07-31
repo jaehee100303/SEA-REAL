@@ -733,12 +733,65 @@
       border: 35px solid rgba(255, 255, 255, .07);
       border-radius: 50%;
     }
-    .risk-panel h2, .risk-panel p, .risk-panel strong { position: relative; z-index: 1; }
+    .risk-panel h2, .risk-panel p, .risk-panel strong, .risk-panel span, .risk-panel b { position: relative; z-index: 1; }
     .risk-panel p { color: #cce9f6; font-size: calc(12px + var(--font-add, 0px)); line-height: 1.65; }
-    .risk-bars { position: relative; z-index: 1; display: flex; gap: 5px; margin: 27px 0 12px; }
+    .risk-bars { position: relative; z-index: 1; display: flex; gap: 5px; margin: 24px 0 7px; }
     .risk-bars i { height: 7px; flex: 1; background: rgba(255, 255, 255, .22); border-radius: 999px; }
-    .risk-bars i:first-child { background: #5eead4; }
+    .risk-bars i:first-child { background: #34d399; }
+    .risk-bars i:nth-child(2) { background: #5eead4; box-shadow: 0 0 0 3px rgba(94, 234, 212, .14); }
+    .risk-scale {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 4px;
+      margin-bottom: 7px;
+      color: #9fcfe1;
+      font-size: calc(8px + var(--font-add, 0px));
+      text-align: center;
+      line-height: 1.25;
+    }
+    .risk-panel .risk-method {
+      margin: 0 0 18px;
+      color: #91c6da;
+      font-size: calc(8px + var(--font-add, 0px));
+      line-height: 1.45;
+      text-align: center;
+    }
     .risk-panel strong { display: block; font-size: calc(23px + var(--font-add, 0px)); }
+    .risk-current {
+      display: inline-block;
+      margin-top: 7px;
+      padding: 5px 8px;
+      color: #bdf7ec;
+      background: rgba(52, 211, 153, .13);
+      border: 1px solid rgba(94, 234, 212, .22);
+      border-radius: 9px;
+      font-size: calc(9px + var(--font-add, 0px));
+      font-weight: 700;
+    }
+    .risk-advice {
+      position: relative;
+      z-index: 1;
+      margin-top: 14px;
+      padding: 12px;
+      color: #dff6ff;
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 13px;
+    }
+    .risk-advice b {
+      display: block;
+      margin-bottom: 4px;
+      color: white;
+      font-size: calc(10px + var(--font-add, 0px));
+    }
+    .risk-advice span {
+      display: block;
+      color: #c4e5f1;
+      font-size: calc(9px + var(--font-add, 0px));
+      line-height: 1.55;
+    }
 
     .more-grid {
       display: grid;
@@ -1684,10 +1737,23 @@
           <aside class="panel risk-panel">
             <div class="eyebrow" style="color:#8be1ff">PRICE CHECK</div>
             <h2 data-i18n="priceRisk">가격 위험도 분석</h2>
-            <p data-i18n="priceRiskSub">선택한 식당의 가격을 부산 평균과 비교해 드려요.</p>
+            <p data-i18n="priceRiskSub">부산 평균 시세와 비교해 가격 위험도를 총 5단계로 분석합니다.</p>
             <div class="risk-bars"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="risk-scale">
+              <span data-i18n="riskSafe">안심</span>
+              <span data-i18n="riskFair">적정</span>
+              <span data-i18n="riskCaution">주의</span>
+              <span data-i18n="riskDanger">위험</span>
+              <span data-i18n="riskCritical">매우 위험</span>
+            </div>
+            <p class="risk-method" data-i18n="riskMethod">기준: 평균 이하 / ±10% / +10~20% / +20~40% / +40% 이상</p>
             <strong data-i18n="fairPrice">● 적정가격</strong>
-            <p data-i18n="belowAverage">평균보다 3% 낮은 가격입니다.</p>
+            <span class="risk-current" data-i18n="riskCurrent">2단계 · 부산 평균 대비 ±10%</span>
+            <p data-i18n="belowAverage">부산 평균 시세 범위 안에 있는 적정가격입니다.</p>
+            <div class="risk-advice">
+              <b data-i18n="riskAdviceTitle">결제 전 확인하세요</b>
+              <span data-i18n="riskAdvice">표시 가격에 중량, 상차림비와 추가 비용이 포함되어 있는지 확인하면 더 안전합니다.</span>
+            </div>
           </aside>
         </div>
       </div>
@@ -1799,7 +1865,8 @@
         marketCountdownPrefix: "시세 업데이트까지", marketCountdownSuffix: "남았습니다", hourlyMarketInfo: "한 시간마다 시세가 업데이트됩니다.", marketLastUpdated: "마지막 업데이트 · {time}",
         jagalchi: "자갈치", millak: "민락", gwangalliMarket: "광안리", marketStandard: "{market} 시장 기준",
         flounder: "광어", rockfish: "우럭", snowCrab: "대게", kingCrab: "킹크랩", abalone: "전복", seaSquirt: "멍게", seaCucumber: "해삼", perKg: "1kg 기준", perTen: "10미 기준",
-        priceRisk: "가격 위험도 분석", priceRiskSub: "선택한 식당의 가격을 부산 평균과 비교해 드려요.", fairPrice: "● 적정가격", belowAverage: "평균보다 3% 낮은 가격입니다.",
+        priceRisk: "가격 위험도 분석", priceRiskSub: "부산 평균 시세와 비교해 가격 위험도를 총 5단계로 분석합니다.", fairPrice: "● 적정가격", belowAverage: "부산 평균 시세 범위 안에 있는 적정가격입니다.",
+        riskSafe: "안심", riskFair: "적정", riskCaution: "주의", riskDanger: "위험", riskCritical: "매우 위험", riskMethod: "기준: 평균 이하 / ±10% / +10~20% / +20~40% / +40% 이상", riskCurrent: "2단계 · 부산 평균 대비 ±10%", riskAdviceTitle: "결제 전 확인하세요", riskAdvice: "표시 가격에 중량, 상차림비와 추가 비용이 포함되어 있는지 확인하면 더 안전합니다.",
         moreTitle: "더보기", moreSub: "여행을 더 편하게 만드는 SEA-REAL의 지원 기능입니다.", menuTranslate: "메뉴판 번역", menuTranslateSub: "재료, 맵기, 알레르기 정보를 네 가지 언어로 이해하기 쉽게 확인하세요.",
         beachBookingLong: "파라솔과 평상을 예약하고 QR로 빠르게 입장하세요.", sos: "긴급 SOS", sosSub: "가까운 관광안내소, 경찰서, 병원, 영사관 위치를 확인하세요.", openFeature: "기능 열기 →",
         footerCopy: "부산을 가장 공정하게 즐기는 방법", home: "홈", market: "시세", more: "더보기", confirm: "확인했어요",
@@ -1830,7 +1897,8 @@
         marketCountdownPrefix: "Next price update in", marketCountdownSuffix: "remaining", hourlyMarketInfo: "Seafood prices update every hour.", marketLastUpdated: "Last updated · {time}",
         jagalchi: "Jagalchi", millak: "Millak", gwangalliMarket: "Gwangalli", marketStandard: "{market} market",
         flounder: "Olive flounder", rockfish: "Rockfish", snowCrab: "Snow crab", kingCrab: "King crab", abalone: "Abalone", seaSquirt: "Sea squirt", seaCucumber: "Sea cucumber", perKg: "per 1 kg", perTen: "per 10 pieces",
-        priceRisk: "Price risk check", priceRiskSub: "Compare a restaurant’s price with the Busan average.", fairPrice: "● Fair price", belowAverage: "This price is 3% below average.",
+        priceRisk: "Price risk check", priceRiskSub: "Price risk is analysed in five levels against the Busan average market price.", fairPrice: "● Fair price", belowAverage: "This price is within Busan’s average market range.",
+        riskSafe: "Safe", riskFair: "Fair", riskCaution: "Caution", riskDanger: "Risky", riskCritical: "Very risky", riskMethod: "Levels: at/below average / ±10% / +10–20% / +20–40% / +40% or more", riskCurrent: "Level 2 · within ±10% of Busan average", riskAdviceTitle: "Check before paying", riskAdvice: "Confirm whether weight, table-setting fees and other charges are included in the displayed price.",
         moreTitle: "More", moreSub: "Helpful SEA-REAL services for an easier trip.", menuTranslate: "Menu translation", menuTranslateSub: "Understand ingredients, spice level and allergen information in four languages.",
         beachBookingLong: "Book a parasol or beach table and enter quickly with QR.", sos: "Emergency SOS", sosSub: "Find the nearest tourist office, police, hospital or consulate.", openFeature: "Open feature →",
         footerCopy: "The fairest way to enjoy Busan", home: "Home", market: "Market", more: "More", confirm: "Got it",
@@ -1861,7 +1929,8 @@
         marketCountdownPrefix: "相場更新まで", marketCountdownSuffix: "です", hourlyMarketInfo: "相場は1時間ごとに更新されます。", marketLastUpdated: "最終更新 · {time}",
         jagalchi: "チャガルチ", millak: "民楽", gwangalliMarket: "広安里", marketStandard: "{market}市場基準",
         flounder: "ヒラメ", rockfish: "クロソイ", snowCrab: "ズワイガニ", kingCrab: "タラバガニ", abalone: "アワビ", seaSquirt: "ホヤ", seaCucumber: "ナマコ", perKg: "1kg基準", perTen: "10個基準",
-        priceRisk: "価格リスク分析", priceRiskSub: "選択した店舗の価格を釜山の平均と比較します。", fairPrice: "● 適正価格", belowAverage: "平均より3%安い価格です。",
+        priceRisk: "価格リスク分析", priceRiskSub: "釜山の平均相場と比較し、価格リスクを5段階で分析します。", fairPrice: "● 適正価格", belowAverage: "釜山の平均相場の範囲内にある適正価格です。",
+        riskSafe: "安心", riskFair: "適正", riskCaution: "注意", riskDanger: "危険", riskCritical: "非常に危険", riskMethod: "基準：平均以下 / ±10% / +10～20% / +20～40% / +40%以上", riskCurrent: "レベル2・釜山平均の±10%以内", riskAdviceTitle: "決済前に確認", riskAdvice: "表示価格に重量、席料、追加料金が含まれているか確認するとより安心です。",
         moreTitle: "その他", moreSub: "旅をもっと快適にするSEA-REALのサポート機能です。", menuTranslate: "メニュー翻訳", menuTranslateSub: "材料、辛さ、アレルギー情報を4つの言語で確認できます。",
         beachBookingLong: "パラソルやビーチテーブルを予約し、QRですばやく入場できます。", sos: "緊急 SOS", sosSub: "最寄りの観光案内所、警察、病院、領事館を確認できます。", openFeature: "機能を開く →",
         footerCopy: "釜山を最も公正に楽しむ方法", home: "ホーム", market: "相場", more: "その他", confirm: "確認",
@@ -1892,7 +1961,8 @@
         marketCountdownPrefix: "距离价格更新还有", marketCountdownSuffix: "后更新", hourlyMarketInfo: "海鲜价格每小时更新一次。", marketLastUpdated: "最后更新 · {time}",
         jagalchi: "札嘎其", millak: "民乐", gwangalliMarket: "广安里", marketStandard: "{market}市场标准",
         flounder: "比目鱼", rockfish: "石斑鱼", snowCrab: "雪蟹", kingCrab: "帝王蟹", abalone: "鲍鱼", seaSquirt: "海鞘", seaCucumber: "海参", perKg: "每1公斤", perTen: "每10只",
-        priceRisk: "价格风险分析", priceRiskSub: "将所选餐厅的价格与釜山平均价格进行比较。", fairPrice: "● 合理价格", belowAverage: "该价格比平均价格低3%。",
+        priceRisk: "价格风险分析", priceRiskSub: "与釜山平均市场价格比较，按五个等级分析价格风险。", fairPrice: "● 合理价格", belowAverage: "该价格处于釜山平均市场价格范围内。",
+        riskSafe: "安心", riskFair: "合理", riskCaution: "注意", riskDanger: "危险", riskCritical: "非常危险", riskMethod: "标准：平均以下 / ±10% / +10～20% / +20～40% / +40%以上", riskCurrent: "第2级·釜山平均价格±10%以内", riskAdviceTitle: "付款前请确认", riskAdvice: "请确认标价是否包含重量、餐桌服务费及其他附加费用。",
         moreTitle: "更多", moreSub: "让旅程更轻松的SEA-REAL支持服务。", menuTranslate: "菜单翻译", menuTranslateSub: "用四种语言查看食材、辣度和过敏原信息。",
         beachBookingLong: "预约遮阳伞和休息台，使用QR快速入场。", sos: "紧急 SOS", sosSub: "查找最近的旅游咨询处、警察局、医院或领事馆。", openFeature: "打开功能 →",
         footerCopy: "以最公平的方式畅游釜山", home: "首页", market: "市价", more: "更多", confirm: "知道了",
