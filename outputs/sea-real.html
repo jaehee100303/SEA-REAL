@@ -352,7 +352,14 @@
     .service-icon.amber { color: #b45309; background: #fff3cf; }
     .service-icon.green { color: #15803d; background: #dcfce7; }
     .service-icon.red { color: #dc2626; background: #fee2e2; }
-    .blue-ribbon { color: #2563eb; font-family: serif; font-size: 27px; font-weight: 800; }
+    .blue-ribbon {
+      display: block;
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+      user-select: none;
+      pointer-events: none;
+    }
     .service-card strong {
       display: block;
       margin-top: 16px;
@@ -1237,7 +1244,7 @@
         <div class="category active" id="category-food">
           <div class="services">
             <button class="service-card" type="button" data-feature="blueRibbon">
-              <span class="service-icon"><span class="blue-ribbon">🎗︎</span></span>
+              <span class="service-icon"><img class="blue-ribbon" src="assets/blue-ribbon-icon.png" alt="" width="34" height="34" decoding="async"></span>
               <strong data-i18n="blueRibbon">블루리본 추천 맛집</strong>
               <small data-i18n="blueRibbonSub">네이버 · 카카오 · Google Maps</small>
             </button>
@@ -1465,7 +1472,7 @@
   <div class="modal-layer" id="ribbonModal" role="dialog" aria-modal="true" aria-labelledby="ribbonTitle">
     <div class="modal">
       <button class="close" type="button" data-close-ribbon aria-label="닫기">×</button>
-      <div class="service-icon"><span class="blue-ribbon">🎗︎</span></div>
+      <div class="service-icon"><img class="blue-ribbon" src="assets/blue-ribbon-icon.png" alt="" width="34" height="34" decoding="async"></div>
       <h3 id="ribbonTitle" data-i18n="blueRibbon">블루리본 추천 맛집</h3>
       <p class="modal-copy" data-i18n="ribbonCopy">원하는 지도에서 블루리본 선정 부산 맛집을 확인하세요.</p>
       <div class="map-links">
