@@ -2529,7 +2529,7 @@
           const candidate = scoreMenuRecognition(result, preparedImage);
           recognitionCandidates.push(candidate);
           if (!bestRecognition || candidate.score > bestRecognition.score) bestRecognition = candidate;
-          if (attemptIndex >= 2 && isUsableMenuRecognition(bestRecognition)) break;
+          if (attemptIndex >= 1 && isUsableMenuRecognition(bestRecognition)) break;
         }
 
         if (!bestRecognition || !isUsableMenuRecognition(bestRecognition)) {
@@ -2563,7 +2563,7 @@
             return !list.some((other, otherIndex) => otherIndex !== index && other.includes(key));
           });
           if (!semanticKeys.length) return;
-          const signature = semanticKeys.join("|");
+          const signature = semanticKeys.map(key => menuTranslations[key].en).sort().join("|");
           const duplicate = merged.some(existing => {
             const sameMeaning = existing.signature === signature;
             const sameRow = Math.abs(((existing.top + existing.bottom) / 2) - ((line.top + line.bottom) / 2)) < .035;
