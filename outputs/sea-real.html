@@ -293,12 +293,18 @@
       border-radius: 50%;
     }
     .hero-content { position: relative; z-index: 2; width: min(650px, 100%); }
-    .sea-live-status {
+    .hero-side-stack {
       position: absolute;
       z-index: 3;
       right: clamp(25px, 6vw, 75px);
-      bottom: 150px;
-      min-width: 210px;
+      bottom: 42px;
+      width: 220px;
+      display: grid;
+      gap: 12px;
+    }
+    .sea-live-status {
+      width: 100%;
+      min-width: 0;
       padding: 12px 14px;
       color: #eaf9ff;
       background: rgba(2, 36, 59, .48);
@@ -416,11 +422,7 @@
       font-weight: 700;
     }
     .trust-card {
-      position: absolute;
-      right: clamp(25px, 6vw, 75px);
-      bottom: 42px;
-      z-index: 2;
-      width: 190px;
+      width: 100%;
       padding: 17px 18px;
       background: rgba(255, 255, 255, .11);
       border: 1px solid rgba(255, 255, 255, .2);
@@ -1346,7 +1348,8 @@
       .container { width: min(100% - 32px, 1160px); }
       .hero { min-height: 500px; padding: 58px 22px 52px; align-items: flex-start; }
       .hero-scene { background-position: 58% 54%; }
-      .sea-live-status { right: 22px; bottom: 18px; min-width: 198px; padding: 10px 12px; }
+      .hero-side-stack { right: 22px; bottom: 18px; width: min(218px, calc(100% - 44px)); }
+      .sea-live-status { padding: 10px 12px; }
       .hero h1 { margin-top: 22px; font-size: clamp(calc(42px + var(--font-add)), 13vw, calc(58px + var(--font-add))); letter-spacing: -3px; }
       .hero-copy { font-size: calc(14px + var(--font-add, 0px)); }
       .beach-finder { margin-top: 27px; padding-left: 12px; gap: 5px; }
@@ -1444,14 +1447,16 @@
             <button class="search-submit" id="beachSearch" type="button" data-i18n="viewMap">지도 보기</button>
           </div>
         </div>
-        <div class="sea-live-status" id="seaLiveStatus" role="status" aria-live="polite">
-          <strong id="seaStatusTitle">부산 바다 불러오는 중</strong>
-          <span id="seaStatusMetrics">현재 해양 데이터를 확인하고 있어요.</span>
-          <small id="seaStatusSource">Open-Meteo marine model</small>
-        </div>
-        <div class="trust-card">
-          <strong>98.6%</strong>
-          <span data-i18n="trustText">부산 현지 데이터로 매일 확인하는 정가 신뢰도</span>
+        <div class="hero-side-stack">
+          <div class="sea-live-status" id="seaLiveStatus" role="status" aria-live="polite">
+            <strong id="seaStatusTitle">부산 바다 불러오는 중</strong>
+            <span id="seaStatusMetrics">현재 해양 데이터를 확인하고 있어요.</span>
+            <small id="seaStatusSource">Open-Meteo marine model</small>
+          </div>
+          <div class="trust-card">
+            <strong>98.6%</strong>
+            <span data-i18n="trustText">부산 현지 데이터로 매일 확인하는 정가 신뢰도</span>
+          </div>
         </div>
       </div>
 
