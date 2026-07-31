@@ -25,10 +25,14 @@
       --warning: #f97316;
       --shadow: 0 18px 55px rgba(8, 47, 73, .11);
       --soft-shadow: 0 10px 28px rgba(8, 47, 73, .07);
+      --font-add: 0px;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    body[data-font-size="small"] { --font-add: 0px; }
+    body[data-font-size="medium"] { --font-add: 2px; }
+    body[data-font-size="large"] { --font-add: 4px; }
     body {
       margin: 0;
       min-width: 320px;
@@ -65,7 +69,7 @@
       align-items: center;
       gap: 11px;
       color: var(--navy);
-      font-size: 21px;
+      font-size: calc(21px + var(--font-add, 0px));
       font-weight: 800;
       letter-spacing: -1.2px;
     }
@@ -78,9 +82,72 @@
       border-radius: 13px;
       background: linear-gradient(145deg, #38bdf8, #0369a1);
       box-shadow: 0 8px 20px rgba(14, 165, 233, .3);
-      font-size: 20px;
+      font-size: calc(20px + var(--font-add, 0px));
     }
-    .lang-wrap { position: relative; }
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .lang-wrap, .font-size-wrap { position: relative; }
+    .font-size-button {
+      width: 42px;
+      min-height: 42px;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      color: #0369a1;
+      background: rgba(255, 255, 255, .9);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 5px 18px rgba(8, 47, 73, .05);
+      font-size: calc(15px + var(--font-add, 0px));
+      font-weight: 800;
+    }
+    .font-size-menu {
+      position: absolute;
+      right: 0;
+      top: 50px;
+      width: 214px;
+      display: none;
+      padding: 8px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+    .font-size-menu.open {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 5px;
+      animation: rise .18s ease;
+    }
+    .font-size-option {
+      min-height: 54px;
+      display: grid;
+      place-items: center;
+      gap: 2px;
+      padding: 6px 3px;
+      color: #527084;
+      background: #f5f9fb;
+      border: 1px solid transparent;
+      border-radius: 11px;
+      font-size: calc(10px + var(--font-add, 0px));
+      font-weight: 700;
+    }
+    .font-size-option span {
+      color: #18384d;
+      line-height: 1;
+    }
+    .font-size-option em { font-style: normal; }
+    .font-size-option[data-font-level="small"] span { font-size: calc(13px + var(--font-add, 0px)); }
+    .font-size-option[data-font-level="medium"] span { font-size: calc(17px + var(--font-add, 0px)); }
+    .font-size-option[data-font-level="large"] span { font-size: calc(21px + var(--font-add, 0px)); }
+    .font-size-option.active {
+      color: #0369a1;
+      background: #e4f5fc;
+      border-color: #7dd3fc;
+    }
     .lang-button {
       min-height: 42px;
       display: inline-flex;
@@ -92,7 +159,7 @@
       border: 1px solid var(--line);
       border-radius: 14px;
       box-shadow: 0 5px 18px rgba(8, 47, 73, .05);
-      font-size: 13px;
+      font-size: calc(13px + var(--font-add, 0px));
       font-weight: 700;
     }
     .lang-menu {
@@ -115,7 +182,7 @@
       color: #315b75;
       background: transparent;
       border-radius: 10px;
-      font-size: 13px;
+      font-size: calc(13px + var(--font-add, 0px));
     }
     .lang-menu button:hover { color: #0369a1; background: #edf8fd; }
 
@@ -164,7 +231,7 @@
       border: 1px solid rgba(255, 255, 255, .2);
       border-radius: 999px;
       backdrop-filter: blur(14px);
-      font-size: 11px;
+      font-size: calc(11px + var(--font-add, 0px));
       font-weight: 700;
       letter-spacing: .8px;
     }
@@ -179,7 +246,7 @@
     }
     .hero h1 {
       margin: 24px 0 16px;
-      font-size: clamp(43px, 5.6vw, 72px);
+      font-size: clamp(calc(43px + var(--font-add)), 5.6vw, calc(72px + var(--font-add)));
       line-height: 1.02;
       letter-spacing: -3.8px;
     }
@@ -187,7 +254,7 @@
       max-width: 535px;
       margin: 0;
       color: #d6e8f2;
-      font-size: 16px;
+      font-size: calc(16px + var(--font-add, 0px));
       line-height: 1.75;
     }
     .beach-finder {
@@ -211,7 +278,7 @@
       color: #0284c7;
       background: #e7f6fd;
       border-radius: 11px;
-      font-size: 18px;
+      font-size: calc(18px + var(--font-add, 0px));
     }
     .beach-select {
       min-width: 0;
@@ -221,7 +288,7 @@
       background: transparent;
       border: 0;
       outline: 0;
-      font-size: 14px;
+      font-size: calc(14px + var(--font-add, 0px));
       font-weight: 600;
     }
     .search-submit {
@@ -230,7 +297,7 @@
       color: white;
       background: linear-gradient(135deg, #0ea5e9, #0284c7);
       border-radius: 13px;
-      font-size: 13px;
+      font-size: calc(13px + var(--font-add, 0px));
       font-weight: 700;
     }
     .trust-card {
@@ -245,14 +312,14 @@
       border-radius: 19px;
       backdrop-filter: blur(16px);
       color: #d8edf7;
-      font-size: 11px;
+      font-size: calc(11px + var(--font-add, 0px));
       line-height: 1.55;
     }
     .trust-card strong {
       display: block;
       margin-bottom: 3px;
       color: white;
-      font-size: 24px;
+      font-size: calc(24px + var(--font-add, 0px));
       letter-spacing: -1px;
     }
 
@@ -266,18 +333,18 @@
     }
     .eyebrow {
       color: #0284c7;
-      font-size: 11px;
+      font-size: calc(11px + var(--font-add, 0px));
       font-weight: 800;
       letter-spacing: 1.4px;
     }
     .section-head h2, .page-title {
       margin: 7px 0 0;
       color: var(--navy);
-      font-size: clamp(26px, 3vw, 36px);
+      font-size: clamp(calc(26px + var(--font-add)), 3vw, calc(36px + var(--font-add)));
       line-height: 1.16;
       letter-spacing: -1.8px;
     }
-    .section-hint { color: #7890a3; font-size: 12px; }
+    .section-hint { color: #7890a3; font-size: calc(12px + var(--font-add, 0px)); }
     .category-tabs {
       display: flex;
       gap: 9px;
@@ -296,7 +363,7 @@
       color: #638096;
       background: transparent;
       border-radius: 13px;
-      font-size: 13px;
+      font-size: calc(13px + var(--font-add, 0px));
       font-weight: 700;
     }
     .category-tab.active {
@@ -330,7 +397,7 @@
       right: 18px;
       bottom: 17px;
       color: #8aa3b4;
-      font-size: 14px;
+      font-size: calc(14px + var(--font-add, 0px));
       transition: transform .22s ease, color .22s ease;
     }
     .service-card:hover {
@@ -347,7 +414,7 @@
       color: #0369a1;
       background: linear-gradient(145deg, #e3f5fd, #d7effa);
       border-radius: 15px;
-      font-size: 21px;
+      font-size: calc(21px + var(--font-add, 0px));
     }
     .service-icon.amber { color: #b45309; background: #fff3cf; }
     .service-icon.green { color: #15803d; background: #dcfce7; }
@@ -373,7 +440,7 @@
     .service-card strong {
       display: block;
       margin-top: 16px;
-      font-size: 15px;
+      font-size: calc(15px + var(--font-add, 0px));
       line-height: 1.35;
     }
     .service-card small {
@@ -381,7 +448,7 @@
       max-width: calc(100% - 20px);
       margin-top: 6px;
       color: #71899c;
-      font-size: 11px;
+      font-size: calc(11px + var(--font-add, 0px));
       line-height: 1.5;
     }
 
@@ -389,7 +456,7 @@
     .page-sub {
       margin: 10px 0 28px;
       color: var(--muted);
-      font-size: 14px;
+      font-size: calc(14px + var(--font-add, 0px));
       line-height: 1.7;
     }
     .market-layout {
@@ -410,15 +477,15 @@
       justify-content: space-between;
       gap: 16px;
     }
-    .panel h2 { margin: 0 0 5px; font-size: 21px; letter-spacing: -.8px; }
-    .panel-note { color: #7890a3; font-size: 11px; }
+    .panel h2 { margin: 0 0 5px; font-size: calc(21px + var(--font-add, 0px)); letter-spacing: -.8px; }
+    .panel-note { color: #7890a3; font-size: calc(11px + var(--font-add, 0px)); }
     .market-tabs { display: flex; gap: 7px; }
     .market-tab {
       padding: 8px 11px;
       color: #6f899d;
       background: #eef5f8;
       border-radius: 10px;
-      font-size: 11px;
+      font-size: calc(11px + var(--font-add, 0px));
       font-weight: 700;
     }
     .market-tab.active { color: #0369a1; background: #dff3fc; }
@@ -434,7 +501,7 @@
       border: 1px solid #edf3f6;
       border-radius: 18px;
     }
-    .fish-icon { display: flex; align-items: center; height: 30px; font-size: 26px; }
+    .fish-icon { display: flex; align-items: center; height: 30px; font-size: calc(26px + var(--font-add, 0px)); }
     .sea-squirt-icon {
       position: relative;
       width: 26px;
@@ -479,10 +546,10 @@
     }
     .fish-icon.gray { filter: grayscale(100%) brightness(1.22); }
     .fish-icon.black { filter: grayscale(100%) brightness(.18); }
-    .fish-card strong { display: block; margin-top: 13px; font-size: 14px; }
-    .fish-card small { color: #7890a3; font-size: 10px; }
-    .price { margin-top: 10px; font-size: 15px; font-weight: 800; white-space: nowrap; }
-    .change { display: inline-block; margin-top: 4px; font-size: 10px; font-weight: 700; }
+    .fish-card strong { display: block; margin-top: 13px; font-size: calc(14px + var(--font-add, 0px)); }
+    .fish-card small { color: #7890a3; font-size: calc(10px + var(--font-add, 0px)); }
+    .price { margin-top: 10px; font-size: calc(15px + var(--font-add, 0px)); font-weight: 800; white-space: nowrap; }
+    .change { display: inline-block; margin-top: 4px; font-size: calc(10px + var(--font-add, 0px)); font-weight: 700; }
     .down { color: #059669; }
     .up { color: #ea580c; }
     .risk-panel {
@@ -503,11 +570,11 @@
       border-radius: 50%;
     }
     .risk-panel h2, .risk-panel p, .risk-panel strong { position: relative; z-index: 1; }
-    .risk-panel p { color: #cce9f6; font-size: 12px; line-height: 1.65; }
+    .risk-panel p { color: #cce9f6; font-size: calc(12px + var(--font-add, 0px)); line-height: 1.65; }
     .risk-bars { position: relative; z-index: 1; display: flex; gap: 5px; margin: 27px 0 12px; }
     .risk-bars i { height: 7px; flex: 1; background: rgba(255, 255, 255, .22); border-radius: 999px; }
     .risk-bars i:first-child { background: #5eead4; }
-    .risk-panel strong { display: block; font-size: 23px; }
+    .risk-panel strong { display: block; font-size: calc(23px + var(--font-add, 0px)); }
 
     .more-grid {
       display: grid;
@@ -529,9 +596,9 @@
       transition: transform .22s ease;
     }
     .support-card:hover { transform: translateY(-4px); }
-    .support-card strong { margin-top: 20px; font-size: 18px; }
-    .support-card p { margin: 8px 0 20px; color: var(--muted); font-size: 12px; line-height: 1.7; }
-    .support-card em { margin-top: auto; color: #0284c7; font-size: 12px; font-style: normal; font-weight: 700; }
+    .support-card strong { margin-top: 20px; font-size: calc(18px + var(--font-add, 0px)); }
+    .support-card p { margin: 8px 0 20px; color: var(--muted); font-size: calc(12px + var(--font-add, 0px)); line-height: 1.7; }
+    .support-card em { margin-top: auto; color: #0284c7; font-size: calc(12px + var(--font-add, 0px)); font-style: normal; font-weight: 700; }
 
     .footer {
       display: flex;
@@ -540,7 +607,7 @@
       padding: 35px max(22px, 5vw) 115px;
       color: #7890a3;
       border-top: 1px solid var(--line);
-      font-size: 11px;
+      font-size: calc(11px + var(--font-add, 0px));
     }
     .footer strong { color: #315b75; }
 
@@ -571,10 +638,10 @@
       color: #7a93a6;
       background: transparent;
       border-radius: 16px;
-      font-size: 10px;
+      font-size: calc(10px + var(--font-add, 0px));
       font-weight: 700;
     }
-    .nav-item .nav-icon { min-height: 23px; display: grid; place-items: center; font-size: 20px; line-height: 1; }
+    .nav-item .nav-icon { min-height: 23px; display: grid; place-items: center; font-size: calc(20px + var(--font-add, 0px)); line-height: 1; }
     .nav-item.active { color: #0369a1; background: #e4f5fc; }
     .rainbow-fish {
       width: 26px;
@@ -639,17 +706,17 @@
       color: #607d91;
       background: #eef5f8;
       border-radius: 11px;
-      font-size: 20px;
+      font-size: calc(20px + var(--font-add, 0px));
     }
-    .modal h3 { margin: 18px 42px 8px 0; font-size: 23px; letter-spacing: -1px; }
-    .modal-copy { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .modal h3 { margin: 18px 42px 8px 0; font-size: calc(23px + var(--font-add, 0px)); letter-spacing: -1px; }
+    .modal-copy { margin: 0; color: var(--muted); font-size: calc(13px + var(--font-add, 0px)); line-height: 1.75; }
     .modal-info {
       margin-top: 18px;
       padding: 15px;
       color: #315b75;
       background: #f0f7fa;
       border-radius: 16px;
-      font-size: 12px;
+      font-size: calc(12px + var(--font-add, 0px));
       line-height: 1.65;
     }
     .modal-action {
@@ -659,7 +726,7 @@
       color: white;
       background: linear-gradient(135deg, #0ea5e9, #0284c7);
       border-radius: 14px;
-      font-size: 13px;
+      font-size: calc(13px + var(--font-add, 0px));
       font-weight: 800;
     }
     .map-frame {
@@ -681,7 +748,7 @@
       background: #0ea5e9;
       border-radius: 14px;
       text-decoration: none;
-      font-size: 13px;
+      font-size: calc(13px + var(--font-add, 0px));
       font-weight: 800;
     }
     .map-link.naver { background: #03c75a; }
@@ -696,7 +763,7 @@
       padding: 13px 15px;
       background: #f3f8fb;
       border-radius: 14px;
-      font-size: 13px;
+      font-size: calc(13px + var(--font-add, 0px));
     }
     .dictionary-row b:last-child { text-align: right; color: #0369a1; }
     .dictionary-row .term-label { text-align: left; color: #173f58; }
@@ -704,7 +771,7 @@
       display: block;
       margin-top: 3px;
       color: #7890a3;
-      font-size: 9px;
+      font-size: calc(9px + var(--font-add, 0px));
       font-weight: 600;
       letter-spacing: .1px;
     }
@@ -723,7 +790,7 @@
       color: #4b6578;
       background: #f1f7fa;
       border-radius: 999px;
-      font-size: 9px;
+      font-size: calc(9px + var(--font-add, 0px));
       font-weight: 700;
     }
     .status-dot {
@@ -752,7 +819,7 @@
     }
     .tool-field label {
       color: #607d91;
-      font-size: 10px;
+      font-size: calc(10px + var(--font-add, 0px));
       font-weight: 800;
       letter-spacing: .3px;
     }
@@ -779,7 +846,7 @@
       color: white;
       background: linear-gradient(135deg, #0ea5e9, #0284c7);
       border-radius: 13px;
-      font-size: 12px;
+      font-size: calc(12px + var(--font-add, 0px));
       font-weight: 800;
     }
     .tool-result {
@@ -792,7 +859,7 @@
       border: 1px solid #d9eef8;
       border-radius: 15px;
       text-align: center;
-      font-size: 17px;
+      font-size: calc(17px + var(--font-add, 0px));
       font-weight: 800;
       line-height: 1.55;
     }
@@ -801,13 +868,13 @@
       place-items: start;
       text-align: left;
       white-space: pre-wrap;
-      font-size: 14px;
+      font-size: calc(14px + var(--font-add, 0px));
       font-weight: 600;
     }
     .tool-note {
       margin: 0;
       color: #8297a7;
-      font-size: 9px;
+      font-size: calc(9px + var(--font-add, 0px));
       line-height: 1.5;
     }
     .crowd-board {
@@ -824,7 +891,7 @@
       padding: 13px 14px;
       background: #f3f8fb;
       border-radius: 14px;
-      font-size: 12px;
+      font-size: calc(12px + var(--font-add, 0px));
     }
     .crowd-row span:last-child {
       display: inline-flex;
@@ -839,14 +906,14 @@
       gap: 10px;
       margin-top: 12px;
       color: #7890a3;
-      font-size: 10px;
+      font-size: calc(10px + var(--font-add, 0px));
     }
     .crowd-refresh {
       padding: 8px 10px;
       color: #0369a1;
       background: #e5f5fc;
       border-radius: 10px;
-      font-size: 10px;
+      font-size: calc(10px + var(--font-add, 0px));
       font-weight: 800;
     }
     .crowd-criteria {
@@ -859,12 +926,12 @@
     .crowd-criteria strong {
       display: block;
       color: #18384d;
-      font-size: 12px;
+      font-size: calc(12px + var(--font-add, 0px));
     }
     .crowd-criteria > p {
       margin: 4px 0 11px;
       color: #7890a3;
-      font-size: 10px;
+      font-size: calc(10px + var(--font-add, 0px));
       line-height: 1.5;
     }
     .criteria-list {
@@ -877,7 +944,7 @@
       color: #526c7e;
       background: #fff;
       border-radius: 10px;
-      font-size: 9px;
+      font-size: calc(9px + var(--font-add, 0px));
       line-height: 1.45;
     }
     .criteria-item b {
@@ -886,7 +953,7 @@
       gap: 5px;
       margin-bottom: 2px;
       color: #27475d;
-      font-size: 10px;
+      font-size: calc(10px + var(--font-add, 0px));
     }
     .photo-upload {
       position: relative;
@@ -909,8 +976,8 @@
       opacity: 0;
       cursor: pointer;
     }
-    .photo-upload strong { display: block; margin-top: 7px; font-size: 12px; }
-    .photo-upload small { color: #7890a3; font-size: 9px; }
+    .photo-upload strong { display: block; margin-top: 7px; font-size: calc(12px + var(--font-add, 0px)); }
+    .photo-upload small { color: #7890a3; font-size: calc(9px + var(--font-add, 0px)); }
     .menu-preview {
       width: 100%;
       max-height: 220px;
@@ -952,7 +1019,7 @@
       border: 1px solid #e0ecf2;
       border-radius: 16px;
       text-decoration: none;
-      font-size: 12px;
+      font-size: calc(12px + var(--font-add, 0px));
       font-weight: 800;
     }
     .quick-link i {
@@ -964,7 +1031,7 @@
       background: white;
       border-radius: 13px;
       box-shadow: 0 5px 15px rgba(8, 47, 73, .07);
-      font-size: 18px;
+      font-size: calc(18px + var(--font-add, 0px));
       font-style: normal;
     }
     .booking-total {
@@ -976,9 +1043,9 @@
       color: #315b75;
       background: #edf8fd;
       border-radius: 15px;
-      font-size: 12px;
+      font-size: calc(12px + var(--font-add, 0px));
     }
-    .booking-total strong { color: #0369a1; font-size: 18px; }
+    .booking-total strong { color: #0369a1; font-size: calc(18px + var(--font-add, 0px)); }
     .booking-success {
       display: none;
       margin-top: 12px;
@@ -986,7 +1053,7 @@
       color: #166534;
       background: #dcfce7;
       border-radius: 13px;
-      font-size: 11px;
+      font-size: calc(11px + var(--font-add, 0px));
       font-weight: 700;
       line-height: 1.55;
     }
@@ -1003,7 +1070,7 @@
       color: #678397;
       background: #edf4f7;
       border-radius: 11px;
-      font-size: 11px;
+      font-size: calc(11px + var(--font-add, 0px));
       font-weight: 800;
     }
     .course-tab.active { color: white; background: #0284c7; }
@@ -1017,7 +1084,7 @@
       color: #0369a1;
       background: #e9f7fd;
       border-radius: 9px;
-      font-size: 10px;
+      font-size: calc(10px + var(--font-add, 0px));
       font-weight: 800;
     }
     .course-route { display: grid; gap: 0; }
@@ -1028,7 +1095,7 @@
       gap: 10px;
       padding-bottom: 15px;
       color: #49697d;
-      font-size: 11px;
+      font-size: calc(11px + var(--font-add, 0px));
       line-height: 1.55;
     }
     .course-stop:not(:last-child)::after {
@@ -1049,10 +1116,10 @@
       color: white;
       background: #0ea5e9;
       border-radius: 10px;
-      font-size: 10px;
+      font-size: calc(10px + var(--font-add, 0px));
       font-weight: 800;
     }
-    .course-stop b { display: block; color: #173f58; font-size: 12px; }
+    .course-stop b { display: block; color: #173f58; font-size: calc(12px + var(--font-add, 0px)); }
     .verified-list {
       display: grid;
       gap: 9px;
@@ -1070,14 +1137,14 @@
       justify-content: space-between;
       gap: 12px;
     }
-    .verified-head b { color: #173f58; font-size: 12px; }
+    .verified-head b { color: #173f58; font-size: calc(12px + var(--font-add, 0px)); }
     .verified-badge {
       min-width: max-content;
       padding: 5px 8px;
       color: #15803d;
       background: #dcfce7;
       border-radius: 999px;
-      font-size: 9px;
+      font-size: calc(9px + var(--font-add, 0px));
       font-weight: 800;
     }
     .verified-price {
@@ -1091,13 +1158,13 @@
       color: #607d91;
       background: white;
       border-radius: 11px;
-      font-size: 9px;
+      font-size: calc(9px + var(--font-add, 0px));
     }
     .verified-price strong {
       display: block;
       margin-top: 3px;
       color: #075985;
-      font-size: 13px;
+      font-size: calc(13px + var(--font-add, 0px));
     }
     .verify-code {
       display: flex;
@@ -1126,7 +1193,7 @@
       align-items: start;
       gap: 8px;
       color: #607d91;
-      font-size: 9px;
+      font-size: calc(9px + var(--font-add, 0px));
       line-height: 1.5;
     }
     .privacy-check input { margin-top: 2px; }
@@ -1142,21 +1209,23 @@
     }
     @media (max-width: 650px) {
       .topbar { height: 64px; padding: 0 18px; }
-      .brand { font-size: 19px; }
+      .brand { font-size: calc(19px + var(--font-add, 0px)); }
       .brand-mark { width: 33px; height: 33px; border-radius: 12px; }
+      .top-actions { gap: 5px; }
+      .font-size-button { width: 39px; min-height: 39px; border-radius: 13px; }
       .lang-button { min-height: 39px; padding: 0 11px; }
       .screen { min-height: calc(100vh - 64px); }
       .container { width: min(100% - 32px, 1160px); }
       .hero { min-height: 500px; padding: 58px 22px 52px; align-items: flex-start; }
-      .hero h1 { margin-top: 22px; font-size: clamp(42px, 13vw, 58px); letter-spacing: -3px; }
-      .hero-copy { font-size: 14px; }
+      .hero h1 { margin-top: 22px; font-size: clamp(calc(42px + var(--font-add)), 13vw, calc(58px + var(--font-add))); letter-spacing: -3px; }
+      .hero-copy { font-size: calc(14px + var(--font-add, 0px)); }
       .beach-finder { margin-top: 27px; padding-left: 12px; gap: 5px; }
       .search-icon { display: none; }
       .search-submit { padding: 0 12px; }
       .service-area { padding-top: 45px; }
       .section-head { align-items: start; }
       .section-hint { display: none; }
-      .section-head h2 { font-size: 27px; }
+      .section-head h2 { font-size: calc(27px + var(--font-add, 0px)); }
       .category-tabs { margin-inline: -3px; }
       .category-tab { padding-inline: 14px; }
       .services, .more-grid { grid-template-columns: 1fr; }
@@ -1164,13 +1233,13 @@
       .service-icon { width: 40px; height: 40px; border-radius: 14px; }
       .service-card strong { margin-top: 13px; }
       .page { padding-top: 32px; }
-      .page-title { font-size: 31px; }
+      .page-title { font-size: calc(31px + var(--font-add, 0px)); }
       .panel { padding: 19px; border-radius: 22px; }
       .panel-head { display: block; }
       .market-tabs { margin-top: 16px; }
       .market-tab { flex: 1; }
       .fish-card { padding: 14px; }
-      .price { font-size: 14px; }
+      .price { font-size: calc(14px + var(--font-add, 0px)); }
       .support-card { min-height: 180px; }
       .footer { display: block; line-height: 1.8; }
       .modal { padding: 24px 20px; border-radius: 24px; }
@@ -1193,17 +1262,27 @@
       <span class="brand-mark">≋</span>
       <span>SEA-REAL</span>
     </div>
-    <div class="lang-wrap">
-      <button class="lang-button" id="langButton" type="button" aria-expanded="false" aria-controls="langMenu">
-        <span aria-hidden="true">🌐</span>
-        <span id="languageLabel">한국어</span>
-        <span aria-hidden="true">⌄</span>
-      </button>
-      <div class="lang-menu" id="langMenu">
-        <button type="button" data-language="ko">🇰🇷 한국어</button>
-        <button type="button" data-language="en">🇺🇸 English</button>
-        <button type="button" data-language="ja">🇯🇵 日本語</button>
-        <button type="button" data-language="zh">🇨🇳 中文</button>
+    <div class="top-actions">
+      <div class="font-size-wrap">
+        <button class="font-size-button" id="fontSizeButton" type="button" aria-expanded="false" aria-controls="fontSizeMenu" data-i18n-aria="fontSize">가</button>
+        <div class="font-size-menu" id="fontSizeMenu">
+          <button class="font-size-option active" type="button" data-font-level="small"><span>가</span><em data-i18n="fontSmall">작게</em></button>
+          <button class="font-size-option" type="button" data-font-level="medium"><span>가</span><em data-i18n="fontMedium">보통</em></button>
+          <button class="font-size-option" type="button" data-font-level="large"><span>가</span><em data-i18n="fontLarge">크게</em></button>
+        </div>
+      </div>
+      <div class="lang-wrap">
+        <button class="lang-button" id="langButton" type="button" aria-expanded="false" aria-controls="langMenu">
+          <span aria-hidden="true">🌐</span>
+          <span id="languageLabel">한국어</span>
+          <span aria-hidden="true">⌄</span>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          <button type="button" data-language="ko">🇰🇷 한국어</button>
+          <button type="button" data-language="en">🇺🇸 English</button>
+          <button type="button" data-language="ja">🇯🇵 日本語</button>
+          <button type="button" data-language="zh">🇨🇳 中文</button>
+        </div>
       </div>
     </div>
   </header>
@@ -1496,6 +1575,7 @@
   <script>
     const translations = {
       ko: {
+        fontSize: "글자 크기 조정", fontSmall: "작게", fontMedium: "보통", fontLarge: "크게",
         heroCopy: "바가지 걱정 없는 부산 여행. 믿을 수 있는 가격과 현지의 진짜 경험을 한 곳에서 만나보세요.",
         beachAria: "해수욕장 선택", beachPlaceholder: "바닷가 주변 맛집찾기", viewMap: "지도 보기",
         haeundae: "해운대해수욕장", gwangalli: "광안리해수욕장", dadaepo: "다대포해수욕장", songdo: "송도해수욕장", songjeong: "송정해수욕장", ilgwang: "일광해수욕장", imrang: "임랑해수욕장",
@@ -1523,6 +1603,7 @@
         menuTranslateCopy: "메뉴의 재료, 맵기, 알레르기 정보를 선택한 언어로 확인합니다.", sosCopy: "가까운 관광안내소, 경찰서, 병원과 영사관을 빠르게 찾습니다."
       },
       en: {
+        fontSize: "Adjust text size", fontSmall: "Small", fontMedium: "Medium", fontLarge: "Large",
         heroCopy: "Enjoy a fair, local Busan trip with trustworthy prices and authentic experiences in one place.",
         beachAria: "Choose a beach", beachPlaceholder: "Find restaurants near the beach", viewMap: "View map",
         haeundae: "Haeundae Beach", gwangalli: "Gwangalli Beach", dadaepo: "Dadaepo Beach", songdo: "Songdo Beach", songjeong: "Songjeong Beach", ilgwang: "Ilgwang Beach", imrang: "Imrang Beach",
@@ -1550,6 +1631,7 @@
         menuTranslateCopy: "View ingredients, spice level and allergen information in your chosen language.", sosCopy: "Quickly find nearby visitor centres, police, hospitals and consulates."
       },
       ja: {
+        fontSize: "文字サイズを調整", fontSmall: "小", fontMedium: "中", fontLarge: "大",
         heroCopy: "ぼったくりの心配なく、信頼できる価格と釜山の本当の魅力を一か所で楽しめます。",
         beachAria: "海水浴場を選択", beachPlaceholder: "海辺のレストランを探す", viewMap: "地図を見る",
         haeundae: "海雲台海水浴場", gwangalli: "広安里海水浴場", dadaepo: "多大浦海水浴場", songdo: "松島海水浴場", songjeong: "松亭海水浴場", ilgwang: "日光海水浴場", imrang: "林浪海水浴場",
@@ -1577,6 +1659,7 @@
         menuTranslateCopy: "材料、辛さ、アレルギー情報を選択した言語で確認します。", sosCopy: "近くの観光案内所、警察、病院、領事館をすばやく探します。"
       },
       zh: {
+        fontSize: "调整文字大小", fontSmall: "小", fontMedium: "中", fontLarge: "大",
         heroCopy: "安心畅游釜山，在一个平台查看可信价格并体验真正的本地文化。",
         beachAria: "选择海水浴场", beachPlaceholder: "寻找海边餐厅", viewMap: "查看地图",
         haeundae: "海云台海水浴场", gwangalli: "广安里海水浴场", dadaepo: "多大浦海水浴场", songdo: "松岛海水浴场", songjeong: "松亭海水浴场", ilgwang: "日光海水浴场", imrang: "林浪海水浴场",
@@ -1837,6 +1920,27 @@
       const menu = document.getElementById("langMenu");
       menu.classList.remove("open");
       document.getElementById("langButton").setAttribute("aria-expanded", "false");
+    }
+
+    function setFontSize(level) {
+      const safeLevel = ["small", "medium", "large"].includes(level) ? level : "small";
+      document.body.dataset.fontSize = safeLevel;
+      document.querySelectorAll("[data-font-level]").forEach(button => {
+        const active = button.dataset.fontLevel === safeLevel;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
+      try {
+        localStorage.setItem("seaRealFontSize", safeLevel);
+      } catch (error) {
+        // The setting still works for the current visit when storage is unavailable.
+      }
+      closeFontSizeMenu();
+    }
+
+    function closeFontSizeMenu() {
+      document.getElementById("fontSizeMenu").classList.remove("open");
+      document.getElementById("fontSizeButton").setAttribute("aria-expanded", "false");
     }
 
     function showScreen(screenId) {
@@ -2364,7 +2468,7 @@
               <span>${label.todayFair} · ${priceUnit}<strong>₩${new Intl.NumberFormat("ko-KR").format(fair)}</strong></span>
               <span>${label.salePrice} · ${priceUnit}<strong>₩${new Intl.NumberFormat("ko-KR").format(sale)}</strong></span>
             </div>
-            <small style="display:block;margin-top:9px;color:#7890a3;font-size:9px">QR · ${shop.code}</small>
+            <small style="display:block;margin-top:9px;color:#7890a3;font-size:calc(9px + var(--font-add))">QR · ${shop.code}</small>
           </div>`;
       }).join("");
     }
@@ -2557,11 +2661,20 @@
 
     document.getElementById("langButton").addEventListener("click", event => {
       event.stopPropagation();
+      closeFontSizeMenu();
       const menu = document.getElementById("langMenu");
       const open = menu.classList.toggle("open");
       event.currentTarget.setAttribute("aria-expanded", String(open));
     });
+    document.getElementById("fontSizeButton").addEventListener("click", event => {
+      event.stopPropagation();
+      closeLanguageMenu();
+      const menu = document.getElementById("fontSizeMenu");
+      const open = menu.classList.toggle("open");
+      event.currentTarget.setAttribute("aria-expanded", String(open));
+    });
     document.querySelectorAll("[data-language]").forEach(button => button.addEventListener("click", () => setLanguage(button.dataset.language)));
+    document.querySelectorAll("[data-font-level]").forEach(button => button.addEventListener("click", () => setFontSize(button.dataset.fontLevel)));
     document.querySelectorAll("[data-screen]").forEach(button => button.addEventListener("click", () => showScreen(button.dataset.screen)));
     document.querySelectorAll("[data-category]").forEach(button => button.addEventListener("click", () => showCategory(button.dataset.category)));
     document.querySelectorAll("[data-feature]").forEach(button => button.addEventListener("click", () => openFeature(button.dataset.feature)));
@@ -2582,17 +2695,26 @@
     }));
     document.addEventListener("click", event => {
       if (!event.target.closest(".lang-wrap")) closeLanguageMenu();
+      if (!event.target.closest(".font-size-wrap")) closeFontSizeMenu();
     });
     document.addEventListener("keydown", event => {
       if (event.key === "Escape") {
         document.querySelectorAll(".modal-layer").forEach(layer => layer.classList.remove("open"));
         document.getElementById("mapFrame").src = "";
         closeLanguageMenu();
+        closeFontSizeMenu();
       }
     });
 
     updateBusanLiveClock();
     window.setInterval(updateBusanLiveClock, 1000);
+    let savedFontSize = "small";
+    try {
+      savedFontSize = localStorage.getItem("seaRealFontSize") || "small";
+    } catch (error) {
+      savedFontSize = "small";
+    }
+    setFontSize(savedFontSize);
     setLanguage("ko");
     setMarket("jagalchi");
   </script>
