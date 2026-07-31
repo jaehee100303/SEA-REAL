@@ -536,6 +536,7 @@
     .service-icon.amber { color: #b45309; background: #fff3cf; }
     .service-icon.green { color: #15803d; background: #dcfce7; }
     .service-icon.red { color: #dc2626; background: #fee2e2; }
+    .service-icon.mint { color: #087f74; background: #dff8f1; }
     .blue-ribbon {
       display: block;
       width: 34px;
@@ -1328,6 +1329,457 @@
       font-weight: 700;
       line-height: 1.55;
     }
+    .stamp-tour-shell {
+      --stamp-ink: #163f53;
+      --stamp-muted: #6b8594;
+      --stamp-mint: #66cdb8;
+      --stamp-sky: #69bfe8;
+      position: relative;
+      margin-top: 16px;
+      color: var(--stamp-ink);
+    }
+    .stamp-tour-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      padding: 20px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 87% 15%, rgba(255,255,255,.9) 0 7%, transparent 7.5%),
+        linear-gradient(135deg, #fff9eb 0%, #eafaf5 58%, #eaf6ff 100%);
+      border: 1px solid #e0eee9;
+      border-radius: 22px;
+    }
+    .stamp-tour-hero small {
+      display: block;
+      margin-bottom: 7px;
+      color: #388275;
+      font-size: calc(9px + var(--font-add, 0px));
+      font-weight: 900;
+      letter-spacing: .12em;
+    }
+    .stamp-tour-hero h4 {
+      margin: 0;
+      max-width: 400px;
+      font-size: calc(20px + var(--font-add, 0px));
+      line-height: 1.28;
+      letter-spacing: -.04em;
+    }
+    .stamp-tour-hero p {
+      margin: 8px 0 0;
+      color: var(--stamp-muted);
+      font-size: calc(11px + var(--font-add, 0px));
+      line-height: 1.55;
+    }
+    .stamp-progress-ring {
+      --progress: 0%;
+      position: relative;
+      width: 76px;
+      height: 76px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 76px;
+      background: conic-gradient(#37b7a0 var(--progress), rgba(255,255,255,.88) 0);
+      border-radius: 50%;
+      box-shadow: 0 12px 25px rgba(40, 132, 117, .15);
+    }
+    .stamp-progress-ring::before {
+      content: "";
+      position: absolute;
+      width: 58px;
+      height: 58px;
+      background: #fffdf8;
+      border-radius: 50%;
+    }
+    .stamp-progress-ring strong {
+      position: relative;
+      z-index: 1;
+      color: #087f74;
+      font-size: calc(16px + var(--font-add, 0px));
+    }
+    .stamp-tour-tabs,
+    .coupon-filters {
+      display: flex;
+      gap: 7px;
+      padding: 5px;
+      margin: 14px 0;
+      overflow-x: auto;
+      background: #f2f7f5;
+      border-radius: 15px;
+      scrollbar-width: none;
+    }
+    .stamp-tour-tab,
+    .coupon-filter {
+      min-width: max-content;
+      flex: 1;
+      padding: 9px 12px;
+      color: #688090;
+      background: transparent;
+      border-radius: 11px;
+      font-size: calc(10px + var(--font-add, 0px));
+      font-weight: 900;
+    }
+    .stamp-tour-tab.active,
+    .coupon-filter.active {
+      color: #155e55;
+      background: white;
+      box-shadow: 0 5px 14px rgba(29, 92, 81, .1);
+    }
+    .stamp-tour-tab:focus-visible,
+    .coupon-filter:focus-visible,
+    .stamp-map-node:focus-visible,
+    .stamp-button:focus-visible {
+      outline: 3px solid rgba(14, 165, 233, .3);
+      outline-offset: 2px;
+    }
+    .stamp-panel { display: none; }
+    .stamp-panel.active { display: block; animation: fade .2s ease; }
+    .stamp-map {
+      position: relative;
+      min-height: 230px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 80% 28%, rgba(255,255,255,.7) 0 3%, transparent 3.5%),
+        linear-gradient(155deg, #dff7f3 0 47%, #dceffc 47.5% 100%);
+      border: 1px solid #d8ebe7;
+      border-radius: 22px;
+    }
+    .stamp-map::before {
+      content: "";
+      position: absolute;
+      left: 12%;
+      top: 16%;
+      width: 63%;
+      height: 68%;
+      background: #fffaf0;
+      border: 1px solid rgba(72, 147, 132, .14);
+      border-radius: 47% 36% 52% 31% / 38% 47% 34% 55%;
+      box-shadow: 0 18px 36px rgba(35, 107, 96, .12);
+      transform: rotate(-7deg);
+    }
+    .stamp-map::after {
+      content: "";
+      position: absolute;
+      left: 29%;
+      top: 27%;
+      width: 43%;
+      height: 48%;
+      border: 2px dashed rgba(61, 141, 132, .32);
+      border-left-color: transparent;
+      border-radius: 48%;
+      transform: rotate(-12deg);
+    }
+    .stamp-map-label {
+      position: absolute;
+      left: 18px;
+      bottom: 14px;
+      z-index: 2;
+      padding: 7px 10px;
+      color: #477063;
+      background: rgba(255,255,255,.82);
+      border-radius: 10px;
+      font-size: calc(9px + var(--font-add, 0px));
+      font-weight: 800;
+      backdrop-filter: blur(6px);
+    }
+    .stamp-map-node {
+      position: absolute;
+      z-index: 3;
+      display: grid;
+      justify-items: center;
+      gap: 4px;
+      color: #244b5d;
+      background: transparent;
+      font-size: calc(9px + var(--font-add, 0px));
+      font-weight: 900;
+    }
+    .stamp-map-node i {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: var(--node-color, #57b8a4);
+      border: 4px solid rgba(255,255,255,.92);
+      border-radius: 50% 50% 50% 18%;
+      box-shadow: 0 8px 18px rgba(34, 95, 85, .2);
+      font-size: 17px;
+      font-style: normal;
+      transform: rotate(-45deg);
+      transition: transform .2s ease;
+    }
+    .stamp-map-node i span { transform: rotate(45deg); }
+    .stamp-map-node:hover i { transform: rotate(-45deg) translateY(-3px); }
+    .stamp-map-node.claimed i { box-shadow: 0 0 0 4px rgba(52, 211, 153, .2), 0 8px 18px rgba(34, 95, 85, .2); }
+    .stamp-map-node.gwangalli { left: 46%; top: 55%; }
+    .stamp-map-node.haeundae { left: 62%; top: 35%; }
+    .stamp-map-node.songdo { left: 17%; top: 65%; }
+    .stamp-map-node.gijang { left: 75%; top: 12%; }
+    .stamp-region-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 11px;
+      margin-top: 13px;
+    }
+    .stamp-region-card {
+      --region: #70c9b7;
+      --region-soft: #e7f8f3;
+      padding: 14px;
+      overflow: hidden;
+      background: white;
+      border: 1px solid #dfebe8;
+      border-radius: 18px;
+      box-shadow: 0 10px 24px rgba(23, 74, 64, .07);
+    }
+    .stamp-region-card.selected { border-color: var(--region); box-shadow: 0 0 0 3px color-mix(in srgb, var(--region) 17%, transparent), 0 12px 28px rgba(23, 74, 64, .09); }
+    .stamp-region-visual {
+      width: 100%;
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px;
+      color: #214c58;
+      background: linear-gradient(140deg, var(--region-soft), #fffaf1);
+      border-radius: 14px;
+    }
+    .stamp-region-visual span { font-size: 34px; filter: drop-shadow(0 7px 8px rgba(34, 82, 74, .12)); }
+    .stamp-region-visual em {
+      padding: 5px 8px;
+      color: #3b7168;
+      background: rgba(255,255,255,.76);
+      border-radius: 999px;
+      font-size: calc(8px + var(--font-add, 0px));
+      font-style: normal;
+      font-weight: 900;
+    }
+    .stamp-region-card h5 {
+      margin: 12px 0 3px;
+      font-size: calc(15px + var(--font-add, 0px));
+    }
+    .stamp-region-card > p {
+      min-height: 34px;
+      margin: 0;
+      color: var(--stamp-muted);
+      font-size: calc(9px + var(--font-add, 0px));
+      line-height: 1.5;
+    }
+    .stamp-region-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin: 10px 0;
+    }
+    .stamp-region-meta span {
+      padding: 5px 7px;
+      color: #577788;
+      background: #f3f7f6;
+      border-radius: 8px;
+      font-size: calc(8px + var(--font-add, 0px));
+      font-weight: 800;
+    }
+    .mission-progress {
+      height: 6px;
+      overflow: hidden;
+      background: #eaf0ee;
+      border-radius: 999px;
+    }
+    .mission-progress i {
+      display: block;
+      width: var(--mission-progress, 0%);
+      height: 100%;
+      background: var(--region);
+      border-radius: inherit;
+      transition: width .35s ease;
+    }
+    .stamp-action-row { display: grid; grid-template-columns: 1fr auto; gap: 6px; margin-top: 10px; }
+    .stamp-button {
+      min-height: 38px;
+      display: grid;
+      place-items: center;
+      padding: 8px 10px;
+      color: white;
+      background: var(--region, #39a896);
+      border-radius: 11px;
+      font-size: calc(9px + var(--font-add, 0px));
+      font-weight: 900;
+    }
+    .stamp-button.secondary {
+      color: #3c6c64;
+      background: #edf6f3;
+    }
+    .stamp-button[disabled] { color: #6e877f; background: #e7efec; opacity: 1; }
+    .reward-track {
+      margin-top: 13px;
+      padding: 16px;
+      background: linear-gradient(135deg, #fff9eb, #f5fbf8);
+      border: 1px solid #ece7d6;
+      border-radius: 18px;
+    }
+    .reward-track-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+    .reward-track-head b { font-size: calc(12px + var(--font-add, 0px)); }
+    .reward-track-head span { color: #8a7451; font-size: calc(9px + var(--font-add, 0px)); font-weight: 800; }
+    .reward-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 13px; }
+    .reward-step { position: relative; text-align: center; color: #89968f; font-size: calc(8px + var(--font-add, 0px)); font-weight: 800; }
+    .reward-step i {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 6px;
+      background: #edf1ee;
+      border-radius: 12px;
+      font-size: 15px;
+      font-style: normal;
+    }
+    .reward-step.reached { color: #276b5f; }
+    .reward-step.reached i { background: #d9f5ec; animation: stampPop .4s ease both; }
+    .passport-book {
+      padding: 19px;
+      background:
+        linear-gradient(90deg, transparent 49.5%, rgba(139, 105, 64, .1) 50%, transparent 50.5%),
+        #fffaf0;
+      border: 1px solid #eadfc9;
+      border-radius: 22px;
+      box-shadow: inset 0 0 28px rgba(143, 105, 61, .06);
+    }
+    .passport-head { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+    .passport-head b { font-size: calc(14px + var(--font-add, 0px)); }
+    .passport-head span { color: #92785a; font-size: calc(10px + var(--font-add, 0px)); font-weight: 800; }
+    .stamp-book-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+    .stamp-seal-card {
+      min-height: 150px;
+      padding: 13px;
+      text-align: center;
+      background: rgba(255,255,255,.64);
+      border: 1px dashed #d4c5aa;
+      border-radius: 17px;
+    }
+    .stamp-seal {
+      width: 78px;
+      height: 78px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 8px;
+      color: var(--region, #6db6a8);
+      border: 4px double currentColor;
+      border-radius: 50%;
+      font-size: 31px;
+      filter: saturate(.9);
+      transform: rotate(-8deg);
+    }
+    .stamp-seal-card.locked { opacity: .36; filter: grayscale(1); }
+    .stamp-seal-card.earned .stamp-seal { animation: stampPop .45s cubic-bezier(.18,.8,.32,1.25) both; }
+    .stamp-seal-card b { display: block; font-size: calc(11px + var(--font-add, 0px)); }
+    .stamp-seal-card small { color: #937f62; font-size: calc(8px + var(--font-add, 0px)); line-height: 1.45; }
+    .coupon-list { display: grid; gap: 10px; }
+    .coupon-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 7px 1fr auto;
+      gap: 13px;
+      align-items: center;
+      padding: 15px;
+      overflow: hidden;
+      background: #fffdf8;
+      border: 1px solid #e8e5d8;
+      border-radius: 17px;
+    }
+    .coupon-card::before,
+    .coupon-card::after {
+      content: "";
+      position: absolute;
+      right: 84px;
+      width: 13px;
+      height: 13px;
+      background: white;
+      border: 1px solid #e8e5d8;
+      border-radius: 50%;
+    }
+    .coupon-card::before { top: -7px; }
+    .coupon-card::after { bottom: -7px; }
+    .coupon-color { align-self: stretch; background: var(--coupon, #69c4b3); border-radius: 999px; }
+    .coupon-card h6 { margin: 0 0 4px; font-size: calc(12px + var(--font-add, 0px)); }
+    .coupon-card strong { color: #087f74; font-size: calc(15px + var(--font-add, 0px)); }
+    .coupon-card p { margin: 5px 0 0; color: #758894; font-size: calc(8px + var(--font-add, 0px)); line-height: 1.45; }
+    .coupon-code-button {
+      width: 68px;
+      min-height: 56px;
+      color: #365d66;
+      background: #f0f7f5;
+      border-radius: 12px;
+      font-size: calc(8px + var(--font-add, 0px));
+      font-weight: 900;
+    }
+    .coupon-card.used, .coupon-card.expired { opacity: .53; filter: grayscale(.65); }
+    .coupon-code-panel {
+      grid-column: 2 / -1;
+      display: none;
+      padding: 11px;
+      background: #f5f8f6;
+      border-radius: 12px;
+    }
+    .coupon-code-panel.open { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; }
+    .coupon-barcode {
+      height: 44px;
+      background: repeating-linear-gradient(90deg, #183b45 0 2px, transparent 2px 4px, #183b45 4px 5px, transparent 5px 8px);
+      border: 6px solid white;
+      border-radius: 6px;
+    }
+    .coupon-use { padding: 9px 10px; color: white; background: #168c79; border-radius: 9px; font-size: calc(8px + var(--font-add, 0px)); font-weight: 900; }
+    .empty-coupons { padding: 30px 16px; text-align: center; color: #80929b; background: #f5f8f7; border-radius: 17px; font-size: calc(11px + var(--font-add, 0px)); line-height: 1.7; }
+    .nearby-recommendations { margin-top: 13px; }
+    .nearby-recommendations h5 { margin: 0 0 9px; font-size: calc(13px + var(--font-add, 0px)); }
+    .nearby-shop {
+      display: grid;
+      grid-template-columns: 54px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 12px;
+      background: #f5faf8;
+      border-radius: 15px;
+    }
+    .nearby-shop-icon { width: 54px; height: 54px; display: grid; place-items: center; background: white; border-radius: 14px; font-size: 24px; }
+    .nearby-shop b { display: block; font-size: calc(11px + var(--font-add, 0px)); }
+    .nearby-shop p { margin: 3px 0 0; color: #6f8791; font-size: calc(8px + var(--font-add, 0px)); line-height: 1.45; }
+    .nearby-shop a { padding: 8px 9px; color: #087f74; background: white; border-radius: 10px; text-decoration: none; font-size: calc(8px + var(--font-add, 0px)); font-weight: 900; }
+    .stamp-sheet {
+      margin-top: 13px;
+      padding: 16px;
+      background: #f4f9f7;
+      border: 1px solid #dfebe7;
+      border-radius: 17px;
+    }
+    .stamp-sheet[hidden] { display: none; }
+    .stamp-sheet h5 { margin: 0 0 6px; font-size: calc(13px + var(--font-add, 0px)); }
+    .stamp-sheet p { margin: 0 0 10px; color: #6f8791; font-size: calc(9px + var(--font-add, 0px)); line-height: 1.5; }
+    .stamp-sheet-actions { display: flex; gap: 7px; }
+    .stamp-sheet .tool-input { flex: 1; min-width: 0; }
+    .stamp-login-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+    .stamp-login-actions .stamp-button:first-child { background: #fee500; color: #342f00; }
+    .stamp-toast {
+      position: sticky;
+      top: -12px;
+      z-index: 8;
+      display: none;
+      margin: 0 0 10px;
+      padding: 12px 14px;
+      color: #14584e;
+      background: rgba(224, 250, 241, .96);
+      border: 1px solid #bceadc;
+      border-radius: 13px;
+      box-shadow: 0 12px 28px rgba(23, 89, 77, .16);
+      font-size: calc(10px + var(--font-add, 0px));
+      font-weight: 900;
+      line-height: 1.45;
+    }
+    .stamp-toast.show { display: block; animation: rise .25s ease; }
+    @keyframes stampPop {
+      0% { opacity: 0; transform: rotate(-18deg) scale(1.55); }
+      72% { opacity: 1; transform: rotate(-6deg) scale(.94); }
+      100% { opacity: 1; transform: rotate(-8deg) scale(1); }
+    }
     .course-tabs {
       display: flex;
       gap: 7px;
@@ -1543,6 +1995,20 @@
       .quick-links { grid-template-columns: 1fr; }
       .report-grid { grid-template-columns: 1fr; }
       .report-grid .full { grid-column: auto; }
+      .stamp-tour-hero { grid-template-columns: 1fr; }
+      .stamp-progress-ring { width: 66px; height: 66px; }
+      .stamp-progress-ring::before { width: 50px; height: 50px; }
+      .stamp-region-grid { grid-template-columns: 1fr; }
+      .stamp-map { min-height: 210px; }
+      .stamp-book-grid { gap: 8px; }
+      .stamp-seal-card { min-height: 138px; padding: 10px 6px; }
+      .stamp-seal { width: 68px; height: 68px; }
+      .coupon-card { grid-template-columns: 6px 1fr; }
+      .coupon-code-button { grid-column: 2; width: 100%; min-height: 38px; }
+      .coupon-card::before, .coupon-card::after { display: none; }
+      .coupon-code-panel { grid-column: 2; }
+      .nearby-shop { grid-template-columns: 48px 1fr; }
+      .nearby-shop a { grid-column: 2; justify-self: start; }
     }
     @media (orientation: landscape) and (max-height: 520px) {
       .modal-layer {
@@ -1849,10 +2315,10 @@
             <p data-i18n="menuTranslateSub">재료, 맵기, 알레르기 정보를 네 가지 언어로 이해하기 쉽게 확인하세요.</p>
             <em data-i18n="openFeature">기능 열기 →</em>
           </button>
-          <button class="support-card" type="button" data-feature="beachBooking">
-            <span class="service-icon amber">☂</span>
-            <strong data-i18n="beachBooking">해수욕장 예약</strong>
-            <p data-i18n="beachBookingLong">파라솔과 평상을 예약하고 QR로 빠르게 입장하세요.</p>
+          <button class="support-card" type="button" data-feature="stampTour">
+            <span class="service-icon mint">✦</span>
+            <strong data-i18n="stampTour">스탬프 투어 & 쿠폰</strong>
+            <p data-i18n="stampTourSub">부산 4개 지역을 여행하고 착한가게 혜택과 완주 굿즈를 모아보세요.</p>
             <em data-i18n="openFeature">기능 열기 →</em>
           </button>
           <button class="support-card" type="button" data-feature="sos">
@@ -1945,7 +2411,7 @@
         flounder: "광어", rockfish: "우럭", snowCrab: "대게", kingCrab: "킹크랩", abalone: "전복", seaSquirt: "멍게", seaCucumber: "해삼", perKg: "1kg 기준", perTen: "10미 기준",
         priceRisk: "가격 위험도 분석", priceRiskSub: "부산 평균 시세와 비교해 가격 위험도를 총 5단계로 분석합니다.", fairPrice: "● 적정가격", belowAverage: "부산 평균 시세 범위 안에 있는 적정가격입니다.",
         riskSafe: "안심", riskFair: "적정", riskCaution: "주의", riskDanger: "위험", riskCritical: "매우 위험", riskMethod: "기준: 평균 이하 / ±10% / +10~20% / +20~40% / +40% 이상", riskCurrent: "2단계 · 부산 평균 대비 ±10%", riskAdviceTitle: "결제 전 확인하세요", riskAdvice: "표시 가격에 중량, 상차림비와 추가 비용이 포함되어 있는지 확인하면 더 안전합니다.",
-        moreTitle: "더보기", moreSub: "여행을 더 편하게 만드는 SEA-REAL의 지원 기능입니다.", menuTranslate: "메뉴판 번역", menuTranslateSub: "재료, 맵기, 알레르기 정보를 네 가지 언어로 이해하기 쉽게 확인하세요.",
+        moreTitle: "더보기", moreSub: "여행을 더 편하게 만드는 SEA-REAL의 지원 기능입니다.", menuTranslate: "메뉴판 번역", menuTranslateSub: "재료, 맵기, 알레르기 정보를 네 가지 언어로 이해하기 쉽게 확인하세요.", stampTour: "스탬프 투어 & 쿠폰", stampTourSub: "부산 4개 지역을 여행하고 착한가게 혜택과 완주 굿즈를 모아보세요.",
         beachBookingLong: "파라솔과 평상을 예약하고 QR로 빠르게 입장하세요.", sos: "긴급 SOS", sosSub: "가까운 관광안내소, 경찰서, 병원, 영사관 위치를 확인하세요.", openFeature: "기능 열기 →",
         footerCopy: "부산을 가장 공정하게 즐기는 방법", home: "홈", market: "시세", more: "더보기", confirm: "확인했어요",
         mapCopy: "선택한 해수욕장 주변 식당을 Google Maps에서 확인합니다.", openGoogle: "Google Maps에서 크게 보기", ribbonCopy: "원하는 지도에서 블루리본 선정 부산 맛집을 확인하세요.",
@@ -1957,7 +2423,7 @@
         beachBookingCopy: "파라솔, 평상과 튜브를 미리 확인하고 예약할 수 있습니다.", beachBookingInfo: "실제 예약·결제 기능은 제휴 해수욕장 연동 후 제공됩니다.",
         crowdCopy: "주요 해수욕장의 현재 혼잡도를 색상으로 확인합니다.", crowdInfo: "초록은 여유, 노랑은 보통, 빨강은 매우 혼잡을 의미합니다.",
         dictionaryCopy: "부산에서 자주 쓰는 낯선 표현을 쉬운 말로 확인하세요.", tasteCopy: "부산 음식을 익숙한 해외 음식과 비교해 설명합니다.", currencyCopy: "KRW, USD, JPY, CNY 금액을 간편하게 비교합니다.",
-        menuTranslateCopy: "메뉴의 재료, 맵기, 알레르기 정보를 선택한 언어로 확인합니다.", sosCopy: "가까운 관광안내소, 경찰서, 병원과 영사관을 빠르게 찾습니다."
+        menuTranslateCopy: "메뉴의 재료, 맵기, 알레르기 정보를 선택한 언어로 확인합니다.", sosCopy: "가까운 관광안내소, 경찰서, 병원과 영사관을 빠르게 찾습니다.", stampTourCopy: "부산 관광지 방문과 SEA-REAL 착한가게 혜택을 하나의 여행 미션으로 연결합니다.", stampTourInfo: "로그인 없이 코스를 볼 수 있으며, 스탬프 저장·쿠폰 발급·사용 시에만 간편 로그인을 안내합니다."
       },
       en: {
         fontSize: "Adjust text size", fontSmall: "Small", fontMedium: "Medium", fontLarge: "Large",
@@ -1977,7 +2443,7 @@
         flounder: "Olive flounder", rockfish: "Rockfish", snowCrab: "Snow crab", kingCrab: "King crab", abalone: "Abalone", seaSquirt: "Sea squirt", seaCucumber: "Sea cucumber", perKg: "per 1 kg", perTen: "per 10 pieces",
         priceRisk: "Price risk check", priceRiskSub: "Price risk is analysed in five levels against the Busan average market price.", fairPrice: "● Fair price", belowAverage: "This price is within Busan’s average market range.",
         riskSafe: "Safe", riskFair: "Fair", riskCaution: "Caution", riskDanger: "Risky", riskCritical: "Very risky", riskMethod: "Levels: at/below average / ±10% / +10–20% / +20–40% / +40% or more", riskCurrent: "Level 2 · within ±10% of Busan average", riskAdviceTitle: "Check before paying", riskAdvice: "Confirm whether weight, table-setting fees and other charges are included in the displayed price.",
-        moreTitle: "More", moreSub: "Helpful SEA-REAL services for an easier trip.", menuTranslate: "Menu translation", menuTranslateSub: "Understand ingredients, spice level and allergen information in four languages.",
+        moreTitle: "More", moreSub: "Helpful SEA-REAL services for an easier trip.", menuTranslate: "Menu translation", menuTranslateSub: "Understand ingredients, spice level and allergen information in four languages.", stampTour: "Stamp tour & coupons", stampTourSub: "Visit four Busan districts and collect fair-store perks and tour rewards.",
         beachBookingLong: "Book a parasol or beach table and enter quickly with QR.", sos: "Emergency SOS", sosSub: "Find the nearest tourist office, police, hospital or consulate.", openFeature: "Open feature →",
         footerCopy: "The fairest way to enjoy Busan", home: "Home", market: "Market", more: "More", confirm: "Got it",
         mapCopy: "Explore restaurants near your selected beach on Google Maps.", openGoogle: "Open in Google Maps", ribbonCopy: "Choose a map to explore Blue Ribbon restaurants in Busan.",
@@ -1989,7 +2455,7 @@
         beachBookingCopy: "Check and reserve parasols, beach tables and tubes in advance.", beachBookingInfo: "Booking and payment will be available after partner beach integration.",
         crowdCopy: "Check current crowd levels at major beaches by colour.", crowdInfo: "Green means quiet, yellow normal and red very busy.",
         dictionaryCopy: "Understand unfamiliar words commonly used by Busan locals.", tasteCopy: "Busan food explained through familiar dishes from abroad.", currencyCopy: "Quickly compare KRW, USD, JPY and CNY.",
-        menuTranslateCopy: "View ingredients, spice level and allergen information in your chosen language.", sosCopy: "Quickly find nearby visitor centres, police, hospitals and consulates."
+        menuTranslateCopy: "View ingredients, spice level and allergen information in your chosen language.", sosCopy: "Quickly find nearby visitor centres, police, hospitals and consulates.", stampTourCopy: "Connect Busan sightseeing and SEA-REAL fair-store rewards in one travel mission.", stampTourInfo: "Browse routes without signing in. Sign-in is requested only when saving stamps, issuing coupons or redeeming rewards."
       },
       ja: {
         fontSize: "文字サイズを調整", fontSmall: "小", fontMedium: "中", fontLarge: "大",
@@ -2009,7 +2475,7 @@
         flounder: "ヒラメ", rockfish: "クロソイ", snowCrab: "ズワイガニ", kingCrab: "タラバガニ", abalone: "アワビ", seaSquirt: "ホヤ", seaCucumber: "ナマコ", perKg: "1kg基準", perTen: "10個基準",
         priceRisk: "価格リスク分析", priceRiskSub: "釜山の平均相場と比較し、価格リスクを5段階で分析します。", fairPrice: "● 適正価格", belowAverage: "釜山の平均相場の範囲内にある適正価格です。",
         riskSafe: "安心", riskFair: "適正", riskCaution: "注意", riskDanger: "危険", riskCritical: "非常に危険", riskMethod: "基準：平均以下 / ±10% / +10～20% / +20～40% / +40%以上", riskCurrent: "レベル2・釜山平均の±10%以内", riskAdviceTitle: "決済前に確認", riskAdvice: "表示価格に重量、席料、追加料金が含まれているか確認するとより安心です。",
-        moreTitle: "その他", moreSub: "旅をもっと快適にするSEA-REALのサポート機能です。", menuTranslate: "メニュー翻訳", menuTranslateSub: "材料、辛さ、アレルギー情報を4つの言語で確認できます。",
+        moreTitle: "その他", moreSub: "旅をもっと快適にするSEA-REALのサポート機能です。", menuTranslate: "メニュー翻訳", menuTranslateSub: "材料、辛さ、アレルギー情報を4つの言語で確認できます。", stampTour: "スタンプツアー＆クーポン", stampTourSub: "釜山4地域を巡り、安心店の特典と完走グッズを集めましょう。",
         beachBookingLong: "パラソルやビーチテーブルを予約し、QRですばやく入場できます。", sos: "緊急 SOS", sosSub: "最寄りの観光案内所、警察、病院、領事館を確認できます。", openFeature: "機能を開く →",
         footerCopy: "釜山を最も公正に楽しむ方法", home: "ホーム", market: "相場", more: "その他", confirm: "確認",
         mapCopy: "選択した海水浴場周辺の飲食店をGoogle Mapsで確認します。", openGoogle: "Google Mapsで大きく見る", ribbonCopy: "お好みの地図で釜山のブルーリボン選定店を確認してください。",
@@ -2021,7 +2487,7 @@
         beachBookingCopy: "パラソル、ビーチテーブル、浮き輪を事前に確認して予約できます。", beachBookingInfo: "予約と決済は提携海水浴場との連携後に提供されます。",
         crowdCopy: "主要海水浴場の現在の混雑度を色で確認します。", crowdInfo: "緑は空き、黄は普通、赤は非常に混雑を表します。",
         dictionaryCopy: "釜山でよく使われる言葉を分かりやすく確認します。", tasteCopy: "釜山料理を身近な海外料理と比較して説明します。", currencyCopy: "KRW、USD、JPY、CNYを簡単に比較します。",
-        menuTranslateCopy: "材料、辛さ、アレルギー情報を選択した言語で確認します。", sosCopy: "近くの観光案内所、警察、病院、領事館をすばやく探します。"
+        menuTranslateCopy: "材料、辛さ、アレルギー情報を選択した言語で確認します。", sosCopy: "近くの観光案内所、警察、病院、領事館をすばやく探します。", stampTourCopy: "釜山観光とSEA-REAL安心店の特典を一つの旅行ミッションにつなげます。", stampTourInfo: "コースはログインなしで閲覧でき、スタンプ保存・クーポン発行・利用時のみ簡単ログインを案内します。"
       },
       zh: {
         fontSize: "调整文字大小", fontSmall: "小", fontMedium: "中", fontLarge: "大",
@@ -2041,7 +2507,7 @@
         flounder: "比目鱼", rockfish: "石斑鱼", snowCrab: "雪蟹", kingCrab: "帝王蟹", abalone: "鲍鱼", seaSquirt: "海鞘", seaCucumber: "海参", perKg: "每1公斤", perTen: "每10只",
         priceRisk: "价格风险分析", priceRiskSub: "与釜山平均市场价格比较，按五个等级分析价格风险。", fairPrice: "● 合理价格", belowAverage: "该价格处于釜山平均市场价格范围内。",
         riskSafe: "安心", riskFair: "合理", riskCaution: "注意", riskDanger: "危险", riskCritical: "非常危险", riskMethod: "标准：平均以下 / ±10% / +10～20% / +20～40% / +40%以上", riskCurrent: "第2级·釜山平均价格±10%以内", riskAdviceTitle: "付款前请确认", riskAdvice: "请确认标价是否包含重量、餐桌服务费及其他附加费用。",
-        moreTitle: "更多", moreSub: "让旅程更轻松的SEA-REAL支持服务。", menuTranslate: "菜单翻译", menuTranslateSub: "用四种语言查看食材、辣度和过敏原信息。",
+        moreTitle: "更多", moreSub: "让旅程更轻松的SEA-REAL支持服务。", menuTranslate: "菜单翻译", menuTranslateSub: "用四种语言查看食材、辣度和过敏原信息。", stampTour: "集章之旅与优惠券", stampTourSub: "游览釜山四个地区，收集诚信商家优惠和完赛礼品。",
         beachBookingLong: "预约遮阳伞和休息台，使用QR快速入场。", sos: "紧急 SOS", sosSub: "查找最近的旅游咨询处、警察局、医院或领事馆。", openFeature: "打开功能 →",
         footerCopy: "以最公平的方式畅游釜山", home: "首页", market: "市价", more: "更多", confirm: "知道了",
         mapCopy: "在Google Maps查看所选海水浴场附近的餐厅。", openGoogle: "在Google Maps中打开", ribbonCopy: "选择地图查看釜山蓝丝带推荐餐厅。",
@@ -2053,7 +2519,7 @@
         beachBookingCopy: "提前查看并预约遮阳伞、休息台和游泳圈。", beachBookingInfo: "预约与支付将在合作海水浴场接入后提供。",
         crowdCopy: "通过颜色查看主要海水浴场的实时拥挤程度。", crowdInfo: "绿色表示宽松，黄色表示普通，红色表示非常拥挤。",
         dictionaryCopy: "轻松了解釜山当地常用的陌生表达。", tasteCopy: "通过熟悉的海外料理来说明釜山美食。", currencyCopy: "快速比较KRW、USD、JPY和CNY。",
-        menuTranslateCopy: "用所选语言查看食材、辣度和过敏原信息。", sosCopy: "快速寻找附近的旅游咨询处、警察、医院和领事馆。"
+        menuTranslateCopy: "用所选语言查看食材、辣度和过敏原信息。", sosCopy: "快速寻找附近的旅游咨询处、警察、医院和领事馆。", stampTourCopy: "将釜山景点游览与SEA-REAL诚信商家奖励连接成一个旅行任务。", stampTourInfo: "无需登录即可查看路线；仅在保存印章、领取或使用优惠券时提示便捷登录。"
       }
     };
 
@@ -2077,6 +2543,7 @@
       taste: [null, "tasteCopy", "featureReady", "🍜"],
       currency: ["currency", "currencyCopy", "featureReady", "↻"],
       menuTranslate: ["menuTranslate", "menuTranslateCopy", "featureReady", "🦜"],
+      stampTour: ["stampTour", "stampTourCopy", "stampTourInfo", "✦"],
       sos: ["sos", "sosCopy", "featureReady", "!"]
     };
 
@@ -2204,6 +2671,100 @@
       ["dadaepo", "free"],
       ["ilgwang", "normal"]
     ];
+
+    const stampTourText = {
+      ko: {
+        eyebrow: "SEA-REAL LOCAL REWARDS", hero: "부산을 여행하고, 스탬프와 혜택을 모아보세요!", heroSub: "관광지 방문부터 착한가게 쿠폰, 부산 완주 굿즈까지 한 번에 이어집니다.",
+        tour: "투어 지도", stampbook: "내 스탬프북", coupons: "내 쿠폰함", mapLabel: "BUSAN STAMP ROUTE · 4 AREAS",
+        visited: "관광지 방문 완료", unvisited: "방문 인증 전", storeDone: "착한가게 이용 완료", storePending: "착한가게 방문 미완료", shops: "착한가게 {count}곳", couponCount: "쿠폰 {count}개", progress: "진행률 {value}%",
+        verifyVisit: "방문 인증하기", qrVerify: "QR 인증", earned: "획득 완료", rewardTitle: "스탬프 리워드", rewardNext: "다음 보상까지 {count}개", rewardComplete: "전체 보상 달성!", reward1: "지역 쿠폰", reward2: "추가 할인", reward3: "굿즈 응모", reward4: "완주 배지",
+        bookProgress: "현재 {count}/4 지역 완료", bookNext: "스탬프 {count}개만 더 모으면 부산 완주 굿즈를 받을 수 있어요!", bookDone: "부산 4개 지역 완주! 굿즈 교환권이 발급되었습니다.",
+        loginTitle: "혜택을 저장하려면 간편 로그인이 필요해요", loginCopy: "코스는 계속 자유롭게 볼 수 있어요. 로그인하면 스탬프와 쿠폰이 이 기기에 저장됩니다.", kakao: "카카오로 시작", phone: "전화번호로 시작", loginNote: "V1 체험 로그인입니다. 실제 계정 연동과 서버 저장은 정식 출시 단계에서 연결됩니다.", loginDone: "체험 로그인이 완료되었습니다. 방문 인증을 다시 눌러주세요.",
+        gpsChecking: "현재 위치를 확인하고 있어요…", gpsDenied: "위치를 확인할 수 없습니다. 위치 권한을 허용하거나 현장 QR을 이용해 주세요.", tooFar: "인증 장소에서 약 {distance}m 떨어져 있어요. 반경 100m 안에서 다시 시도해 주세요.", duplicate: "이미 획득한 지역 스탬프입니다.", stampSuccess: "{region} 스탬프 획득 완료!", couponSuccess: "주변 착한가게 쿠폰이 지급되었습니다.", completeSuccess: "부산 투어 완주! 특별 굿즈 교환권이 지급되었습니다.",
+        qrTitle: "현장 QR 코드 인증", qrCopy: "{region} 현장 QR을 촬영하거나 표시된 코드를 입력해 주세요.", qrPlaceholder: "예: SEA-GWANGAN", qrSubmit: "QR 코드 확인", qrCamera: "QR 촬영·선택", qrReading: "QR 코드를 읽는 중…", qrNoRead: "QR을 읽지 못했습니다. 코드를 직접 입력해 주세요.", qrHint: "V1 테스트 코드: {code}", invalidQr: "QR 코드가 일치하지 않습니다.",
+        available: "사용 가능", scheduled: "사용 예정", used: "사용 완료", expired: "기간 만료", noCoupons: "아직 쿠폰이 없습니다.<br>관광지 스탬프를 모으면 주변 착한가게 쿠폰이 자동 지급됩니다.", condition: "조건", valid: "유효기간", hours: "사용시간", showCode: "QR·바코드 보기", hideCode: "코드 닫기", redeem: "직원 확인 후 사용", redeemConfirm: "이 쿠폰을 사용 완료로 처리할까요? 매장 직원 확인 후 진행해 주세요.", couponUsed: "쿠폰 사용이 완료되었습니다.", staffHint: "매장 직원이 이 코드를 확인하거나 스캔해 주세요.",
+        nearbyTitle: "{region} 스탬프를 획득했어요! 가까운 착한가게 혜택", distance: "거리", menu: "대표 메뉴", review: "현지인 인증", repeat: "재방문율", directions: "길찾기", loginStatus: "체험 로그인됨"
+      },
+      en: {
+        eyebrow: "SEA-REAL LOCAL REWARDS", hero: "Travel Busan and collect stamps and rewards!", heroSub: "Connect landmark visits, fair-store coupons and Busan completion gifts in one journey.",
+        tour: "Tour map", stampbook: "My stampbook", coupons: "My coupons", mapLabel: "BUSAN STAMP ROUTE · 4 AREAS",
+        visited: "Landmark visited", unvisited: "Not verified", storeDone: "Fair store completed", storePending: "Fair store pending", shops: "{count} fair stores", couponCount: "{count} coupons", progress: "{value}% complete",
+        verifyVisit: "Verify visit", qrVerify: "QR check", earned: "Collected", rewardTitle: "Stamp rewards", rewardNext: "{count} more for next reward", rewardComplete: "All rewards unlocked!", reward1: "Local coupon", reward2: "Extra discount", reward3: "Gift entry", reward4: "Tour badge",
+        bookProgress: "{count}/4 areas complete", bookNext: "Collect {count} more stamp(s) to receive your Busan tour gift!", bookDone: "All four areas complete! Your gift voucher is ready.",
+        loginTitle: "Quick sign-in is required to save rewards", loginCopy: "You can still browse every route. Sign in to save stamps and coupons on this device.", kakao: "Continue with Kakao", phone: "Continue with phone", loginNote: "V1 demo sign-in. Real accounts and server sync will be connected for launch.", loginDone: "Demo sign-in complete. Tap verify visit again.",
+        gpsChecking: "Checking your current location…", gpsDenied: "Location is unavailable. Allow location access or use the on-site QR.", tooFar: "You are about {distance}m from the check-in point. Try again within 100m.", duplicate: "You already collected this stamp.", stampSuccess: "{region} stamp collected!", couponSuccess: "A nearby fair-store coupon was issued.", completeSuccess: "Busan tour complete! A special gift voucher was issued.",
+        qrTitle: "On-site QR verification", qrCopy: "Scan the {region} on-site QR or enter its code.", qrPlaceholder: "e.g. SEA-GWANGAN", qrSubmit: "Verify QR code", qrCamera: "Scan · choose QR", qrReading: "Reading the QR code…", qrNoRead: "The QR could not be read. Enter the code manually.", qrHint: "V1 test code: {code}", invalidQr: "The QR code does not match.",
+        available: "Available", scheduled: "Upcoming", used: "Used", expired: "Expired", noCoupons: "No coupons yet.<br>Collect a landmark stamp to receive a nearby fair-store coupon.", condition: "Condition", valid: "Valid until", hours: "Hours", showCode: "Show QR · barcode", hideCode: "Hide code", redeem: "Redeem with staff", redeemConfirm: "Mark this coupon as used? Continue only after store staff confirmation.", couponUsed: "Coupon redeemed.", staffHint: "Ask store staff to check or scan this code.",
+        nearbyTitle: "You collected the {region} stamp! Nearby fair-store perk", distance: "Distance", menu: "Main menu", review: "Local review", repeat: "Return rate", directions: "Directions", loginStatus: "Demo signed in"
+      },
+      ja: {
+        eyebrow: "SEA-REAL LOCAL REWARDS", hero: "釜山を旅して、スタンプと特典を集めましょう！", heroSub: "観光地訪問から安心店クーポン、釜山完走グッズまで一つにつながります。",
+        tour: "ツアーマップ", stampbook: "スタンプブック", coupons: "クーポン", mapLabel: "BUSAN STAMP ROUTE · 4 AREAS",
+        visited: "観光地訪問済み", unvisited: "未認証", storeDone: "安心店利用済み", storePending: "安心店未訪問", shops: "安心店 {count}店", couponCount: "クーポン {count}枚", progress: "進行率 {value}%",
+        verifyVisit: "訪問認証", qrVerify: "QR認証", earned: "獲得済み", rewardTitle: "スタンプ特典", rewardNext: "次の特典まであと{count}個", rewardComplete: "全特典達成！", reward1: "地域クーポン", reward2: "追加割引", reward3: "グッズ応募", reward4: "完走バッジ",
+        bookProgress: "現在 {count}/4 地域完了", bookNext: "あと{count}個で釜山完走グッズを受け取れます！", bookDone: "4地域完走！グッズ交換券を発行しました。",
+        loginTitle: "特典を保存するには簡単ログインが必要です", loginCopy: "コースはログインなしで閲覧できます。ログインするとスタンプとクーポンがこの端末に保存されます。", kakao: "Kakaoで開始", phone: "電話番号で開始", loginNote: "V1体験ログインです。正式なアカウントとサーバー保存はリリース時に接続します。", loginDone: "体験ログインが完了しました。もう一度訪問認証を押してください。",
+        gpsChecking: "現在地を確認しています…", gpsDenied: "位置を確認できません。位置情報を許可するか現地QRをご利用ください。", tooFar: "認証場所から約{distance}m離れています。100m以内で再試行してください。", duplicate: "この地域のスタンプは獲得済みです。", stampSuccess: "{region}スタンプ獲得！", couponSuccess: "周辺安心店クーポンを発行しました。", completeSuccess: "釜山ツアー完走！特別グッズ交換券を発行しました。",
+        qrTitle: "現地QRコード認証", qrCopy: "{region}現地QRを撮影するかコードを入力してください。", qrPlaceholder: "例：SEA-GWANGAN", qrSubmit: "QRコード確認", qrCamera: "QR撮影・選択", qrReading: "QRコードを読み取り中…", qrNoRead: "QRを読み取れませんでした。コードを直接入力してください。", qrHint: "V1テストコード：{code}", invalidQr: "QRコードが一致しません。",
+        available: "利用可能", scheduled: "利用予定", used: "利用済み", expired: "期限切れ", noCoupons: "クーポンはまだありません。<br>観光地スタンプを集めると周辺安心店クーポンが自動発行されます。", condition: "条件", valid: "有効期限", hours: "利用時間", showCode: "QR・バーコード表示", hideCode: "コードを閉じる", redeem: "スタッフ確認後に利用", redeemConfirm: "このクーポンを利用済みにしますか？店舗スタッフ確認後に進めてください。", couponUsed: "クーポンを利用しました。", staffHint: "店舗スタッフにこのコードを確認・スキャンしてもらってください。",
+        nearbyTitle: "{region}スタンプ獲得！近くの安心店特典", distance: "距離", menu: "代表メニュー", review: "地元レビュー", repeat: "再訪率", directions: "道案内", loginStatus: "体験ログイン済み"
+      },
+      zh: {
+        eyebrow: "SEA-REAL LOCAL REWARDS", hero: "畅游釜山，收集印章和优惠！", heroSub: "将景点打卡、诚信商家优惠券和釜山完赛礼品连接成一次旅程。",
+        tour: "旅行地图", stampbook: "我的集章册", coupons: "我的优惠券", mapLabel: "BUSAN STAMP ROUTE · 4 AREAS",
+        visited: "景点已打卡", unvisited: "尚未认证", storeDone: "诚信商家已使用", storePending: "诚信商家未访问", shops: "诚信商家 {count}家", couponCount: "优惠券 {count}张", progress: "进度 {value}%",
+        verifyVisit: "到访认证", qrVerify: "QR认证", earned: "已获得", rewardTitle: "集章奖励", rewardNext: "距离下一奖励还差{count}枚", rewardComplete: "全部奖励已解锁！", reward1: "地区优惠券", reward2: "额外折扣", reward3: "礼品抽选", reward4: "完赛徽章",
+        bookProgress: "已完成 {count}/4 个地区", bookNext: "再收集{count}枚即可获得釜山完赛礼品！", bookDone: "四个地区全部完成！礼品兑换券已发放。",
+        loginTitle: "保存奖励需要便捷登录", loginCopy: "无需登录也可查看全部路线。登录后印章和优惠券将保存在此设备。", kakao: "使用Kakao开始", phone: "使用手机号开始", loginNote: "这是V1体验登录，正式账号与服务器同步将在上线时连接。", loginDone: "体验登录完成，请再次点击到访认证。",
+        gpsChecking: "正在确认当前位置…", gpsDenied: "无法确认位置，请允许位置权限或使用现场QR。", tooFar: "距离认证地点约{distance}米，请在100米范围内重试。", duplicate: "该地区印章已经获得。", stampSuccess: "{region}印章获取成功！", couponSuccess: "附近诚信商家优惠券已发放。", completeSuccess: "釜山之旅完成！特别礼品兑换券已发放。",
+        qrTitle: "现场QR码认证", qrCopy: "拍摄{region}现场QR或输入显示的代码。", qrPlaceholder: "例如 SEA-GWANGAN", qrSubmit: "确认QR代码", qrCamera: "拍摄·选择QR", qrReading: "正在读取QR代码…", qrNoRead: "无法读取QR，请手动输入代码。", qrHint: "V1测试代码：{code}", invalidQr: "QR代码不匹配。",
+        available: "可使用", scheduled: "待使用", used: "已使用", expired: "已过期", noCoupons: "暂时没有优惠券。<br>收集景点印章后将自动发放附近诚信商家优惠券。", condition: "条件", valid: "有效期", hours: "使用时间", showCode: "显示QR·条码", hideCode: "关闭代码", redeem: "店员确认后使用", redeemConfirm: "是否将此优惠券标记为已使用？请在店员确认后继续。", couponUsed: "优惠券已使用。", staffHint: "请店员确认或扫描此代码。",
+        nearbyTitle: "已获得{region}印章！附近诚信商家优惠", distance: "距离", menu: "招牌菜单", review: "本地评价", repeat: "回访率", directions: "路线", loginStatus: "体验登录完成"
+      }
+    };
+
+    const stampTourRegions = {
+      gwangalli: {
+        names: { ko: "광안리", en: "Gwangalli", ja: "広安里", zh: "广安里" },
+        landmarks: { ko: "광안대교 야경 스탬프", en: "Gwangan Bridge night stamp", ja: "広安大橋夜景スタンプ", zh: "广安大桥夜景印章" },
+        icon: "🌉", color: "#6dbfe8", soft: "#e5f5fd", coords: [35.1532, 129.1187], qr: "SEA-GWANGAN", shops: 3, coupons: 2,
+        store: { ko: "민락 바다횟집", en: "Millak Sea Sashimi", ja: "民楽 海鮮刺身店", zh: "民乐海鲜刺身店" },
+        benefit: { ko: "대표 메뉴 5% 할인", en: "5% off the signature menu", ja: "代表メニュー5%割引", zh: "招牌菜单9.5折" },
+        condition: { ko: "3만원 이상 결제", en: "Spend ₩30,000+", ja: "3万ウォン以上", zh: "消费满3万韩元" },
+        menu: { ko: "광어회 1kg · ₩44,000", en: "Flounder sashimi 1kg · ₩44,000", ja: "ヒラメ刺身1kg · ₩44,000", zh: "比目鱼刺身1kg · ₩44,000" },
+        distance: "300m", review: "4.8", repeat: "82%", query: "광안리 민락 횟집"
+      },
+      haeundae: {
+        names: { ko: "해운대", en: "Haeundae", ja: "海雲台", zh: "海云台" },
+        landmarks: { ko: "해운대 해수욕장 파도 스탬프", en: "Haeundae Beach wave stamp", ja: "海雲台ビーチ波スタンプ", zh: "海云台海水浴场海浪印章" },
+        icon: "🌊", color: "#6bcbb7", soft: "#e4f8f3", coords: [35.1587, 129.1604], qr: "SEA-HAEUNDAE", shops: 5, coupons: 3,
+        store: { ko: "해운대 정가회관", en: "Haeundae Fair-Price Hall", ja: "海雲台 適正価格会館", zh: "海云台诚信价格馆" },
+        benefit: { ko: "음료 또는 사이드 무료", en: "Free drink or side dish", ja: "ドリンクまたはサイド無料", zh: "饮料或小菜免费" },
+        condition: { ko: "메인 메뉴 주문 시", en: "With a main-menu order", ja: "メイン注文時", zh: "点主菜时" },
+        menu: { ko: "해산물 모둠 · ₩39,000", en: "Seafood platter · ₩39,000", ja: "海鮮盛り合わせ · ₩39,000", zh: "海鲜拼盘 · ₩39,000" },
+        distance: "240m", review: "4.7", repeat: "79%", query: "해운대 정가 횟집"
+      },
+      songdo: {
+        names: { ko: "송도", en: "Songdo", ja: "松島", zh: "松岛" },
+        landmarks: { ko: "송도 해상케이블카 스탬프", en: "Songdo cable-car stamp", ja: "松島海上ケーブルカースタンプ", zh: "松岛海上缆车印章" },
+        icon: "🚡", color: "#e9a9a0", soft: "#fff0ed", coords: [35.0758, 129.0173], qr: "SEA-SONGDO", shops: 2, coupons: 2,
+        store: { ko: "송도 바다식당", en: "Songdo Sea Restaurant", ja: "松島 海の食堂", zh: "松岛海景餐厅" },
+        benefit: { ko: "결제금액 3,000원 할인", en: "₩3,000 off your bill", ja: "会計から3,000ウォン割引", zh: "结账减3,000韩元" },
+        condition: { ko: "2만원 이상 결제", en: "Spend ₩20,000+", ja: "2万ウォン以上", zh: "消费满2万韩元" },
+        menu: { ko: "생선구이 정식 · ₩18,000", en: "Grilled fish set · ₩18,000", ja: "焼き魚定食 · ₩18,000", zh: "烤鱼套餐 · ₩18,000" },
+        distance: "180m", review: "4.6", repeat: "76%", query: "송도해수욕장 인증 맛집"
+      },
+      gijang: {
+        names: { ko: "기장", en: "Gijang", ja: "機張", zh: "机张" },
+        landmarks: { ko: "기장 등대·대게 스탬프", en: "Gijang lighthouse & crab stamp", ja: "機張灯台・カニスタンプ", zh: "机张灯塔·雪蟹印章" },
+        icon: "🦀", color: "#e8bd6d", soft: "#fff7df", coords: [35.1870, 129.2270], qr: "SEA-GIJANG", shops: 4, coupons: 2,
+        store: { ko: "기장 대게마을", en: "Gijang Snow Crab Village", ja: "機張カニ村", zh: "机张雪蟹村" },
+        benefit: { ko: "지역 특산품 증정", en: "Free local specialty gift", ja: "地域特産品プレゼント", zh: "赠送当地特产" },
+        condition: { ko: "대게 메뉴 주문 시", en: "With a snow-crab order", ja: "カニメニュー注文時", zh: "点雪蟹菜单时" },
+        menu: { ko: "대게 1kg · 시가", en: "Snow crab 1kg · market price", ja: "ズワイガニ1kg・時価", zh: "雪蟹1kg·时价" },
+        distance: "420m", review: "4.8", repeat: "84%", query: "기장 대게 맛집"
+      }
+    };
 
     const menuTranslations = {
       "광어회": { en: "Olive flounder sashimi", ja: "ヒラメ刺身", zh: "比目鱼刺身" },
@@ -3224,6 +3785,475 @@
       document.getElementById("bookingTotal").textContent = `₩${new Intl.NumberFormat("ko-KR").format(price * quantity)}`;
     }
 
+    const stampTourStorageKey = "seaRealStampTourV1";
+
+    function createStampTourState() {
+      return { loggedIn: false, authType: "", stamps: {}, coupons: [], rewards: [] };
+    }
+
+    function loadStampTourState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(stampTourStorageKey) || "null");
+        if (!saved || typeof saved !== "object") return createStampTourState();
+        return {
+          ...createStampTourState(),
+          ...saved,
+          stamps: saved.stamps && typeof saved.stamps === "object" ? saved.stamps : {},
+          coupons: Array.isArray(saved.coupons) ? saved.coupons : [],
+          rewards: Array.isArray(saved.rewards) ? saved.rewards : []
+        };
+      } catch (error) {
+        return createStampTourState();
+      }
+    }
+
+    function saveStampTourState(state) {
+      if (state.loggedIn) localStorage.setItem(stampTourStorageKey, JSON.stringify(state));
+    }
+
+    function stampLocal(value) {
+      if (value && typeof value === "object") return value[currentLanguage] || value.ko || "";
+      return String(value || "");
+    }
+
+    function stampFill(template, values = {}) {
+      return Object.keys(values).reduce((text, key) => text.replaceAll(`{${key}}`, values[key]), template);
+    }
+
+    function renderStampTourTool(container) {
+      const label = stampTourText[currentLanguage] || stampTourText.ko;
+      const state = loadStampTourState();
+      const firstEarned = Object.keys(stampTourRegions).find(id => state.stamps[id]);
+      const context = {
+        root: container,
+        state,
+        selectedRegion: firstEarned || "gwangalli",
+        couponFilter: "available",
+        activeTab: "tour",
+        toastTimer: null
+      };
+      window.currentStampTourContext = context;
+      container.innerHTML = `
+        <div class="stamp-tour-shell" id="stampTourShell">
+          <div class="stamp-toast" id="stampTourToast" role="status" aria-live="polite"></div>
+          <section class="stamp-tour-hero">
+            <div>
+              <small>${label.eyebrow}</small>
+              <h4>${label.hero}</h4>
+              <p>${label.heroSub}</p>
+            </div>
+            <div class="stamp-progress-ring" id="stampProgressRing" aria-label="${label.stampbook}">
+              <strong id="stampProgressCount">0/4</strong>
+            </div>
+          </section>
+          <div class="stamp-tour-tabs" role="tablist" aria-label="${label.hero}">
+            <button class="stamp-tour-tab active" type="button" role="tab" aria-selected="true" data-stamp-tab="tour">${label.tour}</button>
+            <button class="stamp-tour-tab" type="button" role="tab" aria-selected="false" data-stamp-tab="book">${label.stampbook}</button>
+            <button class="stamp-tour-tab" type="button" role="tab" aria-selected="false" data-stamp-tab="coupons">${label.coupons}</button>
+          </div>
+          <section class="stamp-panel active" data-stamp-panel="tour">
+            <div class="stamp-map" id="stampTourMap" aria-label="${label.mapLabel}">
+              <span class="stamp-map-label">${label.mapLabel}</span>
+            </div>
+            <div class="stamp-region-grid" id="stampRegionGrid"></div>
+            <div class="reward-track" id="stampRewardTrack"></div>
+            <div class="nearby-recommendations" id="stampNearby"></div>
+          </section>
+          <section class="stamp-panel" data-stamp-panel="book">
+            <div class="passport-book" id="stampPassport"></div>
+          </section>
+          <section class="stamp-panel" data-stamp-panel="coupons">
+            <div class="coupon-filters" role="tablist" aria-label="${label.coupons}">
+              <button class="coupon-filter active" type="button" data-coupon-filter="available">${label.available}</button>
+              <button class="coupon-filter" type="button" data-coupon-filter="scheduled">${label.scheduled}</button>
+              <button class="coupon-filter" type="button" data-coupon-filter="used">${label.used}</button>
+              <button class="coupon-filter" type="button" data-coupon-filter="expired">${label.expired}</button>
+            </div>
+            <div class="coupon-list" id="stampCouponList"></div>
+          </section>
+          <section class="stamp-sheet" id="stampLoginSheet" hidden>
+            <h5>${label.loginTitle}</h5>
+            <p>${label.loginCopy}</p>
+            <div class="stamp-login-actions">
+              <button class="stamp-button" type="button" data-stamp-auth="kakao">${label.kakao}</button>
+              <button class="stamp-button secondary" type="button" data-stamp-auth="phone">${label.phone}</button>
+            </div>
+            <p style="margin-top:9px">${label.loginNote}</p>
+          </section>
+          <section class="stamp-sheet" id="stampQrSheet" hidden>
+            <h5>${label.qrTitle}</h5>
+            <p id="stampQrCopy"></p>
+            <label class="stamp-button secondary" style="margin-bottom:8px">${label.qrCamera}<input id="stampQrPhoto" type="file" accept="image/*" capture="environment" hidden></label>
+            <div class="stamp-sheet-actions">
+              <input class="tool-input" id="stampQrInput" type="text" autocomplete="off" placeholder="${label.qrPlaceholder}">
+              <button class="stamp-button" type="button" data-stamp-qr-submit>${label.qrSubmit}</button>
+            </div>
+            <p id="stampQrHint" style="margin-top:8px"></p>
+          </section>
+        </div>`;
+
+      container.onclick = event => handleStampTourClick(event, context);
+      container.querySelector("#stampQrPhoto").addEventListener("change", event => scanStampQrPhoto(event, context));
+      refreshStampTour(context);
+    }
+
+    function handleStampTourClick(event, context) {
+      const tab = event.target.closest("[data-stamp-tab]");
+      if (tab) {
+        context.activeTab = tab.dataset.stampTab;
+        context.root.querySelectorAll("[data-stamp-tab]").forEach(item => {
+          const active = item === tab;
+          item.classList.toggle("active", active);
+          item.setAttribute("aria-selected", active ? "true" : "false");
+        });
+        context.root.querySelectorAll("[data-stamp-panel]").forEach(panel => panel.classList.toggle("active", panel.dataset.stampPanel === context.activeTab));
+        return;
+      }
+
+      const regionSelector = event.target.closest("[data-stamp-region]");
+      if (regionSelector) {
+        context.selectedRegion = regionSelector.dataset.stampRegion;
+        refreshStampTour(context);
+        return;
+      }
+
+      const verify = event.target.closest("[data-stamp-verify]");
+      if (verify) {
+        verifyStampVisit(verify.dataset.stampVerify, context);
+        return;
+      }
+
+      const qr = event.target.closest("[data-stamp-qr]");
+      if (qr) {
+        openStampQr(qr.dataset.stampQr, context);
+        return;
+      }
+
+      const auth = event.target.closest("[data-stamp-auth]");
+      if (auth) {
+        context.state.loggedIn = true;
+        context.state.authType = auth.dataset.stampAuth;
+        saveStampTourState(context.state);
+        context.root.querySelector("#stampLoginSheet").hidden = true;
+        showStampToast(context, (stampTourText[currentLanguage] || stampTourText.ko).loginDone);
+        refreshStampTour(context);
+        return;
+      }
+
+      if (event.target.closest("[data-stamp-qr-submit]")) {
+        submitStampQr(context);
+        return;
+      }
+
+      const filter = event.target.closest("[data-coupon-filter]");
+      if (filter) {
+        context.couponFilter = filter.dataset.couponFilter;
+        context.root.querySelectorAll("[data-coupon-filter]").forEach(item => item.classList.toggle("active", item === filter));
+        renderStampCoupons(context);
+        return;
+      }
+
+      const code = event.target.closest("[data-coupon-code]");
+      if (code) {
+        const panel = context.root.querySelector(`[data-coupon-panel="${code.dataset.couponCode}"]`);
+        if (panel) panel.classList.toggle("open");
+        return;
+      }
+
+      const use = event.target.closest("[data-coupon-use]");
+      if (use) redeemStampCoupon(use.dataset.couponUse, context);
+    }
+
+    function refreshStampTour(context) {
+      const label = stampTourText[currentLanguage] || stampTourText.ko;
+      const state = context.state;
+      const stampCount = Object.keys(stampTourRegions).filter(id => state.stamps[id]).length;
+      const ring = context.root.querySelector("#stampProgressRing");
+      ring.style.setProperty("--progress", `${stampCount * 25}%`);
+      context.root.querySelector("#stampProgressCount").textContent = `${stampCount}/4`;
+
+      context.root.querySelector("#stampTourMap").innerHTML = `
+        <span class="stamp-map-label">${label.mapLabel}</span>
+        ${Object.entries(stampTourRegions).map(([id, region]) => `
+          <button class="stamp-map-node ${id} ${state.stamps[id] ? "claimed" : ""}" type="button" data-stamp-region="${id}" style="--node-color:${region.color}" aria-label="${stampLocal(region.names)}">
+            <i><span>${region.icon}</span></i><b>${stampLocal(region.names)}</b>
+          </button>`).join("")}`;
+
+      context.root.querySelector("#stampRegionGrid").innerHTML = Object.entries(stampTourRegions).map(([id, region]) => {
+        const stamped = Boolean(state.stamps[id]);
+        const usedCoupon = state.coupons.some(coupon => coupon.type === "region" && coupon.region === id && coupon.status === "used");
+        const missionProgress = stamped ? (usedCoupon ? 100 : 50) : 0;
+        return `
+          <article class="stamp-region-card ${context.selectedRegion === id ? "selected" : ""}" style="--region:${region.color};--region-soft:${region.soft}" id="stamp-region-${id}">
+            <button class="stamp-region-visual" type="button" data-stamp-region="${id}" aria-label="${stampLocal(region.names)}">
+              <span>${region.icon}</span><em>${stamped ? label.earned : label.unvisited}</em>
+            </button>
+            <h5>${stampLocal(region.names)}</h5>
+            <p>${stampLocal(region.landmarks)}</p>
+            <div class="stamp-region-meta">
+              <span>${stamped ? label.visited : label.unvisited}</span>
+              <span>${usedCoupon ? label.storeDone : label.storePending}</span>
+              <span>${stampFill(label.shops, { count: region.shops })}</span>
+              <span>${stampFill(label.couponCount, { count: region.coupons })}</span>
+            </div>
+            <div class="mission-progress" style="--mission-progress:${missionProgress}%" aria-label="${stampFill(label.progress, { value: missionProgress })}"><i></i></div>
+            <div class="stamp-action-row">
+              <button class="stamp-button" type="button" data-stamp-verify="${id}" ${stamped ? "disabled" : ""}>${stamped ? label.earned : label.verifyVisit}</button>
+              <button class="stamp-button secondary" type="button" data-stamp-qr="${id}" ${stamped ? "disabled" : ""}>${label.qrVerify}</button>
+            </div>
+          </article>`;
+      }).join("");
+
+      const rewards = [label.reward1, label.reward2, label.reward3, label.reward4];
+      context.root.querySelector("#stampRewardTrack").innerHTML = `
+        <div class="reward-track-head"><b>${label.rewardTitle}</b><span>${stampCount >= 4 ? label.rewardComplete : stampFill(label.rewardNext, { count: 1 })}</span></div>
+        <div class="reward-steps">${rewards.map((reward, index) => `<div class="reward-step ${stampCount >= index + 1 ? "reached" : ""}"><i>${["🎟", "₩", "🎁", "🏅"][index]}</i>${index + 1} · ${reward}</div>`).join("")}</div>`;
+
+      renderStampPassport(context);
+      renderStampCoupons(context);
+      renderStampNearby(context);
+    }
+
+    function renderStampPassport(context) {
+      const label = stampTourText[currentLanguage] || stampTourText.ko;
+      const state = context.state;
+      const stampCount = Object.keys(stampTourRegions).filter(id => state.stamps[id]).length;
+      const locale = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN" }[currentLanguage] || "ko-KR";
+      context.root.querySelector("#stampPassport").innerHTML = `
+        <div class="passport-head">
+          <div><b>${stampFill(label.bookProgress, { count: stampCount })}</b><br><span>${stampCount >= 4 ? label.bookDone : stampFill(label.bookNext, { count: 4 - stampCount })}</span></div>
+          <span>SEA-REAL<br>BUSAN PASS</span>
+        </div>
+        <div class="stamp-book-grid">
+          ${Object.entries(stampTourRegions).map(([id, region]) => {
+            const earned = state.stamps[id];
+            const date = earned ? new Intl.DateTimeFormat(locale, { year: "numeric", month: "short", day: "numeric" }).format(new Date(earned.date)) : label.unvisited;
+            return `<button class="stamp-seal-card ${earned ? "earned" : "locked"}" type="button" data-stamp-region="${id}" style="--region:${region.color}">
+              <span class="stamp-seal">${region.icon}</span><b>${stampLocal(region.names)}</b><small>${stampLocal(region.landmarks)}<br>${date}</small>
+            </button>`;
+          }).join("")}
+        </div>`;
+    }
+
+    function stampRewardCoupon(level) {
+      const content = {
+        2: {
+          title: { ko: "SEA-REAL 추가 할인권", en: "SEA-REAL bonus discount", ja: "SEA-REAL追加割引券", zh: "SEA-REAL额外折扣券" },
+          benefit: { ko: "3,000원 할인", en: "₩3,000 discount", ja: "3,000ウォン割引", zh: "减3,000韩元" }
+        },
+        3: {
+          title: { ko: "부산 기념품 응모권", en: "Busan souvenir entry", ja: "釜山記念品応募券", zh: "釜山纪念品抽选券" },
+          benefit: { ko: "SEA-REAL 굿즈 응모 1회", en: "One SEA-REAL gift entry", ja: "SEA-REALグッズ応募1回", zh: "SEA-REAL礼品抽选1次" }
+        },
+        4: {
+          title: { ko: "부산 투어 완주 교환권", en: "Busan tour completion voucher", ja: "釜山ツアー完走交換券", zh: "釜山之旅完赛兑换券" },
+          benefit: { ko: "한정 굿즈 교환", en: "Limited gift exchange", ja: "限定グッズ交換", zh: "限定礼品兑换" }
+        }
+      };
+      return content[level];
+    }
+
+    function renderStampCoupons(context) {
+      const label = stampTourText[currentLanguage] || stampTourText.ko;
+      const now = Date.now();
+      context.state.coupons.forEach(coupon => {
+        if (coupon.status !== "used" && new Date(coupon.expiresAt).getTime() < now) coupon.status = "expired";
+      });
+      saveStampTourState(context.state);
+      const locale = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN" }[currentLanguage] || "ko-KR";
+      const filtered = context.state.coupons.filter(coupon => coupon.status === context.couponFilter);
+      const list = context.root.querySelector("#stampCouponList");
+      if (!filtered.length) {
+        list.innerHTML = `<div class="empty-coupons">${label.noCoupons}</div>`;
+        return;
+      }
+      list.innerHTML = filtered.map(coupon => {
+        const region = coupon.region ? stampTourRegions[coupon.region] : null;
+        const reward = coupon.rewardLevel ? stampRewardCoupon(coupon.rewardLevel) : null;
+        const title = region ? stampLocal(region.store) : stampLocal(reward.title);
+        const benefit = region ? stampLocal(region.benefit) : stampLocal(reward.benefit);
+        const condition = region ? stampLocal(region.condition) : label.rewardTitle;
+        const valid = new Intl.DateTimeFormat(locale, { year: "numeric", month: "short", day: "numeric" }).format(new Date(coupon.expiresAt));
+        return `
+          <article class="coupon-card ${coupon.status}" style="--coupon:${region ? region.color : "#75c8ad"}">
+            <span class="coupon-color"></span>
+            <div><h6>${title}</h6><strong>${benefit}</strong><p>${label.condition}: ${condition}<br>${label.valid}: ${valid} · ${label.hours}: 11:00–21:00</p></div>
+            <button class="coupon-code-button" type="button" data-coupon-code="${coupon.id}">${label.showCode}</button>
+            <div class="coupon-code-panel" data-coupon-panel="${coupon.id}">
+              <div><div class="coupon-barcode" aria-label="${coupon.code}"></div><small>${coupon.code}<br>${label.staffHint}</small></div>
+              ${coupon.status === "available" ? `<button class="coupon-use" type="button" data-coupon-use="${coupon.id}">${label.redeem}</button>` : ""}
+            </div>
+          </article>`;
+      }).join("");
+    }
+
+    function renderStampNearby(context) {
+      const label = stampTourText[currentLanguage] || stampTourText.ko;
+      const regionId = context.selectedRegion;
+      const region = stampTourRegions[regionId];
+      const container = context.root.querySelector("#stampNearby");
+      if (!context.state.stamps[regionId]) {
+        container.innerHTML = "";
+        return;
+      }
+      const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(region.query)}`;
+      container.innerHTML = `
+        <h5>${stampFill(label.nearbyTitle, { region: stampLocal(region.names) })}</h5>
+        <article class="nearby-shop">
+          <span class="nearby-shop-icon">${region.icon}</span>
+          <div><b>${stampLocal(region.store)} · ${stampLocal(region.benefit)}</b><p>${label.distance} ${region.distance} · ${label.menu} ${stampLocal(region.menu)}<br>${label.review} ${region.review} · ${label.repeat} ${region.repeat}</p></div>
+          <a href="${url}" target="_blank" rel="noopener">${label.directions} ↗</a>
+        </article>`;
+    }
+
+    function requireStampLogin(context) {
+      if (context.state.loggedIn) return false;
+      const sheet = context.root.querySelector("#stampLoginSheet");
+      sheet.hidden = false;
+      sheet.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      return true;
+    }
+
+    function verifyStampVisit(regionId, context) {
+      const label = stampTourText[currentLanguage] || stampTourText.ko;
+      if (requireStampLogin(context)) return;
+      if (context.state.stamps[regionId]) {
+        showStampToast(context, label.duplicate);
+        return;
+      }
+      if (!navigator.geolocation) {
+        showStampToast(context, label.gpsDenied);
+        openStampQr(regionId, context);
+        return;
+      }
+      showStampToast(context, label.gpsChecking, 10000);
+      navigator.geolocation.getCurrentPosition(position => {
+        const region = stampTourRegions[regionId];
+        const distance = Math.round(stampDistanceMeters(position.coords.latitude, position.coords.longitude, region.coords[0], region.coords[1]));
+        if (distance <= 100) {
+          awardStamp(regionId, "gps", context);
+        } else {
+          showStampToast(context, stampFill(label.tooFar, { distance }), 8000);
+          openStampQr(regionId, context);
+        }
+      }, () => {
+        showStampToast(context, label.gpsDenied, 8000);
+        openStampQr(regionId, context);
+      }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 30000 });
+    }
+
+    function stampDistanceMeters(lat1, lon1, lat2, lon2) {
+      const toRadians = value => value * Math.PI / 180;
+      const dLat = toRadians(lat2 - lat1);
+      const dLon = toRadians(lon2 - lon1);
+      const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(dLon / 2) ** 2;
+      return 6371000 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    function openStampQr(regionId, context) {
+      if (requireStampLogin(context)) return;
+      const label = stampTourText[currentLanguage] || stampTourText.ko;
+      const region = stampTourRegions[regionId];
+      context.qrRegion = regionId;
+      const sheet = context.root.querySelector("#stampQrSheet");
+      context.root.querySelector("#stampQrCopy").textContent = stampFill(label.qrCopy, { region: stampLocal(region.names) });
+      context.root.querySelector("#stampQrHint").textContent = stampFill(label.qrHint, { code: region.qr });
+      context.root.querySelector("#stampQrInput").value = "";
+      sheet.hidden = false;
+      sheet.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function submitStampQr(context) {
+      const label = stampTourText[currentLanguage] || stampTourText.ko;
+      const regionId = context.qrRegion;
+      if (!regionId) return;
+      const value = context.root.querySelector("#stampQrInput").value.trim().toUpperCase();
+      if (value !== stampTourRegions[regionId].qr) {
+        showStampToast(context, label.invalidQr);
+        return;
+      }
+      context.root.querySelector("#stampQrSheet").hidden = true;
+      awardStamp(regionId, "qr", context);
+    }
+
+    async function scanStampQrPhoto(event, context) {
+      const label = stampTourText[currentLanguage] || stampTourText.ko;
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      showStampToast(context, label.qrReading, 8000);
+      try {
+        if (!("BarcodeDetector" in window)) throw new Error("BarcodeDetector unavailable");
+        const detector = new BarcodeDetector({ formats: ["qr_code"] });
+        const bitmap = await createImageBitmap(file);
+        const codes = await detector.detect(bitmap);
+        bitmap.close();
+        const value = codes[0] && codes[0].rawValue ? codes[0].rawValue.trim() : "";
+        if (!value) throw new Error("No QR value");
+        context.root.querySelector("#stampQrInput").value = value;
+        submitStampQr(context);
+      } catch (error) {
+        showStampToast(context, label.qrNoRead, 7000);
+      } finally {
+        event.target.value = "";
+      }
+    }
+
+    function awardStamp(regionId, method, context) {
+      const label = stampTourText[currentLanguage] || stampTourText.ko;
+      if (context.state.stamps[regionId]) {
+        showStampToast(context, label.duplicate);
+        return;
+      }
+      const now = new Date();
+      const expires = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+      context.state.stamps[regionId] = { date: now.toISOString(), method };
+      context.state.coupons.push({
+        id: `region-${regionId}-${Date.now()}`, type: "region", region: regionId,
+        status: "available", issuedAt: now.toISOString(), expiresAt: expires.toISOString(),
+        code: `SR-${regionId.slice(0, 3).toUpperCase()}-${Date.now().toString().slice(-6)}`
+      });
+      const count = Object.keys(stampTourRegions).filter(id => context.state.stamps[id]).length;
+      [2, 3, 4].forEach(level => {
+        if (count >= level && !context.state.rewards.includes(level)) {
+          context.state.rewards.push(level);
+          context.state.coupons.push({
+            id: `reward-${level}-${Date.now()}`, type: "reward", rewardLevel: level,
+            status: "available", issuedAt: now.toISOString(),
+            expiresAt: new Date(now.getTime() + 60 * 24 * 60 * 60 * 1000).toISOString(),
+            code: `SR-REWARD-${level}-${Date.now().toString().slice(-5)}`
+          });
+        }
+      });
+      saveStampTourState(context.state);
+      context.selectedRegion = regionId;
+      refreshStampTour(context);
+      const regionName = stampLocal(stampTourRegions[regionId].names);
+      showStampToast(context, `${stampFill(label.stampSuccess, { region: regionName })} ${count >= 4 ? label.completeSuccess : label.couponSuccess}`, 9000);
+    }
+
+    function redeemStampCoupon(couponId, context) {
+      const label = stampTourText[currentLanguage] || stampTourText.ko;
+      if (requireStampLogin(context)) return;
+      const coupon = context.state.coupons.find(item => item.id === couponId);
+      if (!coupon || coupon.status !== "available") return;
+      if (!window.confirm(label.redeemConfirm)) return;
+      coupon.status = "used";
+      coupon.usedAt = new Date().toISOString();
+      saveStampTourState(context.state);
+      renderStampCoupons(context);
+      refreshStampTour(context);
+      showStampToast(context, label.couponUsed);
+    }
+
+    function showStampToast(context, message, duration = 4500) {
+      const toast = context.root.querySelector("#stampTourToast");
+      if (!toast) return;
+      clearTimeout(context.toastTimer);
+      toast.textContent = message;
+      toast.classList.add("show");
+      context.toastTimer = setTimeout(() => toast.classList.remove("show"), duration);
+    }
+
     function renderCourseTool(container) {
       const label = featureLabels[currentLanguage];
       container.innerHTML = `
@@ -3399,6 +4429,7 @@
       const content = featureContent[featureId];
       if (!content) return;
       const [titleKey, copyKey, infoKey, icon] = content;
+      document.querySelector("#featureModal .modal").classList.toggle("wide", featureId === "stampTour");
       document.getElementById("modalIcon").textContent = icon;
       document.getElementById("modalTitle").textContent = titleKey ? t(titleKey) : "Taste Navigator";
       document.getElementById("modalCopy").textContent = t(copyKey);
@@ -3442,6 +4473,10 @@
       if (featureId === "menuTranslate") {
         document.getElementById("modalInfo").textContent = toolLabels[currentLanguage].menuHint;
         renderMenuTranslator(extra);
+      }
+      if (featureId === "stampTour") {
+        document.getElementById("modalInfo").textContent = t("stampTourInfo");
+        renderStampTourTool(extra);
       }
       if (featureId === "crowd") {
         document.getElementById("modalInfo").textContent = toolLabels[currentLanguage].crowdDemo;
