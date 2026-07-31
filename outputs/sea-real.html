@@ -2708,7 +2708,7 @@
       const translatedItems = [];
       normalizedSource.split(/\n/).forEach(rawLine => {
         const line = repairOcrLine(rawLine);
-        const matchedKeys = keys.filter(key => line.includes(key)).filter((key, index, list) => {
+        const matchedKeys = keys.filter(key => key.length >= 2 && line.includes(key)).filter((key, index, list) => {
           return !list.some((other, otherIndex) => otherIndex !== index && other.includes(key));
         });
         const prices = line.match(/(?:\d{1,3}(?:,\d{3})+|\d{4,}|\d{1,3}\.\d{1,3})\s*(?:원|₩|KRW)?/gi) || [];
@@ -2716,10 +2716,6 @@
           const names = matchedKeys.map(key => menuTranslations[key][target]);
           const priceText = prices.length ? ` · ${prices.join(" / ").replace(/\s*(?:원|₩|KRW)?$/i, "")} KRW` : "";
           translatedItems.push(`${[...new Set(names)].join(" · ")}${priceText}`);
-          return;
-        }
-        if (prices.length && translatedItems.length && !/\d/.test(translatedItems[translatedItems.length - 1])) {
-          translatedItems[translatedItems.length - 1] += ` · ${prices.join(" / ").replace(/\s*(?:원|₩|KRW)?$/i, "")} KRW`;
         }
       });
       if (!translatedItems.length) {
