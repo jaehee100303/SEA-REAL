@@ -2273,7 +2273,9 @@
       "광여회": "광어회", "광어희": "광어회", "우럭희": "우럭회", "물희": "물회",
       "회덮밤": "회덮밥", "돼지국밤": "돼지국밥", "씨앗호덕": "씨앗호떡",
       "매운당": "매운탕", "해물당": "해물탕", "아구찜": "아구찜",
-      "부산오묵": "부산어묵", "간장개장": "간장게장"
+      "부산오묵": "부산어묵", "간장개장": "간장게장",
+      "5인스페슬": "5인스페셜", "5인스폐셜": "5인스페셜",
+      "예절 활어회": "계절 활어회", "계철 활어회": "계절 활어회"
     };
 
     let currentLanguage = "ko";
@@ -2511,6 +2513,7 @@
           { rotation: 270, enhance: true, psm: 6 }
         ];
         let bestRecognition = null;
+        const recognitionCandidates = [];
         for (let attemptIndex = 0; attemptIndex < attempts.length; attemptIndex += 1) {
           if (attemptIndex > 0) {
             button.textContent = feature.ocrRetrying;
@@ -2524,13 +2527,15 @@
           const preparedImage = await prepareMenuImage(file, attempts[attemptIndex]);
           const result = await worker.recognize(preparedImage, {}, { text: true, blocks: true });
           const candidate = scoreMenuRecognition(result, preparedImage);
+          recognitionCandidates.push(candidate);
           if (!bestRecognition || candidate.score > bestRecognition.score) bestRecognition = candidate;
-          if (isUsableMenuRecognition(candidate)) break;
+          if (attemptIndex >= 2 && isUsableMenuRecognition(bestRecognition)) break;
         }
 
         if (!bestRecognition || !isUsableMenuRecognition(bestRecognition)) {
           throw new Error("No menu text recognized");
         }
+        bestRecognition.layoutLines = mergeMenuLayoutLines(recognitionCandidates);
         document.getElementById("menuInput").value = bestRecognition.text;
         window.currentMenuOcrLines = bestRecognition.layoutLines;
         document.getElementById("menuTranslationResult").textContent = feature.ocrDone;
@@ -2546,6 +2551,28 @@
         button.textContent = feature.readPhoto;
         setTimeout(() => { progress.style.display = "none"; progressBar.style.width = "0"; }, 700);
       }
+    }
+
+    function mergeMenuLayoutLines(candidates) {
+      const knownKeys = Object.keys(menuTranslations).sort((a, b) => b.length - a.length);
+      const merged = [];
+      candidates.slice(0, 3).forEach(candidate => {
+        (candidate.layoutLines || []).forEach(line => {
+          const normalized = normalizeMenuText(line.text || "");
+          const semanticKeys = knownKeys.filter(key => key.length >= 2 && normalized.includes(key)).filter((key, index, list) => {
+            return !list.some((other, otherIndex) => otherIndex !== index && other.includes(key));
+          });
+          if (!semanticKeys.length) return;
+          const signature = semanticKeys.join("|");
+          const duplicate = merged.some(existing => {
+            const sameMeaning = existing.signature === signature;
+            const sameRow = Math.abs(((existing.top + existing.bottom) / 2) - ((line.top + line.bottom) / 2)) < .035;
+            return sameMeaning && sameRow;
+          });
+          if (!duplicate) merged.push({ ...line, text: normalized, signature });
+        });
+      });
+      return merged.sort((a, b) => a.top - b.top || a.left - b.left);
     }
 
     async function ensureTesseractLoaded() {
