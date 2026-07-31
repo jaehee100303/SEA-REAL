@@ -1196,14 +1196,51 @@
     }
     .photo-upload strong { display: block; margin-top: 7px; font-size: calc(12px + var(--font-add, 0px)); }
     .photo-upload small { color: #7890a3; font-size: calc(9px + var(--font-add, 0px)); }
-    .menu-preview {
+    .menu-image-stage {
+      position: relative;
       width: 100%;
       max-height: 220px;
       display: none;
-      object-fit: contain;
       margin-top: 10px;
       background: #eef4f7;
       border-radius: 15px;
+      overflow: hidden;
+    }
+    .menu-preview {
+      width: 100%;
+      max-height: 220px;
+      display: block;
+      object-fit: contain;
+    }
+    .menu-translation-overlay {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      max-height: 58%;
+      display: none;
+      gap: 5px;
+      padding: 9px;
+      overflow-y: auto;
+      color: #fff;
+      background: rgba(3, 25, 43, .84);
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+      backdrop-filter: blur(8px);
+    }
+    .menu-translation-overlay.show { display: grid; }
+    .menu-translation-overlay strong {
+      color: #7dd3fc;
+      font-size: calc(10px + var(--font-add, 0px));
+    }
+    .menu-overlay-line {
+      padding: 5px 7px;
+      color: #fff;
+      background: rgba(255,255,255,.1);
+      border-radius: 8px;
+      font-size: calc(11px + var(--font-add, 0px));
+      line-height: 1.35;
     }
     .menu-camera-form { min-width: 0; }
     .menu-camera-form > * { min-width: 0; }
@@ -1515,7 +1552,7 @@
       .modal-info { margin-top: 10px; padding: 10px 12px; }
       .tool-form { gap: 8px; margin-top: 10px; }
       .photo-upload { min-height: 76px; padding: 10px 14px; }
-      .menu-preview { max-height: min(160px, 36dvh); }
+      .menu-image-stage, .menu-preview { max-height: min(180px, 42dvh); }
       .modal-action { min-height: 40px; margin-top: 9px; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -2067,7 +2104,7 @@
 
     const featureLabels = {
       ko: {
-        photoSelect: "메뉴판 사진 촬영 또는 선택", photoSub: "선택하면 방향을 보정해 자동으로 인식·번역합니다. 사진은 서버에 저장되지 않습니다.", readPhoto: "사진 다시 읽기", reading: "메뉴판을 읽는 중", ocrRetrying: "사진 방향과 명암을 보정해 다시 읽는 중", ocrDone: "사진 속 글자를 읽고 번역했습니다.", ocrError: "글자를 읽지 못했어요. 메뉴판 전체가 밝고 정면으로 나오게 다시 촬영해 주세요.", ocrFormatError: "사진을 열 수 없습니다. 카메라를 다시 열어 JPG 또는 PNG 사진으로 촬영해 주세요.", openFullTranslation: "전체 메뉴를 Google 번역에서 보기",
+        photoSelect: "메뉴판 사진 촬영 또는 선택", photoSub: "선택하면 메뉴 영역을 보정하고 사진 위에 바로 번역합니다. 사진은 서버에 저장되지 않습니다.", readPhoto: "사진 다시 읽기", reading: "메뉴판을 읽는 중", ocrRetrying: "메뉴 영역과 명암을 보정해 다시 읽는 중", ocrDone: "사진 속 글자를 읽고 이미지 위에 번역했습니다.", ocrError: "정확히 읽을 수 있는 메뉴가 부족합니다. 메뉴판을 화면 가득 정면으로 다시 촬영해 주세요.", ocrFormatError: "사진을 열 수 없습니다. 카메라를 다시 열어 JPG 또는 PNG 사진으로 촬영해 주세요.", openFullTranslation: "전체 메뉴를 Google 번역에서 보기", imageTranslation: "이미지 바로 번역",
         sosGuide: "필요한 시설을 누르면 현재 위치 주변 검색 결과가 지도에서 열립니다.", touristInfo: "관광안내소", police: "경찰서", hospital: "병원·응급실", consulate: "영사관", openMap: "지도에서 찾기",
         bookingBeach: "해수욕장", bookingItem: "대여 용품", bookingDate: "이용 날짜", bookingTime: "이용 시간", bookingQty: "수량", estimate: "예상 금액", reserve: "V1 예약 신청", bookingDone: "예약 신청이 접수되었습니다. V1에서는 실제 결제가 진행되지 않습니다.", bookingDemo: "출시 실험용 예약 화면입니다. 제휴 업체 연결 전에는 실제 재고와 결제가 반영되지 않습니다.",
         jetSki: "제트스키 · 30분", paddleBoard: "패들보드 · 60분", lifeJacket: "구명조끼 · 1일", tube: "튜브 · 1일", surfBoard: "서핑보드 · 2시간",
@@ -2076,7 +2113,7 @@
         receipt: "영수증 사진", chooseReceipt: "영수증 촬영 또는 선택", restaurant: "식당명", location: "위치·주소", menuName: "메뉴명", paidPrice: "결제금액", expectedPrice: "확인한 정가", reportDetail: "신고 내용", privacy: "입력한 내용이 이 기기에 임시 저장되는 것에 동의합니다.", submitReport: "V1 신고 접수", reportDone: "신고가 임시 접수되었습니다.", requiredFields: "필수 항목과 동의 여부를 확인해 주세요.", overchargeResult: "정가보다 {percent}% 높은 결제입니다.", reportDemo: "V1 기기 내 임시 접수입니다. 관리자와 공공기관에는 전송되지 않습니다."
       },
       en: {
-        photoSelect: "Take or choose a menu photo", photoSub: "The photo is auto-rotated, recognised and translated. It is not stored.", readPhoto: "Read photo again", reading: "Reading the menu", ocrRetrying: "Correcting orientation and contrast, then trying again", ocrDone: "Text detected and translated.", ocrError: "Text could not be read. Retake the full menu in bright light and straight on.", ocrFormatError: "The photo could not be opened. Retake it as a JPG or PNG image.", openFullTranslation: "Open the full menu in Google Translate",
+        photoSelect: "Take or choose a menu photo", photoSub: "The menu area is enhanced and translated directly on the photo. It is not stored.", readPhoto: "Read photo again", reading: "Reading the menu", ocrRetrying: "Enhancing the menu area and trying again", ocrDone: "Text detected and translated on the image.", ocrError: "Not enough menu text could be read. Retake the menu straight on so it fills the frame.", ocrFormatError: "The photo could not be opened. Retake it as a JPG or PNG image.", openFullTranslation: "Open the full menu in Google Translate", imageTranslation: "Translation on image",
         sosGuide: "Tap a facility to open nearby results based on your current location.", touristInfo: "Tourist information", police: "Police station", hospital: "Hospital · ER", consulate: "Consulate", openMap: "Find on map",
         bookingBeach: "Beach", bookingItem: "Rental item", bookingDate: "Date", bookingTime: "Time", bookingQty: "Quantity", estimate: "Estimated total", reserve: "Request V1 booking", bookingDone: "Your booking request was received. No payment is processed in V1.", bookingDemo: "V1 booking prototype. Live stock and payment require partner integration.",
         jetSki: "Jet ski · 30 min", paddleBoard: "Paddle board · 60 min", lifeJacket: "Life jacket · 1 day", tube: "Tube · 1 day", surfBoard: "Surfboard · 2 hours",
@@ -2085,7 +2122,7 @@
         receipt: "Receipt photo", chooseReceipt: "Take or choose a receipt", restaurant: "Restaurant", location: "Location · address", menuName: "Menu item", paidPrice: "Amount paid", expectedPrice: "Fair price checked", reportDetail: "Report details", privacy: "I agree to temporarily save these details on this device.", submitReport: "Submit V1 report", reportDone: "Your report was saved temporarily.", requiredFields: "Check the required fields and consent.", overchargeResult: "The payment is {percent}% above the fair price.", reportDemo: "V1 device-only draft. It is not sent to an administrator or public authority."
       },
       ja: {
-        photoSelect: "メニュー写真を撮影または選択", photoSub: "写真の向きを補正し、自動で認識・翻訳します。写真は保存されません。", readPhoto: "写真をもう一度読む", reading: "メニューを読み取り中", ocrRetrying: "写真の向きと明暗を補正して再読込中", ocrDone: "文字を読み取り、翻訳しました。", ocrError: "文字を読み取れませんでした。メニュー全体を明るい場所で正面から撮影してください。", ocrFormatError: "写真を開けません。JPGまたはPNG形式でもう一度撮影してください。", openFullTranslation: "メニュー全体をGoogle翻訳で見る",
+        photoSelect: "メニュー写真を撮影または選択", photoSub: "メニュー部分を補正し、写真上に直接翻訳します。写真は保存されません。", readPhoto: "写真をもう一度読む", reading: "メニューを読み取り中", ocrRetrying: "メニュー部分と明暗を補正して再読込中", ocrDone: "文字を読み取り、画像上に翻訳しました。", ocrError: "十分なメニュー文字を読み取れませんでした。メニューを画面いっぱいに正面から撮影してください。", ocrFormatError: "写真を開けません。JPGまたはPNG形式でもう一度撮影してください。", openFullTranslation: "メニュー全体をGoogle翻訳で見る", imageTranslation: "画像上の翻訳",
         sosGuide: "施設をタップすると、現在地周辺の検索結果が地図で開きます。", touristInfo: "観光案内所", police: "警察署", hospital: "病院・救急", consulate: "領事館", openMap: "地図で探す",
         bookingBeach: "海水浴場", bookingItem: "レンタル用品", bookingDate: "利用日", bookingTime: "利用時間", bookingQty: "数量", estimate: "予想金額", reserve: "V1予約申請", bookingDone: "予約申請を受け付けました。V1では決済されません。", bookingDemo: "V1予約プロトタイプです。実在庫と決済には提携業者との連携が必要です。",
         jetSki: "ジェットスキー・30分", paddleBoard: "パドルボード・60分", lifeJacket: "ライフジャケット・1日", tube: "浮き輪・1日", surfBoard: "サーフボード・2時間",
@@ -2094,7 +2131,7 @@
         receipt: "レシート写真", chooseReceipt: "レシートを撮影または選択", restaurant: "店舗名", location: "場所・住所", menuName: "メニュー名", paidPrice: "支払金額", expectedPrice: "確認した適正価格", reportDetail: "通報内容", privacy: "入力内容をこの端末に一時保存することに同意します。", submitReport: "V1通報受付", reportDone: "通報を一時保存しました。", requiredFields: "必須項目と同意を確認してください。", overchargeResult: "適正価格より{percent}%高い支払いです。", reportDemo: "V1端末内の一時受付です。管理者や公的機関には送信されません。"
       },
       zh: {
-        photoSelect: "拍摄或选择菜单照片", photoSub: "系统会自动校正方向、识别并翻译，照片不会被保存。", readPhoto: "重新识别照片", reading: "正在识别菜单", ocrRetrying: "正在校正照片方向和明暗并重新识别", ocrDone: "已识别并翻译照片文字。", ocrError: "无法识别文字，请在光线明亮处正面拍摄完整菜单。", ocrFormatError: "无法打开照片，请重新拍摄JPG或PNG格式的照片。", openFullTranslation: "在Google翻译中查看完整菜单",
+        photoSelect: "拍摄或选择菜单照片", photoSub: "系统会增强菜单区域并直接在照片上翻译，照片不会被保存。", readPhoto: "重新识别照片", reading: "正在识别菜单", ocrRetrying: "正在增强菜单区域和明暗并重新识别", ocrDone: "已识别文字并在图片上显示翻译。", ocrError: "无法读取足够的菜单文字，请正面拍摄并让菜单填满画面。", ocrFormatError: "无法打开照片，请重新拍摄JPG或PNG格式的照片。", openFullTranslation: "在Google翻译中查看完整菜单", imageTranslation: "图片直接翻译",
         sosGuide: "点击设施即可在地图中查看当前位置附近的搜索结果。", touristInfo: "旅游咨询处", police: "警察局", hospital: "医院·急诊", consulate: "领事馆", openMap: "在地图中查找",
         bookingBeach: "海水浴场", bookingItem: "租赁用品", bookingDate: "使用日期", bookingTime: "使用时间", bookingQty: "数量", estimate: "预计金额", reserve: "提交V1预约", bookingDone: "预约申请已提交。V1版本不会进行实际支付。", bookingDemo: "V1预约原型，实际库存和支付需要连接合作商家。",
         jetSki: "水上摩托·30分钟", paddleBoard: "桨板·60分钟", lifeJacket: "救生衣·1天", tube: "游泳圈·1天", surfBoard: "冲浪板·2小时",
@@ -2159,9 +2196,15 @@
       "광어회": { en: "Olive flounder sashimi", ja: "ヒラメ刺身", zh: "比目鱼刺身" },
       "우럭회": { en: "Rockfish sashimi", ja: "クロソイ刺身", zh: "石斑鱼刺身" },
       "모둠회": { en: "Assorted sashimi", ja: "刺身盛り合わせ", zh: "什锦生鱼片" },
+      "모듬회": { en: "Assorted sashimi", ja: "刺身盛り合わせ", zh: "什锦生鱼片" },
       "활어회": { en: "Fresh live-fish sashimi", ja: "活魚刺身", zh: "活鱼刺身" },
       "광어": { en: "Olive flounder", ja: "ヒラメ", zh: "比目鱼" },
       "우럭": { en: "Rockfish", ja: "クロソイ", zh: "石斑鱼" },
+      "농어": { en: "Sea bass", ja: "スズキ", zh: "鲈鱼" },
+      "도미": { en: "Sea bream", ja: "タイ", zh: "鲷鱼" },
+      "도다리": { en: "Seasonal flounder", ja: "旬のカレイ", zh: "时令鲽鱼" },
+      "방어": { en: "Yellowtail", ja: "ブリ", zh: "鰤鱼" },
+      "놀래미": { en: "Greenling", ja: "アイナメ", zh: "六线鱼" },
       "대게": { en: "Snow crab", ja: "ズワイガニ", zh: "雪蟹" },
       "전복": { en: "Abalone", ja: "アワビ", zh: "鲍鱼" },
       "돼지국밥": { en: "Pork and rice soup", ja: "豚肉クッパ", zh: "猪肉汤饭" },
@@ -2355,7 +2398,10 @@
             <span>📷<strong>${feature.photoSelect}</strong><small>${feature.photoSub}</small></span>
             <input id="menuPhoto" type="file" accept="image/*" capture="environment">
           </label>
-          <img class="menu-preview" id="menuPreview" alt="Menu photo preview">
+          <div class="menu-image-stage" id="menuImageStage">
+            <img class="menu-preview" id="menuPreview" alt="Menu photo preview">
+            <div class="menu-translation-overlay" id="menuTranslationOverlay" aria-live="polite"></div>
+          </div>
           <button class="tool-button" id="menuOcrButton" type="button" disabled>${feature.readPhoto}</button>
           <div class="ocr-progress" id="ocrProgress"><i></i></div>
           <textarea id="menuInput" hidden aria-hidden="true"></textarea>
@@ -2386,7 +2432,9 @@
       const objectUrl = URL.createObjectURL(file);
       preview.dataset.objectUrl = objectUrl;
       preview.src = objectUrl;
-      preview.style.display = "block";
+      document.getElementById("menuImageStage").style.display = "block";
+      document.getElementById("menuTranslationOverlay").classList.remove("show");
+      document.getElementById("menuTranslationOverlay").replaceChildren();
       const button = document.getElementById("menuOcrButton");
       button.disabled = true;
       preview.onload = () => {
@@ -2436,6 +2484,8 @@
         });
 
         const attempts = [
+          { rotation: 0, enhance: true, threshold: true, centerCrop: true, psm: 6 },
+          { rotation: 0, enhance: true, centerCrop: true, psm: 6 },
           { rotation: 0, enhance: true, psm: 6 },
           { rotation: 0, enhance: false, psm: 3 },
           { rotation: 0, enhance: true, psm: 11 },
@@ -2526,6 +2576,8 @@
     async function prepareMenuImage(file, options = {}) {
       const rotation = ((Number(options.rotation) || 0) % 360 + 360) % 360;
       const enhance = options.enhance !== false;
+      const threshold = options.threshold === true;
+      const centerCrop = options.centerCrop === true;
       let imageSource;
       let imageWidth;
       let imageHeight;
@@ -2565,12 +2617,16 @@
         cleanup();
         throw new Error("Invalid image dimensions");
       }
-      const readabilityScale = Math.max(1, Math.min(2.5, 1300 / Math.min(imageWidth, imageHeight)));
-      const maxEdgeScale = 2200 / Math.max(imageWidth, imageHeight);
-      const memorySafeScale = Math.sqrt(3600000 / (imageWidth * imageHeight));
+      const sourceX = centerCrop ? Math.round(imageWidth * .15) : 0;
+      const sourceY = centerCrop ? Math.round(imageHeight * .04) : 0;
+      const sourceWidth = centerCrop ? Math.round(imageWidth * .7) : imageWidth;
+      const sourceHeight = centerCrop ? Math.round(imageHeight * .9) : imageHeight;
+      const readabilityScale = Math.max(1, Math.min(3, 1400 / Math.min(sourceWidth, sourceHeight)));
+      const maxEdgeScale = 2400 / Math.max(sourceWidth, sourceHeight);
+      const memorySafeScale = Math.sqrt(4200000 / (sourceWidth * sourceHeight));
       const scale = Math.min(readabilityScale, maxEdgeScale, memorySafeScale);
-      const scaledWidth = Math.max(1, Math.round(imageWidth * scale));
-      const scaledHeight = Math.max(1, Math.round(imageHeight * scale));
+      const scaledWidth = Math.max(1, Math.round(sourceWidth * scale));
+      const scaledHeight = Math.max(1, Math.round(sourceHeight * scale));
       const swapsDimensions = rotation === 90 || rotation === 270;
       const canvas = document.createElement("canvas");
       canvas.width = swapsDimensions ? scaledHeight : scaledWidth;
@@ -2593,7 +2649,11 @@
         context.translate(0, canvas.height);
         context.rotate(-Math.PI / 2);
       }
-      context.drawImage(imageSource, 0, 0, scaledWidth, scaledHeight);
+      context.drawImage(
+        imageSource,
+        sourceX, sourceY, sourceWidth, sourceHeight,
+        0, 0, scaledWidth, scaledHeight
+      );
       context.restore();
       cleanup();
       if (!enhance) return canvas;
@@ -2602,7 +2662,9 @@
       const pixels = imageData.data;
       for (let index = 0; index < pixels.length; index += 4) {
         const gray = pixels[index] * .299 + pixels[index + 1] * .587 + pixels[index + 2] * .114;
-        const contrast = Math.max(0, Math.min(255, (gray - 128) * 1.18 + 138));
+        const contrast = threshold
+          ? (gray > 120 ? 255 : 0)
+          : Math.max(0, Math.min(255, (gray - 128) * 1.18 + 138));
         pixels[index] = contrast;
         pixels[index + 1] = contrast;
         pixels[index + 2] = contrast;
@@ -2631,6 +2693,7 @@
 
     function translateMenu() {
       const label = toolLabels[currentLanguage];
+      const feature = featureLabels[currentLanguage];
       const source = document.getElementById("menuInput").value.trim();
       const normalizedSource = normalizeMenuText(source);
       const target = document.getElementById("menuTarget").value;
@@ -2642,22 +2705,50 @@
         return;
       }
       const keys = Object.keys(menuTranslations).sort((a, b) => b.length - a.length);
-      const translatedLines = normalizedSource.split(/\n/).map(line => {
-        let translated = repairOcrLine(line);
-        keys.forEach(key => {
-          translated = translated.split(key).join(menuTranslations[key][target]);
+      const translatedItems = [];
+      normalizedSource.split(/\n/).forEach(rawLine => {
+        const line = repairOcrLine(rawLine);
+        const matchedKeys = keys.filter(key => line.includes(key)).filter((key, index, list) => {
+          return !list.some((other, otherIndex) => otherIndex !== index && other.includes(key));
         });
-        translated = translated.replace(/(\d+)\s*인분/g, (_, count) => {
-          if (target === "en") return `${count} ${count === "1" ? "serving" : "servings"}`;
-          if (target === "ja") return `${count}人前`;
-          return `${count}人份`;
-        });
-        translated = translated.replace(/(\d[\d,.]*)\s*원/g, "$1 KRW");
-        return translated;
+        const prices = line.match(/(?:\d{1,3}(?:,\d{3})+|\d{4,}|\d{1,3}\.\d{1,3})\s*(?:원|₩|KRW)?/gi) || [];
+        if (matchedKeys.length) {
+          const names = matchedKeys.map(key => menuTranslations[key][target]);
+          const priceText = prices.length ? ` · ${prices.join(" / ").replace(/\s*(?:원|₩|KRW)?$/i, "")} KRW` : "";
+          translatedItems.push(`${[...new Set(names)].join(" · ")}${priceText}`);
+          return;
+        }
+        if (prices.length && translatedItems.length && !/\d/.test(translatedItems[translatedItems.length - 1])) {
+          translatedItems[translatedItems.length - 1] += ` · ${prices.join(" / ").replace(/\s*(?:원|₩|KRW)?$/i, "")} KRW`;
+        }
       });
-      result.textContent = translatedLines.join("\n");
+      if (!translatedItems.length) {
+        result.textContent = feature.ocrError;
+        renderImageTranslationOverlay([], feature);
+        googleLink.style.display = "none";
+        return;
+      }
+      result.textContent = translatedItems.join("\n");
+      renderImageTranslationOverlay(translatedItems, feature);
       googleLink.href = `https://translate.google.com/?sl=ko&tl=${target}&text=${encodeURIComponent(source)}&op=translate`;
       googleLink.style.display = "flex";
+    }
+
+    function renderImageTranslationOverlay(items, feature) {
+      const overlay = document.getElementById("menuTranslationOverlay");
+      if (!overlay) return;
+      overlay.replaceChildren();
+      overlay.classList.toggle("show", items.length > 0);
+      if (!items.length) return;
+      const title = document.createElement("strong");
+      title.textContent = feature.imageTranslation;
+      overlay.appendChild(title);
+      items.forEach(item => {
+        const line = document.createElement("div");
+        line.className = "menu-overlay-line";
+        line.textContent = item;
+        overlay.appendChild(line);
+      });
     }
 
     function repairOcrLine(line) {
