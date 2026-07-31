@@ -576,6 +576,53 @@
       font-size: calc(14px + var(--font-add, 0px));
       line-height: 1.7;
     }
+    .market-refresh-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin: -10px 0 18px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, rgba(224, 245, 253, .9), rgba(255, 255, 255, .92));
+      border: 1px solid #cdebf7;
+      border-radius: 17px;
+      box-shadow: 0 8px 24px rgba(8, 89, 126, .06);
+    }
+    .market-refresh-main {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      color: #315b75;
+      font-size: calc(12px + var(--font-add, 0px));
+      font-weight: 700;
+    }
+    .market-refresh-main::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      flex: 0 0 auto;
+      margin-right: 2px;
+      background: #0ea5e9;
+      border-radius: 50%;
+      box-shadow: 0 0 0 5px rgba(14, 165, 233, .12);
+      animation: timerPulse 1.8s ease-in-out infinite;
+    }
+    #marketCountdown {
+      min-width: 76px;
+      color: #0369a1;
+      font-size: calc(15px + var(--font-add, 0px));
+      font-variant-numeric: tabular-nums;
+      letter-spacing: .3px;
+    }
+    .market-refresh-detail {
+      text-align: right;
+      color: #6e899b;
+      font-size: calc(10px + var(--font-add, 0px));
+      line-height: 1.5;
+    }
+    .market-refresh-detail p { margin: 0; }
+    .market-refresh-detail small { color: #91a7b6; font-size: calc(9px + var(--font-add, 0px)); }
     .market-layout {
       display: grid;
       grid-template-columns: minmax(0, 1.35fr) minmax(270px, .65fr);
@@ -1330,6 +1377,10 @@
       from { background-position: 0 -90px; }
       to { background-position: -80px 90px; }
     }
+    @keyframes timerPulse {
+      0%, 100% { opacity: .55; transform: scale(.85); }
+      50% { opacity: 1; transform: scale(1); }
+    }
 
     @media (max-width: 860px) {
       .hero { min-height: 510px; margin: 0; border-radius: 0 0 28px 28px; }
@@ -1367,6 +1418,8 @@
       .service-card strong { margin-top: 13px; }
       .page { padding-top: 32px; }
       .page-title { font-size: calc(31px + var(--font-add, 0px)); }
+      .market-refresh-card { align-items: flex-start; flex-direction: column; gap: 8px; }
+      .market-refresh-detail { text-align: left; }
       .panel { padding: 19px; border-radius: 22px; }
       .panel-head { display: block; }
       .market-tabs { margin-top: 16px; }
@@ -1543,9 +1596,20 @@
 
     <section class="screen" id="prices" data-screen-panel>
       <div class="container page">
-        <div class="eyebrow">DAILY MARKET</div>
+        <div class="eyebrow">HOURLY MARKET</div>
         <h1 class="page-title" data-i18n="marketTitle">오늘의 바다 시세</h1>
-        <p class="page-sub" data-i18n="marketSub">매일 오전 10시, 부산 주요 시장의 평균 가격을 업데이트합니다.</p>
+        <p class="page-sub" data-i18n="marketSub">부산 주요 시장의 평균 가격을 한 시간마다 업데이트합니다.</p>
+        <div class="market-refresh-card">
+          <div class="market-refresh-main" role="timer">
+            <span data-i18n="marketCountdownPrefix">시세 업데이트까지</span>
+            <strong id="marketCountdown">01:00:00</strong>
+            <span data-i18n="marketCountdownSuffix">남았습니다</span>
+          </div>
+          <div class="market-refresh-detail">
+            <p data-i18n="hourlyMarketInfo">한 시간마다 시세가 업데이트됩니다.</p>
+            <small id="marketLastUpdated">마지막 업데이트 · --:--</small>
+          </div>
+        </div>
 
         <div class="market-layout">
           <article class="panel">
@@ -1731,7 +1795,8 @@
         blueRibbon: "블루리본 추천 맛집", blueRibbonSub: "네이버 · 카카오 · Google Maps", fairRestaurant: "정가 인증 맛집", fairRestaurantSub: "투명한 판매가격", report: "바가지 신고", reportSub: "영수증으로 간편하게",
         travelCourse: "관광 코스", travelCourseSub: "테마별 동선 안내", beachBooking: "해수욕장 예약", beachBookingSub: "QR로 빠른 입장", crowd: "실시간 혼잡도", crowdSub: "여유 · 보통 · 혼잡", haeundaeShort: "해운대 혼잡", gwangalliShort: "광안리 보통", songjeongShort: "송정 여유",
         dictionary: "부산 로컬 사전", dictionarySub: "정구지 · 메구리 · 아나고", tasteSub: "부산 음식, 쉽게 이해하기", currency: "환율 자동 계산",
-        marketTitle: "오늘의 바다 시세", marketSub: "매일 오전 10시, 부산 주요 시장의 평균 가격을 업데이트합니다.", liveAverage: "실시간 평균가",
+        marketTitle: "오늘의 바다 시세", marketSub: "부산 주요 시장의 평균 가격을 한 시간마다 업데이트합니다.", liveAverage: "실시간 평균가",
+        marketCountdownPrefix: "시세 업데이트까지", marketCountdownSuffix: "남았습니다", hourlyMarketInfo: "한 시간마다 시세가 업데이트됩니다.", marketLastUpdated: "마지막 업데이트 · {time}",
         jagalchi: "자갈치", millak: "민락", gwangalliMarket: "광안리", marketStandard: "{market} 시장 기준",
         flounder: "광어", rockfish: "우럭", snowCrab: "대게", kingCrab: "킹크랩", abalone: "전복", seaSquirt: "멍게", seaCucumber: "해삼", perKg: "1kg 기준", perTen: "10미 기준",
         priceRisk: "가격 위험도 분석", priceRiskSub: "선택한 식당의 가격을 부산 평균과 비교해 드려요.", fairPrice: "● 적정가격", belowAverage: "평균보다 3% 낮은 가격입니다.",
@@ -1761,7 +1826,8 @@
         blueRibbon: "Blue Ribbon restaurants", blueRibbonSub: "Naver · Kakao · Google Maps", fairRestaurant: "Fair-price restaurants", fairRestaurantSub: "Transparent menu prices", report: "Report overcharging", reportSub: "Submit with your receipt",
         travelCourse: "Travel routes", travelCourseSub: "Routes for every travel style", beachBooking: "Beach booking", beachBookingSub: "Fast entry with QR", crowd: "Live crowd level", crowdSub: "Quiet · normal · busy", haeundaeShort: "Haeundae busy", gwangalliShort: "Gwangalli normal", songjeongShort: "Songjeong quiet",
         dictionary: "Busan local dictionary", dictionarySub: "Understand local expressions", tasteSub: "Understand Busan food easily", currency: "Currency converter",
-        marketTitle: "Today’s seafood prices", marketSub: "Average prices from Busan’s major markets, updated daily at 10 AM.", liveAverage: "Live average prices",
+        marketTitle: "Today’s seafood prices", marketSub: "Average prices from Busan’s major markets are updated every hour.", liveAverage: "Live average prices",
+        marketCountdownPrefix: "Next price update in", marketCountdownSuffix: "remaining", hourlyMarketInfo: "Seafood prices update every hour.", marketLastUpdated: "Last updated · {time}",
         jagalchi: "Jagalchi", millak: "Millak", gwangalliMarket: "Gwangalli", marketStandard: "{market} market",
         flounder: "Olive flounder", rockfish: "Rockfish", snowCrab: "Snow crab", kingCrab: "King crab", abalone: "Abalone", seaSquirt: "Sea squirt", seaCucumber: "Sea cucumber", perKg: "per 1 kg", perTen: "per 10 pieces",
         priceRisk: "Price risk check", priceRiskSub: "Compare a restaurant’s price with the Busan average.", fairPrice: "● Fair price", belowAverage: "This price is 3% below average.",
@@ -1791,7 +1857,8 @@
         blueRibbon: "ブルーリボン推薦店", blueRibbonSub: "Naver · Kakao · Google Maps", fairRestaurant: "適正価格認証店", fairRestaurantSub: "透明な販売価格", report: "不当請求を通報", reportSub: "レシートで簡単に",
         travelCourse: "観光コース", travelCourseSub: "テーマ別ルート案内", beachBooking: "海水浴場予約", beachBookingSub: "QRでスムーズに入場", crowd: "リアルタイム混雑度", crowdSub: "空き · 普通 · 混雑", haeundaeShort: "海雲台 混雑", gwangalliShort: "広安里 普通", songjeongShort: "松亭 空き",
         dictionary: "釜山ローカル辞典", dictionarySub: "釜山の方言を分かりやすく", tasteSub: "釜山料理を分かりやすく", currency: "為替自動換算",
-        marketTitle: "今日の海鮮相場", marketSub: "毎日午前10時、釜山主要市場の平均価格を更新します。", liveAverage: "リアルタイム平均価格",
+        marketTitle: "今日の海鮮相場", marketSub: "釜山主要市場の平均価格を1時間ごとに更新します。", liveAverage: "リアルタイム平均価格",
+        marketCountdownPrefix: "相場更新まで", marketCountdownSuffix: "です", hourlyMarketInfo: "相場は1時間ごとに更新されます。", marketLastUpdated: "最終更新 · {time}",
         jagalchi: "チャガルチ", millak: "民楽", gwangalliMarket: "広安里", marketStandard: "{market}市場基準",
         flounder: "ヒラメ", rockfish: "クロソイ", snowCrab: "ズワイガニ", kingCrab: "タラバガニ", abalone: "アワビ", seaSquirt: "ホヤ", seaCucumber: "ナマコ", perKg: "1kg基準", perTen: "10個基準",
         priceRisk: "価格リスク分析", priceRiskSub: "選択した店舗の価格を釜山の平均と比較します。", fairPrice: "● 適正価格", belowAverage: "平均より3%安い価格です。",
@@ -1821,7 +1888,8 @@
         blueRibbon: "蓝丝带推荐餐厅", blueRibbonSub: "Naver · Kakao · Google Maps", fairRestaurant: "合理价格认证餐厅", fairRestaurantSub: "透明的菜单价格", report: "举报高价收费", reportSub: "上传收据即可",
         travelCourse: "旅游路线", travelCourseSub: "按主题规划路线", beachBooking: "海水浴场预约", beachBookingSub: "使用QR快速入场", crowd: "实时拥挤程度", crowdSub: "宽松 · 普通 · 拥挤", haeundaeShort: "海云台 拥挤", gwangalliShort: "广安里 普通", songjeongShort: "松亭 宽松",
         dictionary: "釜山本地词典", dictionarySub: "轻松理解釜山方言", tasteSub: "轻松了解釜山美食", currency: "自动汇率换算",
-        marketTitle: "今日海鲜价格", marketSub: "每天上午10点更新釜山主要市场的平均价格。", liveAverage: "实时平均价格",
+        marketTitle: "今日海鲜价格", marketSub: "釜山主要市场的平均价格每小时更新一次。", liveAverage: "实时平均价格",
+        marketCountdownPrefix: "距离价格更新还有", marketCountdownSuffix: "后更新", hourlyMarketInfo: "海鲜价格每小时更新一次。", marketLastUpdated: "最后更新 · {time}",
         jagalchi: "札嘎其", millak: "民乐", gwangalliMarket: "广安里", marketStandard: "{market}市场标准",
         flounder: "比目鱼", rockfish: "石斑鱼", snowCrab: "雪蟹", kingCrab: "帝王蟹", abalone: "鲍鱼", seaSquirt: "海鞘", seaCucumber: "海参", perKg: "每1公斤", perTen: "每10只",
         priceRisk: "价格风险分析", priceRiskSub: "将所选餐厅的价格与釜山平均价格进行比较。", fairPrice: "● 合理价格", belowAverage: "该价格比平均价格低3%。",
@@ -2052,6 +2120,9 @@
     let currentLanguage = "ko";
     let currentMarket = "jagalchi";
     let seaState = { status: "loading" };
+    const marketHourMs = 60 * 60 * 1000;
+    let lastMarketUpdate = Math.floor(Date.now() / marketHourMs) * marketHourMs;
+    let nextMarketUpdate = lastMarketUpdate + marketHourMs;
 
     const t = key => translations[currentLanguage][key] || translations.ko[key] || key;
     const fillTemplate = (template, values) => Object.keys(values).reduce((text, key) => text.replace(`{${key}}`, values[key]), template);
@@ -2067,6 +2138,7 @@
         element.setAttribute("aria-label", t(element.dataset.i18nAria));
       });
       updateMarketNote();
+      updateMarketCountdown();
       renderSeaStatus();
       closeLanguageMenu();
     }
@@ -2894,6 +2966,30 @@
       document.getElementById("marketNote").textContent = fillTemplate(t("marketStandard"), { market: t(currentMarket) });
     }
 
+    function updateMarketCountdown() {
+      const now = Date.now();
+      while (now >= nextMarketUpdate) {
+        lastMarketUpdate = nextMarketUpdate;
+        nextMarketUpdate += marketHourMs;
+        setMarket(currentMarket);
+      }
+      const remainingSeconds = Math.max(0, Math.ceil((nextMarketUpdate - now) / 1000));
+      const hours = Math.floor(remainingSeconds / 3600);
+      const minutes = Math.floor((remainingSeconds % 3600) / 60);
+      const seconds = remainingSeconds % 60;
+      document.getElementById("marketCountdown").textContent =
+        [hours, minutes, seconds].map(value => String(value).padStart(2, "0")).join(":");
+      const locale = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN" }[currentLanguage];
+      const updatedTime = new Intl.DateTimeFormat(locale, {
+        timeZone: "Asia/Seoul",
+        hour: "2-digit",
+        minute: "2-digit",
+        hourCycle: "h23"
+      }).format(new Date(lastMarketUpdate));
+      document.getElementById("marketLastUpdated").textContent =
+        fillTemplate(t("marketLastUpdated"), { time: `${updatedTime} KST` });
+    }
+
     function setMarket(market) {
       currentMarket = market;
       document.querySelectorAll("[data-market]").forEach(button => button.classList.toggle("active", button.dataset.market === market));
@@ -2952,6 +3048,8 @@
 
     updateBusanLiveClock();
     window.setInterval(updateBusanLiveClock, 1000);
+    updateMarketCountdown();
+    window.setInterval(updateMarketCountdown, 1000);
     updateLiveSeaConditions();
     window.setInterval(updateLiveSeaConditions, 15 * 60 * 1000);
     let savedFontSize = "small";
