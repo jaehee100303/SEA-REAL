@@ -208,7 +208,8 @@
       background: #075985;
       box-shadow: 0 30px 70px rgba(5, 65, 97, .2);
       --wave-duration: 12s;
-      --wave-shift: 8px;
+      --wave-front-duration: 16s;
+      --wave-lift: -8px;
     }
     .hero-scene,
     .hero-atmosphere,
@@ -271,7 +272,7 @@
       height: 112px;
       opacity: .16;
       background-size: 176px 42px;
-      animation-duration: calc(var(--wave-duration) * 1.35);
+      animation-duration: var(--wave-front-duration);
       animation-direction: reverse;
     }
     .hero::before {
@@ -1320,7 +1321,7 @@
     }
     @keyframes waveTravel {
       from { transform: translate3d(-7%, 0, 0); }
-      50% { transform: translate3d(-1%, calc(var(--wave-shift) * -1), 0); }
+      50% { transform: translate3d(-1%, var(--wave-lift), 0); }
       to { transform: translate3d(5%, 0, 0); }
     }
     @keyframes rainDrift {
@@ -2522,12 +2523,13 @@
       const current = marineResult.value.current;
       const waveHeight = current.wave_height;
       const waveMotion = waveHeight < .5
-        ? { duration: "15s", shift: "5px" }
+        ? { duration: "15s", frontDuration: "20s", lift: "-5px" }
         : waveHeight < 1.5
-          ? { duration: "10s", shift: "9px" }
-          : { duration: "6.5s", shift: "14px" };
+          ? { duration: "10s", frontDuration: "13.5s", lift: "-9px" }
+          : { duration: "6.5s", frontDuration: "8.8s", lift: "-14px" };
       hero.style.setProperty("--wave-duration", waveMotion.duration);
-      hero.style.setProperty("--wave-shift", waveMotion.shift);
+      hero.style.setProperty("--wave-front-duration", waveMotion.frontDuration);
+      hero.style.setProperty("--wave-lift", waveMotion.lift);
       seaState = {
         status: "ready",
         time: current.time,
