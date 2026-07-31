@@ -1198,17 +1198,18 @@
     .photo-upload small { color: #7890a3; font-size: calc(9px + var(--font-add, 0px)); }
     .menu-image-stage {
       position: relative;
-      width: 100%;
-      max-height: 220px;
+      width: fit-content;
+      max-width: 100%;
       display: none;
-      margin-top: 10px;
+      margin: 10px auto 0;
       background: #eef4f7;
       border-radius: 15px;
       overflow: hidden;
     }
     .menu-preview {
-      width: 100%;
-      max-height: 220px;
+      width: auto;
+      max-width: 100%;
+      max-height: min(420px, 65dvh);
       display: block;
       object-fit: contain;
     }
@@ -1221,28 +1222,19 @@
     .menu-translation-overlay.show { display: block; }
     .menu-overlay-line {
       position: absolute;
-      right: 5px;
-      width: min(42%, 190px);
-      padding: 4px 7px;
-      color: #fff;
-      background: rgba(2, 132, 199, .92);
-      border: 1px solid rgba(255,255,255,.72);
-      border-radius: 7px;
-      box-shadow: 0 3px 10px rgba(2, 45, 75, .24);
-      font-size: calc(9px + var(--font-add, 0px));
+      left: 25%;
+      width: 37%;
+      padding: 3px 5px;
+      color: #075985;
+      background: rgba(224, 247, 255, .94);
+      border: 1px solid rgba(14, 165, 233, .72);
+      border-radius: 5px;
+      box-shadow: 0 2px 7px rgba(2, 45, 75, .18);
+      font-size: clamp(7px, calc(2vw + var(--font-add, 0px)), 11px);
       font-weight: 800;
-      line-height: 1.25;
+      line-height: 1.15;
       transform: translateY(-50%);
       text-align: left;
-    }
-    .menu-overlay-line::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      right: 100%;
-      width: 10px;
-      height: 1px;
-      background: #38bdf8;
     }
     .menu-translation-status {
       display: none;
@@ -1565,7 +1557,7 @@
       .modal-info { margin-top: 10px; padding: 10px 12px; }
       .tool-form { gap: 8px; margin-top: 10px; }
       .photo-upload { min-height: 76px; padding: 10px 14px; }
-      .menu-image-stage, .menu-preview { max-height: min(180px, 42dvh); }
+      .menu-image-stage, .menu-preview { max-height: min(240px, 62dvh); }
       .modal-action { min-height: 40px; margin-top: 9px; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -2750,7 +2742,7 @@
       if (!items.length) return;
       const positions = items.map(item => {
         const denominator = Math.max(1, item.totalLines - 1);
-        return Math.max(10, Math.min(90, 12 + (item.lineIndex / denominator) * 76));
+        return Math.max(18, Math.min(88, 22 + (item.lineIndex / denominator) * 60));
       });
       const minimumGap = Math.max(7, Math.min(11, 66 / Math.max(1, items.length - 1)));
       for (let index = 1; index < positions.length; index += 1) {
