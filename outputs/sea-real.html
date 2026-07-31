@@ -362,6 +362,14 @@
       user-select: none;
       pointer-events: none;
     }
+    .travel-course-icon {
+      display: block;
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+      user-select: none;
+      pointer-events: none;
+    }
     .service-card strong {
       display: block;
       margin-top: 16px;
@@ -1266,7 +1274,7 @@
         <div class="category" id="category-trip">
           <div class="services">
             <button class="service-card" type="button" data-feature="travelCourse">
-              <span class="service-icon">⌁</span>
+              <span class="service-icon"><img class="travel-course-icon" src="assets/travel-course-pin.png" alt="" width="30" height="30" decoding="async"></span>
               <strong data-i18n="travelCourse">관광 코스</strong>
               <small data-i18n="travelCourseSub">테마별 동선 안내</small>
             </button>
