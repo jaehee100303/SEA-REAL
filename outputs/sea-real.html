@@ -905,6 +905,7 @@
       position: relative;
       width: min(520px, 100%);
       max-height: min(760px, calc(100vh - 38px));
+      max-height: min(760px, calc(100dvh - 38px));
       padding: 28px;
       overflow-y: auto;
       background: white;
@@ -1204,6 +1205,9 @@
       background: #eef4f7;
       border-radius: 15px;
     }
+    .menu-camera-form { min-width: 0; }
+    .menu-camera-form > * { min-width: 0; }
+    .menu-camera-form .translation { overflow-wrap: anywhere; }
     .ocr-progress {
       height: 7px;
       display: none;
@@ -1489,6 +1493,30 @@
       .quick-links { grid-template-columns: 1fr; }
       .report-grid { grid-template-columns: 1fr; }
       .report-grid .full { grid-column: auto; }
+    }
+    @media (orientation: landscape) and (max-height: 520px) {
+      .modal-layer {
+        place-items: start center;
+        padding:
+          max(8px, env(safe-area-inset-top))
+          max(10px, env(safe-area-inset-right))
+          max(8px, env(safe-area-inset-bottom))
+          max(10px, env(safe-area-inset-left));
+        overflow-y: auto;
+      }
+      .modal {
+        width: min(680px, 100%);
+        max-height: calc(100vh - max(16px, env(safe-area-inset-top)) - max(16px, env(safe-area-inset-bottom)));
+        max-height: calc(100dvh - max(16px, env(safe-area-inset-top)) - max(16px, env(safe-area-inset-bottom)));
+        padding: 18px 20px;
+        border-radius: 18px;
+      }
+      .modal h3 { margin-top: 8px; }
+      .modal-info { margin-top: 10px; padding: 10px 12px; }
+      .tool-form { gap: 8px; margin-top: 10px; }
+      .photo-upload { min-height: 76px; padding: 10px 14px; }
+      .menu-preview { max-height: min(160px, 36dvh); }
+      .modal-action { min-height: 40px; margin-top: 9px; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
@@ -2322,7 +2350,7 @@
       const label = toolLabels[currentLanguage];
       const feature = featureLabels[currentLanguage];
       container.innerHTML = `
-        <div class="tool-form">
+        <div class="tool-form menu-camera-form">
           <label class="photo-upload" for="menuPhoto">
             <span>📷<strong>${feature.photoSelect}</strong><small>${feature.photoSub}</small></span>
             <input id="menuPhoto" type="file" accept="image/*" capture="environment">
@@ -2330,10 +2358,7 @@
           <img class="menu-preview" id="menuPreview" alt="Menu photo preview">
           <button class="tool-button" id="menuOcrButton" type="button" disabled>${feature.readPhoto}</button>
           <div class="ocr-progress" id="ocrProgress"><i></i></div>
-          <div class="tool-field">
-            <label for="menuInput">${label.menuInput}</label>
-            <textarea class="tool-textarea" id="menuInput" placeholder="${label.menuPlaceholder}"></textarea>
-          </div>
+          <textarea id="menuInput" hidden aria-hidden="true"></textarea>
           <div class="tool-field">
             <label for="menuTarget">${label.target}</label>
             <select class="tool-select" id="menuTarget">
@@ -2342,12 +2367,10 @@
               <option value="zh">中文</option>
             </select>
           </div>
-          <button class="tool-button" id="menuTranslateButton" type="button">${label.translate}</button>
           <div class="tool-result translation" id="menuTranslationResult">${label.translationResult}</div>
           <a class="map-link google" id="googleTranslateLink" target="_blank" rel="noopener" style="display:none"><span>${feature.openFullTranslation}</span><span>↗</span></a>
           <p class="tool-note">${label.menuHint}</p>
         </div>`;
-      document.getElementById("menuTranslateButton").addEventListener("click", translateMenu);
       document.getElementById("menuPhoto").addEventListener("change", previewMenuPhoto);
       document.getElementById("menuOcrButton").addEventListener("click", readMenuPhoto);
       document.getElementById("menuTarget").addEventListener("change", () => {
@@ -2359,10 +2382,25 @@
       const file = event.target.files && event.target.files[0];
       if (!file) return;
       const preview = document.getElementById("menuPreview");
-      preview.src = URL.createObjectURL(file);
+      if (preview.dataset.objectUrl) URL.revokeObjectURL(preview.dataset.objectUrl);
+      const objectUrl = URL.createObjectURL(file);
+      preview.dataset.objectUrl = objectUrl;
+      preview.src = objectUrl;
       preview.style.display = "block";
-      document.getElementById("menuOcrButton").disabled = false;
-      preview.onload = () => readMenuPhoto();
+      const button = document.getElementById("menuOcrButton");
+      button.disabled = true;
+      preview.onload = () => {
+        if (preview.dataset.objectUrl === objectUrl) {
+          URL.revokeObjectURL(objectUrl);
+          delete preview.dataset.objectUrl;
+        }
+        button.disabled = false;
+        readMenuPhoto();
+      };
+      preview.onerror = () => {
+        button.disabled = true;
+        document.getElementById("menuTranslationResult").textContent = featureLabels[currentLanguage].ocrError;
+      };
     }
 
     async function readMenuPhoto() {
@@ -2380,9 +2418,10 @@
       progress.style.display = "block";
       progressBar.style.width = "3%";
       button.textContent = `${feature.reading} · 0%`;
+      let worker;
       try {
         const preparedImage = await prepareMenuImage(file);
-        const worker = await Tesseract.createWorker("kor+eng", 1, {
+        worker = await Tesseract.createWorker("kor+eng", 1, {
           logger: message => {
             if (message.status === "recognizing text") {
               const percent = Math.round((message.progress || 0) * 100);
@@ -2392,8 +2431,8 @@
           }
         });
         const result = await worker.recognize(preparedImage);
-        await worker.terminate();
         const recognized = normalizeMenuText(result.data.text);
+        if (!recognized) throw new Error("No menu text recognized");
         document.getElementById("menuInput").value = recognized;
         document.getElementById("menuTranslationResult").textContent = feature.ocrDone;
         translateMenu();
@@ -2401,6 +2440,7 @@
       } catch (error) {
         document.getElementById("menuTranslationResult").textContent = feature.ocrError;
       } finally {
+        if (worker) await worker.terminate().catch(() => {});
         button.disabled = false;
         button.textContent = feature.readPhoto;
         setTimeout(() => { progress.style.display = "none"; progressBar.style.width = "0"; }, 700);
@@ -2422,12 +2462,24 @@
       let imageHeight;
       let cleanup = () => {};
       if ("createImageBitmap" in window) {
-        const bitmap = await createImageBitmap(file);
-        imageSource = bitmap;
-        imageWidth = bitmap.width;
-        imageHeight = bitmap.height;
-        cleanup = () => bitmap.close();
-      } else {
+        let bitmap;
+        try {
+          bitmap = await createImageBitmap(file, { imageOrientation: "from-image" });
+        } catch (orientationError) {
+          try {
+            bitmap = await createImageBitmap(file);
+          } catch (decodeError) {
+            bitmap = null;
+          }
+        }
+        if (bitmap) {
+          imageSource = bitmap;
+          imageWidth = bitmap.width;
+          imageHeight = bitmap.height;
+          cleanup = () => bitmap.close();
+        }
+      }
+      if (!imageSource) {
         const image = new Image();
         const objectUrl = URL.createObjectURL(file);
         await new Promise((resolve, reject) => {
@@ -2440,11 +2492,23 @@
         imageHeight = image.naturalHeight;
         cleanup = () => URL.revokeObjectURL(objectUrl);
       }
-      const scale = Math.min(2, 1800 / imageWidth);
+      if (!imageWidth || !imageHeight) {
+        cleanup();
+        throw new Error("Invalid image dimensions");
+      }
+      const maxEdgeScale = 1800 / Math.max(imageWidth, imageHeight);
+      const memorySafeScale = Math.sqrt(2800000 / (imageWidth * imageHeight));
+      const scale = Math.min(1, maxEdgeScale, memorySafeScale);
       const canvas = document.createElement("canvas");
       canvas.width = Math.max(1, Math.round(imageWidth * scale));
       canvas.height = Math.max(1, Math.round(imageHeight * scale));
       const context = canvas.getContext("2d", { willReadFrequently: true });
+      if (!context) {
+        cleanup();
+        throw new Error("Canvas is unavailable");
+      }
+      context.imageSmoothingEnabled = true;
+      context.imageSmoothingQuality = "high";
       context.drawImage(imageSource, 0, 0, canvas.width, canvas.height);
       cleanup();
       const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
