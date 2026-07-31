@@ -605,6 +605,75 @@
     }
     .market-refresh-detail p { margin: 0; }
     .market-refresh-detail small { color: #91a7b6; font-size: calc(9px + var(--font-add, 0px)); }
+    .market-source-card {
+      display: grid;
+      gap: 11px;
+      margin-top: 16px;
+      padding: 15px 16px;
+      color: #385a6f;
+      background: linear-gradient(145deg, #f7fbfd, #eef7fa);
+      border: 1px solid #dcecf2;
+      border-radius: 16px;
+    }
+    .market-source-head {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+    }
+    .market-source-badge {
+      flex: 0 0 auto;
+      padding: 5px 8px;
+      color: #0369a1;
+      background: #dff3fc;
+      border-radius: 999px;
+      font-size: calc(9px + var(--font-add, 0px));
+      font-weight: 900;
+    }
+    .market-source-head strong {
+      min-width: 0;
+      color: #183f57;
+      font-size: calc(12px + var(--font-add, 0px));
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+    .market-source-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .market-source-row {
+      display: grid;
+      gap: 4px;
+      padding: 10px 11px;
+      background: rgba(255, 255, 255, .78);
+      border: 1px solid #e7f0f4;
+      border-radius: 12px;
+    }
+    .market-source-row span {
+      color: #7d94a4;
+      font-size: calc(9px + var(--font-add, 0px));
+      font-weight: 700;
+    }
+    .market-source-row b {
+      color: #31566d;
+      font-size: calc(10px + var(--font-add, 0px));
+      line-height: 1.45;
+    }
+    .market-source-link {
+      width: fit-content;
+      color: #0284c7;
+      font-size: calc(10px + var(--font-add, 0px));
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .market-source-link:hover { text-decoration: underline; }
+    .market-source-disclaimer {
+      margin: 0;
+      color: #7890a0;
+      font-size: calc(9px + var(--font-add, 0px));
+      line-height: 1.55;
+    }
     .market-layout {
       display: grid;
       grid-template-columns: minmax(0, 1.35fr) minmax(270px, .65fr);
@@ -1974,6 +2043,7 @@
       .page-title { font-size: calc(31px + var(--font-add, 0px)); }
       .market-refresh-card { align-items: flex-start; flex-direction: column; gap: 8px; }
       .market-refresh-detail { text-align: left; }
+      .market-source-grid { grid-template-columns: 1fr; }
       .panel { padding: 19px; border-radius: 22px; }
       .panel-head { display: block; }
       .market-tabs { margin-top: 16px; }
@@ -2267,6 +2337,24 @@
                 <span class="change up">↑ 0.7%</span>
               </div>
             </div>
+            <div class="market-source-card" aria-live="polite">
+              <div class="market-source-head">
+                <span class="market-source-badge" data-i18n="marketSourceLabel">출처</span>
+                <strong id="marketSourceName">부산시설공단 자갈치시장</strong>
+              </div>
+              <div class="market-source-grid">
+                <div class="market-source-row">
+                  <span data-i18n="priceDataSourceLabel">가격 데이터</span>
+                  <b data-i18n="priceDataSourceV1">SEA-REAL V1 내부 테스트 표본 · 실시간 API 미연동</b>
+                </div>
+                <div class="market-source-row">
+                  <span data-i18n="marketUpdateBasisLabel">업데이트 시간 기준</span>
+                  <b data-i18n="marketUpdateBasisValue">한국시간 매 정시(00분) 화면 기준 시각 갱신 · 가격값은 고정 표본</b>
+                </div>
+              </div>
+              <a class="market-source-link" id="marketSourceLink" href="https://www.bisco.or.kr/jagalchimarket/" target="_blank" rel="noopener noreferrer" data-i18n="marketSourceLink">시장·지역 공식 안내 보기 ↗</a>
+              <p class="market-source-disclaimer" data-i18n="marketDataDisclaimer">현재 가격은 출시 실험용 참고값으로 실제 시장 판매가격이나 결제 기준이 아닙니다.</p>
+            </div>
           </article>
 
           <aside class="panel risk-panel">
@@ -2396,9 +2484,13 @@
         blueRibbon: "블루리본 추천 맛집", blueRibbonSub: "네이버 · 카카오 · Google Maps", fairRestaurant: "정가 인증 맛집", fairRestaurantSub: "투명한 판매가격", report: "바가지 신고", reportSub: "영수증으로 간편하게",
         travelCourse: "관광 코스", travelCourseSub: "테마별 동선 안내", beachBooking: "해수욕장 예약", beachBookingSub: "QR로 빠른 입장", crowd: "실시간 혼잡도", crowdSub: "여유 · 보통 · 혼잡", haeundaeShort: "해운대 혼잡", gwangalliShort: "광안리 보통", songjeongShort: "송정 여유",
         dictionary: "부산 로컬 사전", dictionarySub: "정구지 · 메구리 · 아나고", tasteSub: "부산 음식, 쉽게 이해하기", currency: "환율 자동 계산",
-        marketTitle: "오늘의 바다 시세", marketSub: "부산 주요 시장의 평균 가격을 한 시간마다 업데이트합니다.", liveAverage: "실시간 평균가",
-        marketCountdownPrefix: "시세 업데이트까지", marketCountdownSuffix: "남았습니다", hourlyMarketInfo: "한 시간마다 시세가 업데이트됩니다.", marketLastUpdated: "마지막 업데이트 · {time}",
-        jagalchi: "자갈치", millak: "민락", gwangalliMarket: "광안리", marketStandard: "{market} 시장 기준",
+        marketTitle: "오늘의 바다 시세", marketSub: "시장별 참고가격과 데이터 출처를 함께 확인하세요.", liveAverage: "시장별 참고 평균가",
+        marketCountdownPrefix: "다음 시세 기준 시각까지", marketCountdownSuffix: "남았습니다", hourlyMarketInfo: "표시 기준 시각 · 매 정시(00분, KST)", marketLastUpdated: "현재 기준 구간 · {time}",
+        jagalchi: "자갈치", millak: "민락", gwangalliMarket: "광안리", marketStandard: "{market} 기준",
+        marketSourceLabel: "시장·지역 출처", priceDataSourceLabel: "가격 데이터", priceDataSourceV1: "SEA-REAL V1 내부 테스트 표본 · 실시간 API 미연동",
+        marketUpdateBasisLabel: "업데이트 시간 기준", marketUpdateBasisValue: "한국시간 매 정시(00분) 화면 기준 시각 갱신 · 가격값은 고정 표본",
+        marketSourceLink: "시장·지역 공식 안내 보기 ↗", marketDataDisclaimer: "현재 가격은 출시 실험용 참고값으로 실제 시장 판매가격이나 결제 기준이 아닙니다.",
+        marketSourceJagalchi: "부산시설공단 자갈치시장 · 중구 자갈치해안로 52", marketSourceMillak: "수영구청 민락어민활어직판장 · 수영구 광안해변로312번길 60", marketSourceGwangalli: "부산시 광안리해수욕장 인근 횟집 상권 · 단일 시장이 아닌 지역 표본",
         flounder: "광어", rockfish: "우럭", snowCrab: "대게", kingCrab: "킹크랩", abalone: "전복", seaSquirt: "멍게", seaCucumber: "해삼", perKg: "1kg 기준", perTen: "10미 기준",
         priceRisk: "가격 위험도 분석", priceRiskSub: "부산 평균 시세와 비교해 가격 위험도를 총 5단계로 분석합니다.", fairPrice: "● 적정가격", belowAverage: "부산 평균 시세 범위 안에 있는 적정가격입니다.",
         riskSafe: "안심", riskFair: "적정", riskCaution: "주의", riskDanger: "위험", riskCritical: "매우 위험", riskMethod: "기준: 평균 이하 / ±10% / +10~20% / +20~40% / +40% 이상", riskCurrent: "2단계 · 부산 평균 대비 ±10%", riskAdviceTitle: "결제 전 확인하세요", riskAdvice: "표시 가격에 중량, 상차림비와 추가 비용이 포함되어 있는지 확인하면 더 안전합니다.",
@@ -2428,9 +2520,13 @@
         blueRibbon: "Blue Ribbon restaurants", blueRibbonSub: "Naver · Kakao · Google Maps", fairRestaurant: "Fair-price restaurants", fairRestaurantSub: "Transparent menu prices", report: "Report overcharging", reportSub: "Submit with your receipt",
         travelCourse: "Travel routes", travelCourseSub: "Routes for every travel style", beachBooking: "Beach booking", beachBookingSub: "Fast entry with QR", crowd: "Live crowd level", crowdSub: "Quiet · normal · busy", haeundaeShort: "Haeundae busy", gwangalliShort: "Gwangalli normal", songjeongShort: "Songjeong quiet",
         dictionary: "Busan local dictionary", dictionarySub: "Understand local expressions", tasteSub: "Understand Busan food easily", currency: "Currency converter",
-        marketTitle: "Today’s seafood prices", marketSub: "Average prices from Busan’s major markets are updated every hour.", liveAverage: "Live average prices",
-        marketCountdownPrefix: "Next price update in", marketCountdownSuffix: "remaining", hourlyMarketInfo: "Seafood prices update every hour.", marketLastUpdated: "Last updated · {time}",
-        jagalchi: "Jagalchi", millak: "Millak", gwangalliMarket: "Gwangalli", marketStandard: "{market} market",
+        marketTitle: "Today’s seafood prices", marketSub: "View reference prices together with each market’s data source.", liveAverage: "Market reference averages",
+        marketCountdownPrefix: "Next reference time in", marketCountdownSuffix: "remaining", hourlyMarketInfo: "Display reference · every hour at :00 KST", marketLastUpdated: "Current reference period · {time}",
+        jagalchi: "Jagalchi", millak: "Millak", gwangalliMarket: "Gwangalli", marketStandard: "{market} reference",
+        marketSourceLabel: "Market · area source", priceDataSourceLabel: "Price data", priceDataSourceV1: "SEA-REAL V1 internal test sample · no live API connected",
+        marketUpdateBasisLabel: "Update-time basis", marketUpdateBasisValue: "The display reference time advances every hour at :00 KST · prices remain fixed samples",
+        marketSourceLink: "Open official market · area guide ↗", marketDataDisclaimer: "Current prices are launch-test reference values, not actual market selling prices or a payment standard.",
+        marketSourceJagalchi: "Busan Infrastructure Corporation · Jagalchi Market, 52 Jagalchihaean-ro", marketSourceMillak: "Suyeong-gu Office · Millak Fishermen’s Live Fish Market, 60 Gwanganhaebyeon-ro 312beon-gil", marketSourceGwangalli: "Restaurant district near Gwangalli Beach · an area sample, not one individual market",
         flounder: "Olive flounder", rockfish: "Rockfish", snowCrab: "Snow crab", kingCrab: "King crab", abalone: "Abalone", seaSquirt: "Sea squirt", seaCucumber: "Sea cucumber", perKg: "per 1 kg", perTen: "per 10 pieces",
         priceRisk: "Price risk check", priceRiskSub: "Price risk is analysed in five levels against the Busan average market price.", fairPrice: "● Fair price", belowAverage: "This price is within Busan’s average market range.",
         riskSafe: "Safe", riskFair: "Fair", riskCaution: "Caution", riskDanger: "Risky", riskCritical: "Very risky", riskMethod: "Levels: at/below average / ±10% / +10–20% / +20–40% / +40% or more", riskCurrent: "Level 2 · within ±10% of Busan average", riskAdviceTitle: "Check before paying", riskAdvice: "Confirm whether weight, table-setting fees and other charges are included in the displayed price.",
@@ -2460,9 +2556,13 @@
         blueRibbon: "ブルーリボン推薦店", blueRibbonSub: "Naver · Kakao · Google Maps", fairRestaurant: "適正価格認証店", fairRestaurantSub: "透明な販売価格", report: "不当請求を通報", reportSub: "レシートで簡単に",
         travelCourse: "観光コース", travelCourseSub: "テーマ別ルート案内", beachBooking: "海水浴場予約", beachBookingSub: "QRでスムーズに入場", crowd: "リアルタイム混雑度", crowdSub: "空き · 普通 · 混雑", haeundaeShort: "海雲台 混雑", gwangalliShort: "広安里 普通", songjeongShort: "松亭 空き",
         dictionary: "釜山ローカル辞典", dictionarySub: "釜山の方言を分かりやすく", tasteSub: "釜山料理を分かりやすく", currency: "為替自動換算",
-        marketTitle: "今日の海鮮相場", marketSub: "釜山主要市場の平均価格を1時間ごとに更新します。", liveAverage: "リアルタイム平均価格",
-        marketCountdownPrefix: "相場更新まで", marketCountdownSuffix: "です", hourlyMarketInfo: "相場は1時間ごとに更新されます。", marketLastUpdated: "最終更新 · {time}",
-        jagalchi: "チャガルチ", millak: "民楽", gwangalliMarket: "広安里", marketStandard: "{market}市場基準",
+        marketTitle: "今日の海鮮相場", marketSub: "市場別の参考価格とデータ出典を一緒に確認できます。", liveAverage: "市場別参考平均価格",
+        marketCountdownPrefix: "次の基準時刻まで", marketCountdownSuffix: "です", hourlyMarketInfo: "表示基準時刻・毎時00分（KST）", marketLastUpdated: "現在の基準区間 · {time}",
+        jagalchi: "チャガルチ", millak: "民楽", gwangalliMarket: "広安里", marketStandard: "{market}基準",
+        marketSourceLabel: "市場・地域の出典", priceDataSourceLabel: "価格データ", priceDataSourceV1: "SEA-REAL V1内部テスト標本・リアルタイムAPI未接続",
+        marketUpdateBasisLabel: "更新時刻の基準", marketUpdateBasisValue: "韓国時間の毎時00分に表示基準時刻を更新・価格は固定標本",
+        marketSourceLink: "市場・地域の公式案内を見る ↗", marketDataDisclaimer: "現在の価格はリリース実験用の参考値であり、実際の販売価格や決済基準ではありません。",
+        marketSourceJagalchi: "釜山施設公団 チャガルチ市場・中区チャガルチ海岸路52", marketSourceMillak: "水営区庁 民楽漁民活魚直売場・水営区広安海辺路312番キル60", marketSourceGwangalli: "広安里海水浴場周辺の刺身店商圏・単一市場ではなく地域標本",
         flounder: "ヒラメ", rockfish: "クロソイ", snowCrab: "ズワイガニ", kingCrab: "タラバガニ", abalone: "アワビ", seaSquirt: "ホヤ", seaCucumber: "ナマコ", perKg: "1kg基準", perTen: "10個基準",
         priceRisk: "価格リスク分析", priceRiskSub: "釜山の平均相場と比較し、価格リスクを5段階で分析します。", fairPrice: "● 適正価格", belowAverage: "釜山の平均相場の範囲内にある適正価格です。",
         riskSafe: "安心", riskFair: "適正", riskCaution: "注意", riskDanger: "危険", riskCritical: "非常に危険", riskMethod: "基準：平均以下 / ±10% / +10～20% / +20～40% / +40%以上", riskCurrent: "レベル2・釜山平均の±10%以内", riskAdviceTitle: "決済前に確認", riskAdvice: "表示価格に重量、席料、追加料金が含まれているか確認するとより安心です。",
@@ -2492,9 +2592,13 @@
         blueRibbon: "蓝丝带推荐餐厅", blueRibbonSub: "Naver · Kakao · Google Maps", fairRestaurant: "合理价格认证餐厅", fairRestaurantSub: "透明的菜单价格", report: "举报高价收费", reportSub: "上传收据即可",
         travelCourse: "旅游路线", travelCourseSub: "按主题规划路线", beachBooking: "海水浴场预约", beachBookingSub: "使用QR快速入场", crowd: "实时拥挤程度", crowdSub: "宽松 · 普通 · 拥挤", haeundaeShort: "海云台 拥挤", gwangalliShort: "广安里 普通", songjeongShort: "松亭 宽松",
         dictionary: "釜山本地词典", dictionarySub: "轻松理解釜山方言", tasteSub: "轻松了解釜山美食", currency: "自动汇率换算",
-        marketTitle: "今日海鲜价格", marketSub: "釜山主要市场的平均价格每小时更新一次。", liveAverage: "实时平均价格",
-        marketCountdownPrefix: "距离价格更新还有", marketCountdownSuffix: "后更新", hourlyMarketInfo: "海鲜价格每小时更新一次。", marketLastUpdated: "最后更新 · {time}",
-        jagalchi: "札嘎其", millak: "民乐", gwangalliMarket: "广安里", marketStandard: "{market}市场标准",
+        marketTitle: "今日海鲜价格", marketSub: "同时查看各市场的参考价格和数据来源。", liveAverage: "各市场参考均价",
+        marketCountdownPrefix: "距离下一基准时间还有", marketCountdownSuffix: "后更新", hourlyMarketInfo: "显示基准时间·韩国时间每小时00分", marketLastUpdated: "当前基准时段 · {time}",
+        jagalchi: "札嘎其", millak: "民乐", gwangalliMarket: "广安里", marketStandard: "{market}参考",
+        marketSourceLabel: "市场·地区来源", priceDataSourceLabel: "价格数据", priceDataSourceV1: "SEA-REAL V1内部测试样本·尚未连接实时API",
+        marketUpdateBasisLabel: "更新时间标准", marketUpdateBasisValue: "韩国时间每小时00分更新显示基准时间·价格为固定样本",
+        marketSourceLink: "查看市场·地区官方介绍 ↗", marketDataDisclaimer: "当前价格仅为发布测试参考值，并非实际市场售价或付款标准。",
+        marketSourceJagalchi: "釜山设施公团 札嘎其市场·中区札嘎其海岸路52", marketSourceMillak: "水营区政府 民乐渔民活鱼直销市场·水营区广安海边路312番街60", marketSourceGwangalli: "广安里海水浴场附近生鱼片餐厅商圈·地区样本，并非单一市场",
         flounder: "比目鱼", rockfish: "石斑鱼", snowCrab: "雪蟹", kingCrab: "帝王蟹", abalone: "鲍鱼", seaSquirt: "海鞘", seaCucumber: "海参", perKg: "每1公斤", perTen: "每10只",
         priceRisk: "价格风险分析", priceRiskSub: "与釜山平均市场价格比较，按五个等级分析价格风险。", fairPrice: "● 合理价格", belowAverage: "该价格处于釜山平均市场价格范围内。",
         riskSafe: "安心", riskFair: "合理", riskCaution: "注意", riskDanger: "危险", riskCritical: "非常危险", riskMethod: "标准：平均以下 / ±10% / +10～20% / +20～40% / +40%以上", riskCurrent: "第2级·釜山平均价格±10%以内", riskAdviceTitle: "付款前请确认", riskAdvice: "请确认标价是否包含重量、餐桌服务费及其他附加费用。",
@@ -4603,8 +4707,33 @@
       gwangalliMarket: ["45,000", "50,000", "84,000", "106,000", "39,000", "20,000", "46,000"]
     };
 
+    const marketSources = {
+      jagalchi: {
+        labelKey: "marketSourceJagalchi",
+        url: "https://www.bisco.or.kr/jagalchimarket/"
+      },
+      millak: {
+        labelKey: "marketSourceMillak",
+        url: "https://www.suyeong.go.kr/board/view.suyeong?boardId=LIFE&dataSid=267548&menuCd=DOM_000000113003000000&startPage=1"
+      },
+      gwangalliMarket: {
+        labelKey: "marketSourceGwangalli",
+        url: "https://www.busan.go.kr/depart/ahgwanganri"
+      }
+    };
+
+    function updateMarketSource() {
+      const source = marketSources[currentMarket];
+      const sourceName = document.getElementById("marketSourceName");
+      const sourceLink = document.getElementById("marketSourceLink");
+      if (!source || !sourceName || !sourceLink) return;
+      sourceName.textContent = t(source.labelKey);
+      sourceLink.href = source.url;
+    }
+
     function updateMarketNote() {
       document.getElementById("marketNote").textContent = fillTemplate(t("marketStandard"), { market: t(currentMarket) });
+      updateMarketSource();
     }
 
     function updateMarketCountdown() {
