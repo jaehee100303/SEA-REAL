@@ -2300,13 +2300,18 @@
       extra.innerHTML = "";
 
       if (featureId === "dictionary") {
-        const rows = [["정구지", "Jeongguji", "부추"], ["메구리", "Meguri", "가숭어"], ["아나고", "Anago", "붕장어"], ["데까", "De-kka", "엄청 큰 사이즈"]];
+        const rows = [
+          ["정구지", "Jeongguji", "부추", "Buchu", "garlic chives"],
+          ["메구리", "Meguri", "가숭어", "Gasungeo", "redlip mullet"],
+          ["아나고", "Anago", "붕장어", "Bungjangeo", "conger eel"],
+          ["데까", "De-kka", "엄청 큰 사이즈", "Eomcheong keun saijeu", "extra-large size"]
+        ];
         const list = document.createElement("div");
         list.className = "dictionary-list";
-        rows.forEach(([local, pronunciation, standard]) => {
+        rows.forEach(([local, pronunciation, standard, standardPronunciation, englishMeaning]) => {
           const row = document.createElement("div");
           row.className = "dictionary-row";
-          row.innerHTML = `<b class="term-label">${local}<small class="pronunciation">${pronunciation}</small></b><span>→</span><b>${standard}</b>`;
+          row.innerHTML = `<b class="term-label">${local}<small class="pronunciation">${pronunciation}</small></b><span>→</span><b>${standard}<small class="pronunciation">${standardPronunciation}<br>${englishMeaning}</small></b>`;
           list.appendChild(row);
         });
         extra.appendChild(list);
