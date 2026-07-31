@@ -154,6 +154,7 @@
     .hero-content { position: relative; z-index: 2; width: min(650px, 100%); }
     .live {
       width: fit-content;
+      max-width: 100%;
       display: flex;
       align-items: center;
       gap: 9px;
@@ -167,7 +168,9 @@
       font-weight: 700;
       letter-spacing: .8px;
     }
+    #busanLiveClock { white-space: nowrap; }
     .pulse {
+      flex: 0 0 auto;
       width: 7px;
       height: 7px;
       background: #5eead4;
@@ -829,6 +832,45 @@
       font-size: 10px;
       font-weight: 800;
     }
+    .crowd-criteria {
+      margin-top: 14px;
+      padding: 14px;
+      background: #f8fbfd;
+      border: 1px solid #e5eef3;
+      border-radius: 14px;
+    }
+    .crowd-criteria strong {
+      display: block;
+      color: #18384d;
+      font-size: 12px;
+    }
+    .crowd-criteria > p {
+      margin: 4px 0 11px;
+      color: #7890a3;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+    .criteria-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 7px;
+    }
+    .criteria-item {
+      padding: 9px 8px;
+      color: #526c7e;
+      background: #fff;
+      border-radius: 10px;
+      font-size: 9px;
+      line-height: 1.45;
+    }
+    .criteria-item b {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 2px;
+      color: #27475d;
+      font-size: 10px;
+    }
     .photo-upload {
       position: relative;
       min-height: 110px;
@@ -1153,7 +1195,7 @@
     <section class="screen active" id="home" data-screen-panel>
       <div class="hero">
         <div class="hero-content">
-          <div class="live"><span class="pulse"></span> LIVE BUSAN · 07.30 10:00 UPDATE</div>
+          <div class="live"><span class="pulse"></span><span id="busanLiveClock">LIVE BUSAN · --.-- --:--:-- UPDATE</span></div>
           <h1>Enjoy Busan<br>Without Overpaying.</h1>
           <p class="hero-copy" data-i18n="heroCopy">바가지 걱정 없는 부산 여행. 믿을 수 있는 가격과 현지의 진짜 경험을 한 곳에서 만나보세요.</p>
           <div class="beach-finder">
@@ -1576,7 +1618,7 @@
         menuInput: "한국어 메뉴", menuPlaceholder: "예: 광어회 1인분\n매운탕\n소주", target: "번역 언어", translate: "메뉴 번역하기",
         translationResult: "번역 결과가 여기에 표시됩니다.", emptyMenu: "번역할 메뉴를 입력해 주세요.", menuHint: "V1은 부산 대표 메뉴와 음식 표현을 우선 지원합니다.",
         crowdDemo: "V1 실험용 혼잡도 데이터입니다. 실제 출시 전 공공데이터 연동이 필요합니다.", updated: "업데이트", refresh: "새로고침",
-        free: "여유", normal: "보통", busy: "혼잡"
+        free: "여유", normal: "보통", busy: "혼잡", crowdCriteria: "혼잡도 판단 기준", crowdBasis: "해수욕장 수용 가능 인원 대비 현재 추정 방문객 비율", freeRange: "0~39%", normalRange: "40~69%", busyRange: "70% 이상"
       },
       en: {
         amount: "Amount", from: "From", to: "To", convert: "Convert currency", loading: "Loading the latest rate…",
@@ -1584,7 +1626,7 @@
         menuInput: "Korean menu", menuPlaceholder: "e.g. 광어회 1인분\n매운탕\n소주", target: "Translate to", translate: "Translate menu",
         translationResult: "Your translation will appear here.", emptyMenu: "Enter a Korean menu to translate.", menuHint: "V1 currently supports common Busan dishes and menu terms.",
         crowdDemo: "V1 demonstration data. A public data feed is required before the official launch.", updated: "Updated", refresh: "Refresh",
-        free: "Quiet", normal: "Normal", busy: "Busy"
+        free: "Quiet", normal: "Normal", busy: "Busy", crowdCriteria: "Crowd level criteria", crowdBasis: "Estimated visitors as a percentage of beach capacity", freeRange: "0–39%", normalRange: "40–69%", busyRange: "70% or more"
       },
       ja: {
         amount: "金額", from: "変換元", to: "変換先", convert: "為替を計算", loading: "最新レートを取得中…",
@@ -1592,7 +1634,7 @@
         menuInput: "韓国語メニュー", menuPlaceholder: "例：광어회 1인분\n매운탕\n소주", target: "翻訳言語", translate: "メニューを翻訳",
         translationResult: "翻訳結果がここに表示されます。", emptyMenu: "翻訳するメニューを入力してください。", menuHint: "V1では釜山の代表料理と一般的なメニュー表現に対応します。",
         crowdDemo: "V1実験用データです。正式リリース前に公共データとの連携が必要です。", updated: "更新", refresh: "更新する",
-        free: "空き", normal: "普通", busy: "混雑"
+        free: "空き", normal: "普通", busy: "混雑", crowdCriteria: "混雑度の判定基準", crowdBasis: "海水浴場の収容可能人数に対する推定来場者の割合", freeRange: "0～39%", normalRange: "40～69%", busyRange: "70%以上"
       },
       zh: {
         amount: "金额", from: "原币种", to: "目标币种", convert: "换算汇率", loading: "正在获取最新汇率…",
@@ -1600,7 +1642,7 @@
         menuInput: "韩文菜单", menuPlaceholder: "例如：광어회 1인분\n매운탕\n소주", target: "翻译语言", translate: "翻译菜单",
         translationResult: "翻译结果将显示在这里。", emptyMenu: "请输入需要翻译的菜单。", menuHint: "V1优先支持釜山代表美食和常见菜单用语。",
         crowdDemo: "这是V1实验数据，正式发布前需要连接公共数据。", updated: "更新", refresh: "刷新",
-        free: "宽松", normal: "普通", busy: "拥挤"
+        free: "宽松", normal: "普通", busy: "拥挤", crowdCriteria: "拥挤程度判断标准", crowdBasis: "当前预计游客占海水浴场可容纳人数的比例", freeRange: "0～39%", normalRange: "40～69%", busyRange: "70%以上"
       }
     };
 
@@ -2096,11 +2138,21 @@
       const meta = document.createElement("div");
       meta.className = "crowd-meta";
       meta.innerHTML = `<span id="crowdUpdated"></span><button class="crowd-refresh" id="crowdRefresh" type="button">${label.refresh}</button>`;
+      const criteria = document.createElement("div");
+      criteria.className = "crowd-criteria";
+      criteria.innerHTML = `
+        <strong>${label.crowdCriteria}</strong>
+        <p>${label.crowdBasis}</p>
+        <div class="criteria-list">
+          <div class="criteria-item"><b><i class="status-dot free"></i>${label.free}</b>${label.freeRange}</div>
+          <div class="criteria-item"><b><i class="status-dot normal"></i>${label.normal}</b>${label.normalRange}</div>
+          <div class="criteria-item"><b><i class="status-dot busy"></i>${label.busy}</b>${label.busyRange}</div>
+        </div>`;
       const note = document.createElement("p");
       note.className = "tool-note";
       note.style.marginTop = "12px";
       note.textContent = label.crowdDemo;
-      container.append(board, meta, note);
+      container.append(board, meta, criteria, note);
       updateCrowdTime();
       document.getElementById("crowdRefresh").addEventListener("click", updateCrowdTime);
     }
@@ -2108,7 +2160,24 @@
     function updateCrowdTime() {
       const label = toolLabels[currentLanguage];
       const locale = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN" }[currentLanguage];
-      document.getElementById("crowdUpdated").textContent = `${label.updated} · ${new Intl.DateTimeFormat(locale, { hour: "2-digit", minute: "2-digit" }).format(new Date())}`;
+      document.getElementById("crowdUpdated").textContent = `${label.updated} · ${new Intl.DateTimeFormat(locale, { timeZone: "Asia/Seoul", hour: "2-digit", minute: "2-digit" }).format(new Date())}`;
+    }
+
+    function updateBusanLiveClock() {
+      const parts = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Asia/Seoul",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hourCycle: "h23"
+      }).formatToParts(new Date()).reduce((result, part) => {
+        result[part.type] = part.value;
+        return result;
+      }, {});
+      document.getElementById("busanLiveClock").textContent =
+        `LIVE BUSAN · ${parts.month}.${parts.day} ${parts.hour}:${parts.minute}:${parts.second} UPDATE`;
     }
 
     function renderSosTool(container) {
@@ -2505,6 +2574,8 @@
       }
     });
 
+    updateBusanLiveClock();
+    window.setInterval(updateBusanLiveClock, 1000);
     setLanguage("ko");
     setMarket("jagalchi");
   </script>
