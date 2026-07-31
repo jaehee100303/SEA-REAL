@@ -2282,7 +2282,8 @@
       "매운당": "매운탕", "해물당": "해물탕", "아구찜": "아구찜",
       "부산오묵": "부산어묵", "간장개장": "간장게장",
       "5인스페슬": "5인스페셜", "5인스폐셜": "5인스페셜",
-      "예절 활어회": "계절 활어회", "계철 활어회": "계절 활어회"
+      "예절 활어회": "계절 활어회", "계철 활어회": "계절 활어회",
+      "활이회류": "활어회류", "활어희류": "활어회류"
     };
 
     const singleCellMenuKeys = new Set(["대", "중", "소", "회"]);
@@ -2633,37 +2634,101 @@
 
     function extractMenuLayoutLines(blocks, preparedImage) {
       if (!Array.isArray(blocks) || !preparedImage || !preparedImage.menuTransform) return [];
-      const textCells = [];
+      const transform = preparedImage.menuTransform;
+      if (transform.rotation !== 0) return [];
+      const mappedCells = [];
+      const mapBox = bbox => {
+        const x0 = transform.sourceX + bbox.x0 / transform.scale;
+        const y0 = transform.sourceY + bbox.y0 / transform.scale;
+        const x1 = transform.sourceX + bbox.x1 / transform.scale;
+        const y1 = transform.sourceY + bbox.y1 / transform.scale;
+        return {
+          left: Math.max(0, Math.min(1, x0 / transform.originalWidth)),
+          top: Math.max(0, Math.min(1, y0 / transform.originalHeight)),
+          right: Math.max(0, Math.min(1, x1 / transform.originalWidth)),
+          bottom: Math.max(0, Math.min(1, y1 / transform.originalHeight))
+        };
+      };
+      const marketRowKeys = new Set(["광어", "우럭", "농어", "도미", "도다리", "방어", "놀래미"]);
+
       blocks.forEach(block => {
         (block.paragraphs || []).forEach(paragraph => {
           (paragraph.lines || []).forEach(line => {
             const words = Array.isArray(line && line.words)
               ? line.words.filter(word => word && word.bbox && String(word.text || "").trim())
               : [];
-            if (words.length) {
-              words.forEach(word => textCells.push(word));
-            } else if (line && line.bbox && String(line.text || "").trim()) {
-              textCells.push(line);
+            if (!words.length) {
+              if (line && line.bbox && findMenuSemanticKeys(line.text || "").length) {
+                mappedCells.push({ text: normalizeMenuText(line.text || ""), ...mapBox(line.bbox) });
+              }
+              return;
+            }
+
+            const lineKeys = findMenuSemanticKeys(line.text || "");
+            const runs = [];
+            for (let start = 0; start < words.length; start += 1) {
+              for (let end = start; end < Math.min(words.length, start + 4); end += 1) {
+                const runText = words.slice(start, end + 1).map(word => word.text || "").join("");
+                const semanticKeys = findMenuSemanticKeys(runText);
+                if (semanticKeys.length) {
+                  runs.push({
+                    start, end, semanticKeys,
+                    bbox: {
+                      x0: Math.min(...words.slice(start, end + 1).map(word => word.bbox.x0)),
+                      y0: Math.min(...words.slice(start, end + 1).map(word => word.bbox.y0)),
+                      x1: Math.max(...words.slice(start, end + 1).map(word => word.bbox.x1)),
+                      y1: Math.max(...words.slice(start, end + 1).map(word => word.bbox.y1))
+                    }
+                  });
+                }
+              }
+            }
+
+            const keysToPlace = lineKeys.length
+              ? lineKeys
+              : [...new Set(runs.flatMap(run => run.semanticKeys))];
+            const chosenCells = new Map();
+            keysToPlace.forEach(key => {
+              const candidates = runs.filter(run => run.semanticKeys.includes(key)).sort((a, b) => {
+                const wordSpan = (a.end - a.start) - (b.end - b.start);
+                if (wordSpan) return wordSpan;
+                return (a.bbox.x1 - a.bbox.x0) - (b.bbox.x1 - b.bbox.x0);
+              });
+              const chosen = candidates[0];
+              if (!chosen) return;
+              const cellId = `${chosen.start}:${chosen.end}`;
+              if (!chosenCells.has(cellId)) chosenCells.set(cellId, { ...chosen, keys: [] });
+              chosenCells.get(cellId).keys.push(key);
+            });
+            chosenCells.forEach(cell => {
+              mappedCells.push({ text: [...new Set(cell.keys)].join(" "), ...mapBox(cell.bbox) });
+            });
+
+            const lineHasPrice = /\d/.test(String(line.text || ""));
+            const hasFishItem = keysToPlace.some(key => marketRowKeys.has(key));
+            if (!lineHasPrice && hasFishItem) {
+              const selectedBoxes = [...chosenCells.values()].map(cell => mapBox(cell.bbox));
+              const unknownRightCells = words.map(word => ({
+                word,
+                box: mapBox(word.bbox),
+                normalized: normalizeMenuText(word.text || "")
+              })).filter(candidate => {
+                const overlapsSelected = selectedBoxes.some(box =>
+                  candidate.box.left < box.right && candidate.box.right > box.left);
+                return candidate.box.left > .5
+                  && candidate.box.right < .88
+                  && !overlapsSelected
+                  && !/\d/.test(candidate.normalized)
+                  && /[가-힣A-Za-z]/.test(candidate.normalized);
+              }).sort((a, b) => b.box.left - a.box.left);
+              if (unknownRightCells[0]) {
+                mappedCells.push({ text: "시가", ...unknownRightCells[0].box });
+              }
             }
           });
         });
       });
-      const transform = preparedImage.menuTransform;
-      if (transform.rotation !== 0) return [];
-      return textCells.map(cell => {
-        const bbox = cell.bbox;
-        const x0 = transform.sourceX + bbox.x0 / transform.scale;
-        const y0 = transform.sourceY + bbox.y0 / transform.scale;
-        const x1 = transform.sourceX + bbox.x1 / transform.scale;
-        const y1 = transform.sourceY + bbox.y1 / transform.scale;
-        return {
-          text: normalizeMenuText(cell.text || ""),
-          left: Math.max(0, Math.min(1, x0 / transform.originalWidth)),
-          top: Math.max(0, Math.min(1, y0 / transform.originalHeight)),
-          right: Math.max(0, Math.min(1, x1 / transform.originalWidth)),
-          bottom: Math.max(0, Math.min(1, y1 / transform.originalHeight))
-        };
-      });
+      return mappedCells;
     }
 
     function isUsableMenuRecognition(candidate) {
