@@ -1214,34 +1214,47 @@
     }
     .menu-translation-overlay {
       position: absolute;
-      left: 10px;
-      right: 10px;
-      bottom: 10px;
-      max-height: 58%;
+      inset: 0;
       display: none;
-      gap: 5px;
-      padding: 9px;
-      overflow-y: auto;
-      color: #fff;
-      background: rgba(3, 25, 43, .84);
-      border: 1px solid rgba(255,255,255,.28);
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0,0,0,.2);
-      backdrop-filter: blur(8px);
+      pointer-events: none;
     }
-    .menu-translation-overlay.show { display: grid; }
-    .menu-translation-overlay strong {
-      color: #7dd3fc;
-      font-size: calc(10px + var(--font-add, 0px));
-    }
+    .menu-translation-overlay.show { display: block; }
     .menu-overlay-line {
-      padding: 5px 7px;
+      position: absolute;
+      right: 5px;
+      width: min(42%, 190px);
+      padding: 4px 7px;
       color: #fff;
-      background: rgba(255,255,255,.1);
-      border-radius: 8px;
-      font-size: calc(11px + var(--font-add, 0px));
-      line-height: 1.35;
+      background: rgba(2, 132, 199, .92);
+      border: 1px solid rgba(255,255,255,.72);
+      border-radius: 7px;
+      box-shadow: 0 3px 10px rgba(2, 45, 75, .24);
+      font-size: calc(9px + var(--font-add, 0px));
+      font-weight: 800;
+      line-height: 1.25;
+      transform: translateY(-50%);
+      text-align: left;
     }
+    .menu-overlay-line::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 100%;
+      width: 10px;
+      height: 1px;
+      background: #38bdf8;
+    }
+    .menu-translation-status {
+      display: none;
+      padding: 10px 12px;
+      color: #9a3412;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 12px;
+      font-size: calc(11px + var(--font-add, 0px));
+      line-height: 1.45;
+    }
+    .menu-translation-status:not(:empty) { display: block; }
     .menu-camera-form { min-width: 0; }
     .menu-camera-form > * { min-width: 0; }
     .menu-camera-form .translation { overflow-wrap: anywhere; }
@@ -2413,8 +2426,7 @@
               <option value="zh">中文</option>
             </select>
           </div>
-          <div class="tool-result translation" id="menuTranslationResult">${label.translationResult}</div>
-          <a class="map-link google" id="googleTranslateLink" target="_blank" rel="noopener" style="display:none"><span>${feature.openFullTranslation}</span><span>↗</span></a>
+          <div class="menu-translation-status" id="menuTranslationResult" role="status" aria-live="polite"></div>
           <p class="tool-note">${label.menuHint}</p>
         </div>`;
       document.getElementById("menuPhoto").addEventListener("change", previewMenuPhoto);
@@ -2698,15 +2710,14 @@
       const normalizedSource = normalizeMenuText(source);
       const target = document.getElementById("menuTarget").value;
       const result = document.getElementById("menuTranslationResult");
-      const googleLink = document.getElementById("googleTranslateLink");
       if (!source) {
         result.textContent = label.emptyMenu;
-        googleLink.style.display = "none";
         return;
       }
       const keys = Object.keys(menuTranslations).sort((a, b) => b.length - a.length);
       const translatedItems = [];
-      normalizedSource.split(/\n/).forEach(rawLine => {
+      const sourceLines = normalizedSource.split(/\n/);
+      sourceLines.forEach((rawLine, lineIndex) => {
         const line = repairOcrLine(rawLine);
         const matchedKeys = keys.filter(key => key.length >= 2 && line.includes(key)).filter((key, index, list) => {
           return !list.some((other, otherIndex) => otherIndex !== index && other.includes(key));
@@ -2715,19 +2726,20 @@
         if (matchedKeys.length) {
           const names = matchedKeys.map(key => menuTranslations[key][target]);
           const priceText = prices.length ? ` · ${prices.join(" / ").replace(/\s*(?:원|₩|KRW)?$/i, "")} KRW` : "";
-          translatedItems.push(`${[...new Set(names)].join(" · ")}${priceText}`);
+          translatedItems.push({
+            text: `${[...new Set(names)].join(" · ")}${priceText}`,
+            lineIndex,
+            totalLines: sourceLines.length
+          });
         }
       });
       if (!translatedItems.length) {
         result.textContent = feature.ocrError;
         renderImageTranslationOverlay([], feature);
-        googleLink.style.display = "none";
         return;
       }
-      result.textContent = translatedItems.join("\n");
+      result.textContent = "";
       renderImageTranslationOverlay(translatedItems, feature);
-      googleLink.href = `https://translate.google.com/?sl=ko&tl=${target}&text=${encodeURIComponent(source)}&op=translate`;
-      googleLink.style.display = "flex";
     }
 
     function renderImageTranslationOverlay(items, feature) {
@@ -2736,13 +2748,23 @@
       overlay.replaceChildren();
       overlay.classList.toggle("show", items.length > 0);
       if (!items.length) return;
-      const title = document.createElement("strong");
-      title.textContent = feature.imageTranslation;
-      overlay.appendChild(title);
-      items.forEach(item => {
+      const positions = items.map(item => {
+        const denominator = Math.max(1, item.totalLines - 1);
+        return Math.max(10, Math.min(90, 12 + (item.lineIndex / denominator) * 76));
+      });
+      const minimumGap = Math.max(7, Math.min(11, 66 / Math.max(1, items.length - 1)));
+      for (let index = 1; index < positions.length; index += 1) {
+        positions[index] = Math.max(positions[index], positions[index - 1] + minimumGap);
+      }
+      if (positions[positions.length - 1] > 90) {
+        const shift = positions[positions.length - 1] - 90;
+        positions.forEach((position, index) => { positions[index] = Math.max(8, position - shift); });
+      }
+      items.forEach((item, index) => {
         const line = document.createElement("div");
         line.className = "menu-overlay-line";
-        line.textContent = item;
+        line.textContent = item.text;
+        line.style.top = `${positions[index]}%`;
         overlay.appendChild(line);
       });
     }
